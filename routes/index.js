@@ -17,7 +17,6 @@ var conn = {
 /* make the connection */
 var db = pgp(conn);
 
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
    res.render('index', { title: 'Project Module 8: Moose Events', data:[] });
@@ -31,6 +30,11 @@ router.get('/profile/', function(req, res, next) {
 /* GET visualisation page */
 router.get('/visualisation/', function(req, res, next) {
       res.render('visualisation', {title: 'Audio visualisation', data:[]});
+})
+
+/* GET animation page */
+router.get('/animation/', function(req, res, next) {
+      res.render('animation', {title: 'Animation', data:[]});
 })
 
 // router.get('/getgrades/', function(req, res, next) {

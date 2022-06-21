@@ -1,0 +1,53 @@
+.container {
+    width: 1050px;
+    height: 350px;
+    position: relative;
+}
+
+.bar {
+    width: 50px;
+    position: absolute;
+    bottom: 0;
+    border-radius: 25px 25px 0 0;
+    background-color: #C0FF33;
+}
+
+#bar1 {
+    left: 50px;
+}
+
+#bar2 {
+    left: 150px;
+}
+
+#bar3 {
+    left: 250px;
+}
+
+#bar4 {
+    left: 350px;
+}
+
+#bar5 {
+    left: 450px;
+}
+
+#bar6 {
+    left: 550px;
+}
+
+#bar7 {
+    left: 650px;
+}
+
+#bar8 {
+    left: 750px;
+}
+
+#bar9 {
+    left: 850px;
+}
+
+#bar10 {
+    left: 950px;
+}
