@@ -17,14 +17,19 @@ var conn = {
 /* make the connection */
 var db = pgp(conn);
 
-/* GET home page. */
+/* GET index page. */
 router.get('/', function(req, res, next) {
    res.render('index', { title: 'Project Module 8: Moose Events', data:[] });
 });
 
-/* GET home page. */
+/* GET standby-screen page. */
 router.get('/standby-screen', function(req, res, next) {
       res.render('standby-screen', { title: 'Standby screen', data:[] });
+   });
+
+/* GET standby-screen page. */
+router.get('/experience', function(req, res, next) {
+      res.render('experience', { title: 'Experience', data:[] });
    });
 
 /* GET overview page. */
