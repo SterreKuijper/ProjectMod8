@@ -35,6 +35,6 @@ function barGraph(maxHeight, idBar) {
 
 function updateGraphs() {
     for (let i = 1; i < 11; i++) {
-        barGraph(Math.floor(Math.random() * 300) + 100, 'bar' + i);
+        barGraph(Math.floor(Math.random() * 250) + 100, 'bar' + i);
     }
 }

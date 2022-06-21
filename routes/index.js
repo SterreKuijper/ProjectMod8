@@ -22,6 +22,16 @@ router.get('/', function(req, res, next) {
    res.render('index', { title: 'Project Module 8: Moose Events', data:[] });
 });
 
+/* GET home page. */
+router.get('/standby-screen', function(req, res, next) {
+      res.render('standby-screen', { title: 'Standby screen', data:[] });
+   });
+
+/* GET overview page. */
+router.get('/overview/', function(req, res, next) {
+      res.render('overview', { title: 'Project Module 8: Moose Events', data:[] });
+   });
+
 /* GET profile page */
 router.get('/profile/', function(req, res, next) {
       res.render('profile', {title: 'Profile', data:[]});
