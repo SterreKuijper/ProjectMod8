@@ -27,28 +27,33 @@ router.get('/standby-screen', function(req, res, next) {
       res.render('standby-screen', { title: 'Standby screen', data:[] });
    });
 
-/* GET standby-screen page. */
+/* GET experience page. */
 router.get('/experience', function(req, res, next) {
       res.render('experience', { title: 'Experience', data:[] });
    });
 
+/* GET wrapped page. */
+router.get('/wrapped', function(req, res, next) {
+      res.render('wrapped', { title: 'Experience', data:[] });
+   });
+
 /* GET overview page. */
-router.get('/overview/', function(req, res, next) {
+router.get('/overview', function(req, res, next) {
       res.render('overview', { title: 'Project Module 8: Moose Events', data:[] });
    });
 
 /* GET profile page */
-router.get('/profile/', function(req, res, next) {
+router.get('/profile', function(req, res, next) {
       res.render('profile', {title: 'Profile', data:[]});
 })
 
 /* GET visualisation page */
-router.get('/visualisation/', function(req, res, next) {
+router.get('/visualisation', function(req, res, next) {
       res.render('visualisation', {title: 'Audio visualisation', data:[]});
 })
 
 /* GET animation page */
-router.get('/animation/', function(req, res, next) {
+router.get('/animation', function(req, res, next) {
       res.render('animation', {title: 'Animation', data:[]});
 })
 

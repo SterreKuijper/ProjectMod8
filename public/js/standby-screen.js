@@ -9,7 +9,7 @@ let key = 0; // global
 const videoCount = videoSource.length;
 const element = document.getElementById("videos");
 
-element.setAttribute("src",videoSource[0]);
+element.setAttribute("src",videoSource[Math.floor(Math.random() * (videoCount - 0 + 1))]);
 
 function playVideo(videoNum) {
     element.setAttribute("src",videoSource[videoNum]);

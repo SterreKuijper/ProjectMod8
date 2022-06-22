@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/js/bootstrap.min.js"></script>
+
+    <title>
+        <%= title %>
+    </title>
+    <link href="/stylesheets/wrapped.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-dark">
+    <div class="content">
+        <div class="card text-center" id="card1">
+            <div class="card-body">
+                <h5 class="card-title">First card</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+        <div class="card text-center" id="card2">
+            <div class="card-body">
+                <h5 class="card-title">Second card</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+        <div class="card text-center" id="card3">
+            <div class="card-body">
+                <h5 class="card-title">Third card</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row fixed-bottom m-4">
+        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveIn('card1')">Start</button>
+        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveInAndOut('card2', 'card1')">Next</button>
+        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveInAndOut('card3', 'card2')">Next</button>        
+        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveOut('card3')">End</button>
+    </div>
+
+    <script src="/js/wrapped.js"></script>
+
+</body>
+
+</html>
