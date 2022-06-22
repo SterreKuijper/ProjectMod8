@@ -1,25 +1,38 @@
+.bg {
+    animation: colorFade 9s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes colorFade {
+    0% {
+        background-color: #FF5471;
+    }
+
+    33% {
+        background-color: #7F56C0;
+    }
+
+    66% {
+        background-color: #64F8E9;
+    }
+
+    100% {
+        background-color: #C0FF33;
+    }
+}
+
 .content {
     position: fixed;
     width: 100vw;
     height: 100vh;
 }
 
-#card1 {
+.card {
+    background-color: #FFFFFF;
+    border: none;
     display: none;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#card2 {
-    display: none;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#card3 {
-    display: none;
+    height: 600px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -27,7 +40,7 @@
 
 @keyframes move-in {
     from {
-        top: -50%;
+        top: 150%;
     }
 
     to {
@@ -41,15 +54,14 @@
     }
 
     to {
-        top: 150%;
+        top: -50%;
     }
 }
 
-.card-move-in { 
+.card-move-in {
     animation: move-in 2s forwards;
 }
 
 .card-move-out {
     animation: move-out 2s forwards;
 }
-

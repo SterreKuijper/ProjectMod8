@@ -14,6 +14,8 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
     <title>
         <%= title %>
     </title>
@@ -21,12 +23,12 @@
 
 </head>
 
-<body class="bg-dark">
+<body class="bg">
     <div class="content">
-        <div class="card text-center" id="card1">
+        <div class="card text-center" id="card1" style="display: block; top: 50%;">
             <div class="card-body">
-                <h5 class="card-title">First card</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h1 class="card-title mt-4 title1">Ready to see the results??!</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
             </div>
         </div>
         <div class="card text-center" id="card2">
@@ -45,8 +47,10 @@
 
     <div class="row fixed-bottom m-4">
         <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveIn('card1')">Start</button>
-        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveInAndOut('card2', 'card1')">Next</button>
-        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveInAndOut('card3', 'card2')">Next</button>        
+        <button type="button" class="btn btn-lg col btn-primary mx-4"
+            onclick="moveInAndOut('card2', 'card1')">Next</button>
+        <button type="button" class="btn btn-lg col btn-primary mx-4"
+            onclick="moveInAndOut('card3', 'card2')">Next</button>
         <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveOut('card3')">End</button>
     </div>
 
