@@ -15,4 +15,29 @@
     background: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
     border-radius: 6px;
-  }
+}
+
+.genre {
+    position: relative;
+    border-radius: 6px;    
+    background: rgba(0, 0, 0, 0.5);
+}
+
+#time-bar {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
+}
+
+.time {
+    margin: 0;
+}
+
+.fill-progress-bar {
+    animation: fill 60s forwards;
+    animation-timing-function: linear;
+}
+
+@keyframes fill {
+    0% {width: 0;}
+    100% {width: 100%;}    
+}
