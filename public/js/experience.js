@@ -29,7 +29,7 @@ const genreTitle = document.getElementById("genre-1");
 let chosenGenre = 0;
 let randomGenre = Math.floor(Math.random() * genreList.length)
 
-for (let i = 0; i < genreList.length; i++){
+for (let i = 0; i < genreList.length; i++) {
     let genre = randomGenre - i;
     if (genre >= genreList.length) {
         genre = chosenGenre + i;
@@ -37,7 +37,7 @@ for (let i = 0; i < genreList.length; i++){
     if (genre < 0) {
         genre = genreList.length - i + chosenGenre;
     }
-    
+
     $(`#genre-${i + 1}`).html(genreList[genre])
 }
 
@@ -61,7 +61,7 @@ document.addEventListener('keydown', function (event) {
         chosenGenre = genreList.length - 1;
     }
 
-    for (let i = 0; i < genreList.length; i++){
+    for (let i = 0; i < genreList.length; i++) {
         let genre = chosenGenre - i;
         if (genre >= genreList.length) {
             genre = chosenGenre + i;
@@ -69,7 +69,7 @@ document.addEventListener('keydown', function (event) {
         if (genre < 0) {
             genre = genreList.length - i + chosenGenre;
         }
-        
+
         console.log(genreList[genre]);
 
         $(`#genre-${i + 1}`).html(genreList[genre])
@@ -77,26 +77,27 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+var start = 0;
+
 function progressBar(id) {
     var element = document.getElementById(id);
     element.classList.add("fill-progress-bar");
+    start = window.performance.now();
+
+    setTimeout(function () {
+        var end = window.performance.now();
+        var time = end - start;
+        window.location = "http://localhost:3000/wrapped?time=" + time;
+    }, 61000);
 }
 
-// function fillProgressBar() {
-//     let id = null;
-//     const element = document.getElementById('progressbar')
-//     let length = 0;
-//     clearInterval(id);
-//     id = setInterval(frame, 5);
-//     function frame() {
-//         if (length == 0) {
-//             clearInterval(id);
-//         } else {
-//             length++;
-//             element.width = length + "%";
-//         }
-//     }
-// }
 
 
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 65) {
+        var end = window.performance.now();
+        var time = end - start;
+        window.location = "http://localhost:3000/wrapped?time=" + time;
+    }
+});
 

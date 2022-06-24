@@ -34,7 +34,7 @@ router.get('/experience', function(req, res, next) {
 
 /* GET wrapped page. */
 router.get('/wrapped', function(req, res, next) {
-      res.render('wrapped', { title: 'Experience', data:[] });
+      res.render('wrapped', { title: 'Experience', data:[], time: req.query.time });
    });
 
 /* GET overview page. */

@@ -9,16 +9,16 @@ let key = 0; // global
 const videoCount = videoSource.length;
 const element = document.getElementById("videos");
 
-element.setAttribute("src",videoSource[0]);
+element.setAttribute("src", videoSource[0]);
 
 function playVideo(videoNum) {
-    element.setAttribute("src",videoSource[videoNum]);
+    element.setAttribute("src", videoSource[videoNum]);
     element.load();
     element.play();
 }
 
 element.addEventListener('ended', myFunctionHandle, false);
- 
+
 function myFunctionHandle() {
     key++;
     if (key == videoCount) {
@@ -28,3 +28,9 @@ function myFunctionHandle() {
         playVideo(key);
     }
 }
+document.addEventListener('keydown', function (event) {
+
+    window.location = "http://localhost:3000/experience?";
+
+});
+

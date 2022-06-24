@@ -18,4 +18,28 @@ function moveInAndOut(idIn, idOut) {
     moveOut(idOut);
 }
 
+function calculateTime() {
+    let maxFakeTime = 8 * 60 * 60;      // 8 hours
+    let maxRealTime = 120;              // 2 minutes
+
+    console.log('werkt');
+    let timeText = document.getElementById("time").innerHTML;
+    let time = Math.round(parseFloat(timeText))/1000 * maxFakeTime / maxRealTime;
+    document.getElementById('time-text').innerHTML = secondsToHms(time);
+}
+
+function secondsToHms(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    return hDisplay + mDisplay + sDisplay; 
+}
+
+
+
 
