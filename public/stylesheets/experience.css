@@ -7,12 +7,249 @@
     left: 0;
 }
 
-.content {
+#content {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: #f1f1f1;
+    top: 0;
+    left: 0;
+}
+
+#time-bar {
+    /* background: rgba(0, 0, 0, 0.5); */
+    background: rgba(127, 127, 127, 0.5);
     border-radius: 6px;
-  }
+}
+
+.fill-progress-bar {
+    animation: fill 60s forwards;
+    animation-timing-function: linear;
+}
+
+@keyframes fill {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.genre {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    width: 20%;
+    display: inline-block;
+}
+
+.extra {
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 20%;
+    height: 64px;
+}
+
+#card1 {
+    left: 0;
+    bottom: 0;
+}
+
+#card2 {
+    left: 20%;
+    bottom: 0;
+}
+
+#card3 {
+    left: 40%;
+    bottom: 0;
+}
+
+#card4 {
+    left: 60%;
+    bottom: 0;
+}
+
+#card5 {
+    left: 80%;
+    bottom: 0;
+}
+
+#card6 {
+    left: -20%;
+    bottom: 0;
+}
+
+.card1-right {
+    animation: card1-right 1s forwards;
+}
+
+@keyframes card1-right {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: 20%;
+    }        
+}
+
+.card2-right {
+    animation: card2-right 1s forwards;
+}
+
+@keyframes card2-right {
+    0% {
+        left: 20%;
+    }
+
+    100% {
+        left: 40%;
+    }        
+}
+
+.card3-right {
+    animation: card3-right 1s forwards;
+}
+
+@keyframes card3-right {
+    0% {
+        left: 40%;
+    }
+
+    100% {
+        left: 60%;
+    }        
+}
+
+.card4-right {
+    animation: card4-right 1s forwards;
+}
+
+@keyframes card4-right {
+    0% {
+        left: 60%;
+    }
+
+    100% {
+        left: 80%;
+    }        
+}
+
+.card5-right {
+    animation: card5-right 1s forwards;
+}
+
+@keyframes card5-right {
+    0% {
+        left: 80%;
+    }
+
+    100% {
+        left: 100%;
+        display: none;
+    }        
+}
+
+.card6-right {
+    animation: card6-right 1s forwards;
+}
+
+@keyframes card6-right {
+    0% {
+        display: inline-block;
+        left: -20%;
+    }
+
+    100% {
+        left: 0;
+    }        
+}
+
+.card6-left {
+    animation: card6-left 1s forwards;
+}
+
+@keyframes card6-left {
+    0% {
+        left: 0;
+    }
+
+    100% {
+        left: -20%;
+        display: none;
+    }        
+}
+
+.card1-left {
+    animation: card1-left 1s forwards;
+}
+
+@keyframes card1-left {
+    0% {
+        left: 20%;
+    }
+
+    100% {
+        left: 0%;
+    }        
+}
+
+.card2-left {
+    animation: card2-left 1s forwards;
+}
+
+@keyframes card2-left {
+    0% {
+        left: 40%;
+    }
+
+    100% {
+        left: 20%;
+    }        
+}
+
+.card3-left {
+    animation: card3-left 1s forwards;
+}
+
+@keyframes card3-left {
+    0% {
+        left: 60%;
+    }
+
+    100% {
+        left: 40%;
+    }        
+}
+
+.card4-left {
+    animation: card4-left 1s forwards;
+}
+
+@keyframes card4-left {
+    0% {
+        left: 80%;
+    }
+
+    100% {
+        left: 60%;
+    }        
+}
+
+.card5-left {
+    animation: card5-left 1s forwards;
+}
+
+@keyframes card5-left {
+    0% {
+        display: inline-block;
+        left: 100%;
+    }
+
+    100% {
+        left: 80%;
+    }        
+}
