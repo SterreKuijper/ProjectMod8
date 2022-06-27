@@ -2,17 +2,17 @@ var videoSource = new Array();
 videoSource[0] = '/videos/visual1.mp4';
 let key = 0; // global
 const videoCount = videoSource.length;
-const element = document.getElementById("videos");
+const audioElement = document.getElementById("videos");
 
 // element.setAttribute("src", videoSource[0]);
 ``
 function playVideo(videoNum) {
-    element.setAttribute("src", videoSource[videoNum]);
-    element.load();
-    element.play();
+    audioElement.setAttribute("src", videoSource[videoNum]);
+    audioElement.load();
+    audioElement.play();
 }
 
-element.addEventListener('ended', myFunctionHandle, false);
+audioElement.addEventListener('ended', myFunctionHandle, false);
 
 function myFunctionHandle() {
     key++;
@@ -56,9 +56,14 @@ audioSource[0] = '/audio/dreams.mp3';
 var audio = document.getElementById("audio");
 
 function playAudio() {
-    element.setAttribute("src", audioSource[0]);
-    element.load();
-    element.play();
+    audioElement.setAttribute("src", audioSource[0]);
+    audioElement.load();
+    audioElement.play();
+}
+
+function stopAudio() {
+    audioElement.pause();
+    audio.currentTime = 0;
 }
 
 function audioVisualisation() {
@@ -158,6 +163,7 @@ document.addEventListener('keydown', function (event) {
 
         for (let i = 0; i < isPlaying.length; i++) {
             if (isPlaying[i]) {
+                stopAudio();
                 playAudio();
                 audioVisualisation()
             }
@@ -184,6 +190,7 @@ document.addEventListener('keydown', function (event) {
 
         for (let i = 0; i < isPlaying.length; i++) {
             if (isPlaying[i]) {
+                stopAudio();
                 playAudio();
                 audioVisualisation()
             }
