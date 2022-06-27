@@ -33,11 +33,11 @@ function progressBar(id) {
     element.classList.add("fill-progress-bar");
     start = window.performance.now();
 
-    // setTimeout(function () {
-    //     var end = window.performance.now();
-    //     var time = end - start;
-    //     window.location = "http://localhost:3000/wrapped?time=" + time;
-    // }, 61000);
+    setTimeout(function () {
+        var end = window.performance.now();
+        var time = end - start;
+        window.location = "http://localhost:3000/wrapped?time=" + time;
+    }, 61000);
 }
 
 document.addEventListener('keydown', function (event) {

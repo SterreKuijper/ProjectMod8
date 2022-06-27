@@ -23,35 +23,15 @@
 
 </head>
 
-<body class="bg">
+<body class="bg" onload="calculateTime()">
     <div class="content">
         <div class="card text-center" id="card1" style="display: block; top: 50%;" onclick="calculateTime()">
             <div class="card-body">
+                <h1>MOOSE WRAPPED</h1>
                 <h1 class="card-title mt-4 title1" id="time"><%= time %></h5>
                     <p class="card-text" id="time-text">With supporting text below as a natural lead-in to additional content.</p>
             </div>
         </div>
-        <div class="card text-center" id="card2">
-            <div class="card-body">
-                <h5 class="card-title">Second card</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-        </div>
-        <div class="card text-center" id="card3">
-            <div class="card-body">
-                <h5 class="card-title">Third card</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="row fixed-bottom m-4">
-        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveIn('card1')">Start</button>
-        <button type="button" class="btn btn-lg col btn-primary mx-4"
-            onclick="moveInAndOut('card2', 'card1')">Next</button>
-        <button type="button" class="btn btn-lg col btn-primary mx-4"
-            onclick="moveInAndOut('card3', 'card2')">Next</button>
-        <button type="button" class="btn btn-lg col btn-primary mx-4" onclick="moveOut('card3')">End</button>
     </div>
 
     <script src="/js/wrapped.js"></script>

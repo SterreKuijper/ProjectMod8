@@ -18,13 +18,16 @@ function moveInAndOut(idIn, idOut) {
     moveOut(idOut);
 }
 
+var elapsedTimeInHours = 0;
+
 function calculateTime() {
     let maxFakeTime = 8 * 60 * 60;      // 8 hours
-    let maxRealTime = 120;              // 2 minutes
+    let maxRealTime = 60;              // 2 minutes
 
-    console.log('werkt');
     let timeText = document.getElementById("time").innerHTML;
     let time = Math.round(parseFloat(timeText))/1000 * maxFakeTime / maxRealTime;
+    elapsedTimeInHours = time/3600;
+
     document.getElementById('time-text').innerHTML = secondsToHms(time);
 }
 
