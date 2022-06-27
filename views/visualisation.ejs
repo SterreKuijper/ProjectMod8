@@ -19,12 +19,11 @@
     <link href="/stylesheets/visualisation.css" rel="stylesheet">
 
   </head>
-  <body class="bg-dark">
+  <body class="bg-dark" onclick="audioVisualisation()">
 
     <div id="content">
-      <input type="file" id="thefile" accept="audio/*" />
       <canvas id="canvas"></canvas>
-      <audio id="audio" controls></audio>
+      <audio id="audio" src="/audio/dreams.mp3" ></audio>
     </div>
 
     <script src="/js/visualisation.js"></script>
