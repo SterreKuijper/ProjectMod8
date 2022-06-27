@@ -3,48 +3,168 @@ var inputs = easymidi.getInputs();
 
 var buttonID, buttonValue;
 
-// Ion Discover DJ Mapping
+// Ion Discover DJ
 
-//  - Controllers
-    const jogwheelL = 25;
-    const jogwheelR = 24;
-    const crossfader = 10;
-    const volumeL = 8;
-    const volumeR = 9;
-    const bassL = 20;
-    const bassR = 21;
-    const trebleL = 16;
-    const trebleR = 17;
-    const masterVolume = 23;
-
-//  - Buttons
-    const playL = 74;
-    const playR = 76;
-    const cueL = 59;
-    const cueR = 66;
-    const revL = 51;
-    const revR = 60;
-    const syncL = 64;
-    const syncR = 71;
-    const pitchDownL = 67;
-    const pitchUpL = 68;
-    const pitchDownR = 69;
-    const pitchUpR = 70;
-    const loadA = 75;
-    const loadB = 52;
-    const reset = 72;
+//  - MIDI mapping of controller
+const mapping = [
+  // Controllers
+  {
+    id: 25,
+    button: "jogwheelL",
+    directional: true,
+  },
+  {
+    id: 24,
+    button: "jogwheelR",
+    directional: true,
+  },
+  {
+    id: 26,
+    button: "browse",
+    directional: true,
+  },
+  {
+    id: 10,
+    button: "crossfader",
+    directional: true,
+  },
+  {
+    id: 8,
+    button: "volumeL",
+    directional: false,
+  },
+  {
+    id: 9,
+    button: "volumeR",
+    directional: false,
+  },
+  {
+    id: 20,
+    button: "bassL",
+    directional: false,
+  },
+  {
+    id: 21,
+    button: "bassR",
+    directional: false,
+  },
+  {
+    id: 16,
+    button: "trebleL",
+    directional: false,
+  },
+  {
+    id: 17,
+    button: "trebleR",
+    directional: false,
+  },
+  {
+    id: 23,
+    button: "masterVolume",
+    directional: false,
+  },
+  // Buttons
+  {
+    id: 74,
+    button: "playL",
+    directional: false,
+  },
+  {
+    id: 76,
+    button: "playR",
+    directional: false,
+  },
+  {
+    id: 59,
+    button: "cueL",
+    directional: false,
+  },
+  {
+    id: 66,
+    button: "cueR",
+    directional: false,
+  },
+  {
+    id: 51,
+    button: "revL",
+    directional: false,
+  },
+  {
+    id: 60,
+    button: "revR",
+    directional: false,
+  },
+  {
+    id: 64,
+    button: "syncL",
+    directional: false,
+  },
+  {
+    id: 71,
+    button: "syncR",
+    directional: false,
+  },
+  {
+    id: 67,
+    button: "pitchDownL",
+    directional: false,
+  },
+  {
+    id: 68,
+    button: "pitchUpL",
+    directional: false,
+  },
+  {
+    id: 69,
+    button: "pitchDownR",
+    directional: false,
+  },
+  {
+    id: 70,
+    button: "pitchUpR",
+    directional: false,
+  },
+  {
+    id: 75,
+    button: "loadA",
+    directional: false,
+  },
+  {
+    id: 52,
+    button: "loadB",
+    directional: false,
+  },
+  {
+    id: 72,
+    button: "reset",
+    directional: false,
+  },
+]
 
 // EasyMIDI - Read MIDI input
 
 easymidi.getInputs().forEach((inputName) => {
     const input = new easymidi.Input(inputName);
     input.on('message', (msg) => {
+      // Catch all MIDI input
       const vals = Object.keys(msg).map((key) => `${key}: ${msg[key]}`);
       read = (`${inputName}: ${vals.join(', ')}`);
-      //console.log(read);
+      // Split values on types needed
       var split = read.split(" ");
-      buttonID = split[4];
-      buttonValue = split[6];
-      console.log(buttonID + buttonValue);
+      buttonID = parseInt(split[6].slice(0, split[6].length - 1));
+      buttonValue = parseInt(split[8].slice(0, split[8].length - 1));
+      //console.log(buttonID, buttonValue);
+      Press(buttonID, buttonValue);
     });
-  });   
+  });
+
+function Press(id, value){
+  var obj = mapping.find(x => {return x.id === id});
+  if(!obj) return;
+  console.log(obj)
+  if(obj.directional == true){
+    console.log("Directional");
+  } else {
+    console.log("Button");
+  }
+}
