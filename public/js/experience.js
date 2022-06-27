@@ -4,8 +4,8 @@ let key = 0; // global
 const videoCount = videoSource.length;
 const element = document.getElementById("videos");
 
-element.setAttribute("src", videoSource[0]);
-
+// element.setAttribute("src", videoSource[0]);
+``
 function playVideo(videoNum) {
     element.setAttribute("src", videoSource[videoNum]);
     element.load();
@@ -24,56 +24,7 @@ function myFunctionHandle() {
     }
 }
 
-var genreList = ["Rock", "Classical Music", "Hip Hop", "EDM", "Pop", "Church Choir"];
-const genreTitle = document.getElementById("genre-1");
-let chosenGenre = 0;
-let randomGenre = Math.floor(Math.random() * genreList.length)
-
-for (let i = 0; i < genreList.length; i++) {
-    let genre = randomGenre - i;
-    if (genre >= genreList.length) {
-        genre = chosenGenre + i;
-    }
-    if (genre < 0) {
-        genre = genreList.length - i + chosenGenre;
-    }
-
-    $(`#genre-${i + 1}`).html(genreList[genre])
-}
-
-// genreTitle.innerHTML = genreList[randomGenre];
-
-// document.addEventListener('keydown', function (event) {
-//     //right key
-//     if (event.keyCode == 37) {
-//         chosenGenre--;
-//     }
-//     //left key
-//     else if (event.keyCode == 39) {
-//         chosenGenre++;
-//     }
-
-//     if (chosenGenre >= genreList.length) {
-//         chosenGenre = 0;
-//     }
-
-//     if (chosenGenre < 0) {
-//         chosenGenre = genreList.length - 1;
-//     }
-
-//     for (let i = 0; i < genreList.length; i++) {
-//         let genre = chosenGenre - i;
-//         if (genre >= genreList.length) {
-//             genre = chosenGenre + i;
-//         }
-//         if (genre < 0) {
-//             genre = genreList.length - i + chosenGenre;
-//         }
-
-//         $(`#genre-${i + 1}`).html(genreList[genre])
-
-//     }
-// });
+// -----------------------------------
 
 var start = 0;
 
@@ -89,8 +40,6 @@ function progressBar(id) {
     // }, 61000);
 }
 
-
-
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 65) {
         var end = window.performance.now();
@@ -99,15 +48,26 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+// ---------------------------------------------
+
+var audioSource = new Array();
+audioSource[0] = '/audio/dreams.mp3';
+
+var audio = document.getElementById("audio");
+
+function playAudio() {
+    element.setAttribute("src", audioSource[0]);
+    element.load();
+    element.play();
+}
+
 function audioVisualisation() {
 
-    var audio = document.getElementById("audio");
     var context = new AudioContext();
     var src = context.createMediaElementSource(audio);
     var analyser = context.createAnalyser();
 
-    audio.load();
-    audio.play();
+    playAudio();
 
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;
@@ -170,111 +130,70 @@ function audioVisualisation() {
     renderFrame();
 };
 
-let index1 = 1;
-let index2 = 2;
-let index3 = 3;
-let index4 = 4;
-let index5 = 5;
-let index6 = 6;
 let left = true;
+var index = [1, 2, 3, 4, 5, 6];
+var isPlaying = [false, false, true, false, false, false];
 
 document.addEventListener('keydown', function (event) {
     //right key
-    if (event.keyCode == 87) {
-        document.getElementById('card1').classList.remove(`card${index1}-right`);
-        document.getElementById('card2').classList.remove(`card${index2}-right`);
-        document.getElementById('card3').classList.remove(`card${index3}-right`);
-        document.getElementById('card4').classList.remove(`card${index4}-right`);
-        document.getElementById('card5').classList.remove(`card${index5}-right`);
-        document.getElementById('card6').classList.remove(`card${index6}-right`);
-        document.getElementById('card1').classList.remove(`card${index1}-left`);
-        document.getElementById('card2').classList.remove(`card${index2}-left`);
-        document.getElementById('card3').classList.remove(`card${index3}-left`);
-        document.getElementById('card4').classList.remove(`card${index4}-left`);
-        document.getElementById('card5').classList.remove(`card${index5}-left`);
-        document.getElementById('card6').classList.remove(`card${index6}-left`);
-
-        if (!left) {
-            index1++;
-            index2++;
-            index3++;
-            index4++;
-            index5++;
-            index6++;
+    if (event.keyCode == 37) {
+        for (let i = 0; i < index.length; i++) {
+            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
+            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
         }
+
+        for (let i = 0; i < index.length; i++) if(!left) index[i]++;
+
         left = false;
 
-        if (index1 <= 0) index1 = 6;
-        if (index2 <= 0) index2 = 6;
-        if (index3 <= 0) index3 = 6;
-        if (index4 <= 0) index4 = 6;
-        if (index5 <= 0) index5 = 6;
-        if (index6 <= 0) index6 = 6;
-        if (index1 >= 7) index1 = 1;
-        if (index2 >= 7) index2 = 1;
-        if (index3 >= 7) index3 = 1;
-        if (index4 >= 7) index4 = 1;
-        if (index5 >= 7) index5 = 1;
-        if (index6 >= 7) index6 = 1;
+        for (let i = 0; i < index.length; i++) if (index[i] <= 0) index[i] = 6;
+        for (let i = 0; i < index.length; i++) if (index[i] >= 7) index[i] = 1;
 
-        document.getElementById('card1').classList.add(`card${index1}-right`);
-        document.getElementById('card2').classList.add(`card${index2}-right`);
-        document.getElementById('card3').classList.add(`card${index3}-right`);
-        document.getElementById('card4').classList.add(`card${index4}-right`);
-        document.getElementById('card5').classList.add(`card${index5}-right`);
-        document.getElementById('card6').classList.add(`card${index6}-right`);
+        for (let i = 0; i < index.length; i++) {
+            document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-right`);
+        }
+
+        for (let i = 0; i < index.length; i++) if (index[i] == 2) isPlaying[i] = true;
+        else isPlaying[i] = false;
+
+        for (let i = 0; i < isPlaying.length; i++) {
+            if (isPlaying[i]) {
+                playAudio();
+                audioVisualisation()
+            }
+        }
     }
     //left key
-    else if (event.keyCode == 81) {
-        document.getElementById('card1').classList.remove(`card${index1}-right`);
-        document.getElementById('card2').classList.remove(`card${index2}-right`);
-        document.getElementById('card3').classList.remove(`card${index3}-right`);
-        document.getElementById('card4').classList.remove(`card${index4}-right`);
-        document.getElementById('card5').classList.remove(`card${index5}-right`);
-        document.getElementById('card6').classList.remove(`card${index6}-right`);
-        document.getElementById('card1').classList.remove(`card${index1}-left`);
-        document.getElementById('card2').classList.remove(`card${index2}-left`);
-        document.getElementById('card3').classList.remove(`card${index3}-left`);
-        document.getElementById('card4').classList.remove(`card${index4}-left`);
-        document.getElementById('card5').classList.remove(`card${index5}-left`);
-        document.getElementById('card6').classList.remove(`card${index6}-left`);
-
-        if (left) {
-            index1--;
-            index2--;
-            index3--;
-            index4--;
-            index5--;
-            index6--;
+    else if (event.keyCode == 39) {
+        for (let i = 0; i < index.length; i++) {
+            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
+            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
         }
+
+        for (let i = 0; i < index.length; i++) if (left) index[i]--;
+
         left = true;
 
-        if (index1 <= 0) index1 = 6;
-        if (index2 <= 0) index2 = 6;
-        if (index3 <= 0) index3 = 6;
-        if (index4 <= 0) index4 = 6;
-        if (index5 <= 0) index5 = 6;
-        if (index6 <= 0) index6 = 6;
-        if (index1 >= 7) index1 = 1;
-        if (index2 >= 7) index2 = 1;
-        if (index3 >= 7) index3 = 1;
-        if (index4 >= 7) index4 = 1;
-        if (index5 >= 7) index5 = 1;
-        if (index6 >= 7) index6 = 1;
+        for (let i = 0; i < index.length; i++) if (index[i] <= 0) index[i] = 6;
+        for (let i = 0; i < index.length; i++) if (index[i] >= 7) index[i] = 1;
 
-        document.getElementById('card1').classList.add(`card${index1}-left`);
-        document.getElementById('card2').classList.add(`card${index2}-left`);
-        document.getElementById('card3').classList.add(`card${index3}-left`);
-        document.getElementById('card4').classList.add(`card${index4}-left`);
-        document.getElementById('card5').classList.add(`card${index5}-left`);
-        document.getElementById('card6').classList.add(`card${index6}-left`);
+        for (let i = 0; i < index.length; i++) document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-left`);
 
+        for (let i = 0; i < index.length; i++) if (index[i] == 3) isPlaying[i] = true;
+        else isPlaying[i] = false;
+
+        for (let i = 0; i < isPlaying.length; i++) {
+            if (isPlaying[i]) {
+                playAudio();
+                audioVisualisation()
+            }
+        }
     }
-    console.log(index1);
-    console.log(index2);
-    console.log(index3);
-    console.log(index4);
-    console.log(index5);
-    console.log(index6);
-    console.log('werkt');
+
+    console.log(isPlaying);
+
 });
+
+
+
+
