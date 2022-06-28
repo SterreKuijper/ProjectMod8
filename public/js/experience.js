@@ -1,5 +1,6 @@
+
 var videoSource = new Array();
-videoSource[0] = '/videos/visual1.mp4';
+videoSource[0] = './videos/visual1.mp4';
 let key = 0; // global
 const videoCount = videoSource.length;
 const audioElement = document.getElementById("videos");
@@ -139,9 +140,8 @@ let left = true;
 var index = [1, 2, 3, 4, 5, 6];
 var isPlaying = [false, false, true, false, false, false];
 
-document.addEventListener('keydown', function (event) {
-    //right key
-    if (event.keyCode == 37) {
+    
+    function rightInput() {
         for (let i = 0; i < index.length; i++) {
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
@@ -169,8 +169,9 @@ document.addEventListener('keydown', function (event) {
             }
         }
     }
+
     //left key
-    else if (event.keyCode == 39) {
+    function leftInput() {
         for (let i = 0; i < index.length; i++) {
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
@@ -197,9 +198,15 @@ document.addEventListener('keydown', function (event) {
         }
     }
 
-    console.log(isPlaying);
+    document.addEventListener('keydown', function (event) {
+        if (event.keyCode == 37){
+            rightInput();
+        }
+        if (event.keyCode == 39){
+            leftInput();
+        }
+    });
 
-});
 
 
 

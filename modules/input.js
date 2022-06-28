@@ -1,6 +1,8 @@
 var easymidi = require('easymidi');
 var inputs = easymidi.getInputs();
 
+const socket = require("./socket");
+
 var buttonID, buttonValue;
 
 // Ion Discover DJ
@@ -22,6 +24,11 @@ const mapping = [
     id: 26,
     button: "browse",
     directional: true,
+  },
+  {
+    id: 79,
+    button: "browseClick",
+    directional: false,
   },
   {
     id: 10,
@@ -153,18 +160,24 @@ easymidi.getInputs().forEach((inputName) => {
       var split = read.split(" ");
       buttonID = parseInt(split[6].slice(0, split[6].length - 1));
       buttonValue = parseInt(split[8].slice(0, split[8].length - 1));
-      //console.log(buttonID, buttonValue);
+      console.log(buttonID, buttonValue);
       Press(buttonID, buttonValue);
     });
   });
 
 function Press(id, value){
+  var direction;
   var obj = mapping.find(x => {return x.id === id});
   if(!obj) return;
-  console.log(obj)
   if(obj.directional == true){
-    console.log("Directional");
+    if(value == 1){
+      direction = "right";
+    } else {
+      direction = "left";
+    }
   } else {
     console.log("Button");
   }
+  console.log(obj.button + direction);
+  socket.send(obj.button);
 }
