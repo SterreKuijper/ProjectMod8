@@ -66,6 +66,6 @@ server.on('connection', function(socket) {
     });
 });
 
-exports.getData = () => {
+exports.getEar = () => {
     return ear;
 }

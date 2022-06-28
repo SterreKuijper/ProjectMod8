@@ -1,9 +1,9 @@
 //setup speaker
 var speakerVol = 120; //volume in decibel (dB)
-var distToSpeaker = 16; //distance to speaker in meters
+var distToSpeaker = 4; //distance to speaker in meters
 var speakerVolMult = -8.656; //speaker multiplier
-//var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m
-var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
+var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m
+//var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
 var floatNumComp = 5390; //extra time to run the programm the correct amount of times in milliseconds
 
 //setup  run program
@@ -15,16 +15,17 @@ var critSndDur = 8; //time in hours
 var critSndLvl = 80; //volume in decibel (dB)
 var exchangeRate = 10 //Exchange rate paremeter which is the result of 
 
-//calculated values
+//calculated & received values
 var weightedSndLvl;
 var sndDose = 0; //begins at zero
+var earplugsIn = false;
 
 //set sound dose thresholds
 var maxSndDose = 1000000; //maximum sound dose you could receive
 var safeSndDose = 100; //safe daily sound dose
 var hearingDamage = 0;  //Damage to the ear
 
-
+const tcpServer = require('./tcpserver');
 
 function loop(){
 
@@ -43,6 +44,7 @@ function loop(){
 
 function calcWeightedSndLvl(speakerVol, distToSpeaker){
     weightedSndLvl = speakerVolMult * Math.log(distToSpeaker) + speakerVol + speakerVolComp;
+    if(tcpServer.getEar()) weightedSndLvl - 20; 
     console.log("weightedSndLvl = " + weightedSndLvl);
 } 
 
