@@ -2,17 +2,17 @@ var videoSource = new Array();
 videoSource[0] = '/videos/visual1.mp4';
 let key = 0; // global
 const videoCount = videoSource.length;
-const audioElement = document.getElementById("videos");
+const videoElement = document.getElementById("videos");
 
 // element.setAttribute("src", videoSource[0]);
 ``
 function playVideo(videoNum) {
-    audioElement.setAttribute("src", videoSource[videoNum]);
-    audioElement.load();
-    audioElement.play();
+    videoElement.setAttribute("src", videoSource[videoNum]);
+    videoElement.load();
+    videoElement.play();
 }
 
-audioElement.addEventListener('ended', myFunctionHandle, false);
+videoElement.addEventListener('ended', myFunctionHandle, false);
 
 function myFunctionHandle() {
     key++;
@@ -37,7 +37,7 @@ function progressBar(id) {
         var end = window.performance.now();
         var time = end - start;
         window.location = "http://localhost:3000/wrapped?time=" + time;
-    }, 61000);
+    }, 180000);
 }
 
 document.addEventListener('keydown', function (event) {
@@ -48,38 +48,83 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-// ---------------------------------------------
+// --------------------------------------------- audio
 
-var audioSource = new Array();
-audioSource[0] = '/audio/dreams.mp3';
+// var audioSource = new Array();
+// audioSource[0] = '/audio/dreams.mp3';
+
+var audioInfo = [{
+    genre: "ROCK",
+    files: ["ROCK - AC_DC - Highway to Hell.wav", "ROCK - Joan Jett - I Love Rock 'n' Roll.wav", "ROCK - Nirvana - Smells Like Teen Spirit.wav"],
+    artist: ["AC/DC", "Joan Jett", "Nirvana"],
+    song: ["Highway to Hell", "I love Rock 'n' Roll", "Smells Like Teen Spirit"]
+},
+{
+    genre: "CHOIR",
+    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.wav", "CHOIR - Thomas Tallis - Spem in Alium.wav", "CHOIR - Alleluia - University of Utah Singers.wav"],
+    artist: ["Carl Orff", "Thomas Tallis.wav", "University of Utah Singers"],
+    song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"]
+},
+{
+    genre: "POP",
+    files: ["POP - Abba - Dancing Queen.wav", "POP - The Weeknd - Blinding Lights.wav", "POP - Ed Sheeran - Shape of You.wav"],
+    artist: ["Abba", "The Weeknd", "Ed Sheeran"],
+    song: ["Dancing Queen", "Blinding Lights", "Shape of You"]
+},
+{
+    genre: "EDM",
+    files: ["EDM - ACRAZE - Do It To It.wav", "EDM - DJ Fresh - Gold Dust (Fox Stevenson Remix).wav", "EDM - Shouse - Love Tonight.wav"],
+    artist: ["ACRAZE", "DJ Fresh (Fox Stevenson Remix)", "Shouse"],
+    song: ["Do It To IT", "Gold Dust (Fox Stevenson Remix)", "Love Tonight"]
+},
+{
+    genre: "HIPHOP",
+    files: ["HIPHOP -  Eminem - 'Till I Collapse.wav", "HIPHOP - Dr Dre Ft. Snoop Dogg - Still D.R.E.wav", "HIPHOP - 2Pac - Hit Em Up.wav"],
+    artist: ["Eminem", "Dr Dre Ft. Snoop Dogg", "2Pac"],
+    song: ["'Till I collapse", "Still D.R.E.", "Hit Em Up"]
+},
+{
+    genre: "CLASSIC",
+    files: ["CLASSIC - Beethoven - Fur Elise.wav", "CLASSIC - Mozart - Eine Kleine Nachtmusik.wav", "CLASSIC - Beethoven - Moonlight Sonata.wav"],
+    artist: ["Beethoven", "Mozart", "Beethoven"],
+    song: ["Fur Elise", "Eine kleine Nachtmusik", "Moonlight Sonata"]
+},
+{
+    genre: "HARDSTYLE",
+    files: ["HARDSTYLE - Wildstylez Feat. Niels Geusebroek - Year Of Summer.wav", "HARDSTYLE - Jebroer - Kind van de Duivel.wav", "HARDSTYLE - Ran-D - Zombie.wav"],
+    artist: ["Wildstylez Feat. Niels Geusebroek", "Jebroer", "Ran-D"],
+    song: ["Year Of Summer", "Kind van de Duivel", "Zombie"]
+}];
 
 var audio = document.getElementById("audio");
 
-function playAudio() {
-    audioElement.setAttribute("src", audioSource[0]);
-    audioElement.load();
-    audioElement.play();
+var context;
+var source;
+
+function playAudio(song) {
+    audio.setAttribute("src", song);
+    audio.load();
+    audio.play();
 }
 
 function stopAudio() {
-    audioElement.pause();
+    audio.pause();
     audio.currentTime = 0;
 }
 
-function audioVisualisation() {
-
-    var context = new AudioContext();
-    var src = context.createMediaElementSource(audio);
+function audioVisualisation(song) {
+    context = context || new AudioContext();
+    source = source || context.createMediaElementSource(audio);
     var analyser = context.createAnalyser();
 
-    playAudio();
+    playAudio(song);
 
     var canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     var ctx = canvas.getContext("2d");
 
-    src.connect(analyser);
+    source.connect(analyser);
     analyser.connect(context.destination);
 
     const amountOfBars = 128;
@@ -139,6 +184,13 @@ let left = true;
 var index = [1, 2, 3, 4, 5, 6];
 var isPlaying = [false, false, true, false, false, false];
 
+// 1: Rock
+// 2: Church Choir
+// 3: Pop
+// 4: EDM
+// 5: Hip Hop
+// 6: Classical Music
+
 document.addEventListener('keydown', function (event) {
     //right key
     if (event.keyCode == 37) {
@@ -147,7 +199,7 @@ document.addEventListener('keydown', function (event) {
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
         }
 
-        for (let i = 0; i < index.length; i++) if(!left) index[i]++;
+        for (let i = 0; i < index.length; i++) if (!left) index[i]++;
 
         left = false;
 
@@ -164,8 +216,7 @@ document.addEventListener('keydown', function (event) {
         for (let i = 0; i < isPlaying.length; i++) {
             if (isPlaying[i]) {
                 stopAudio();
-                playAudio();
-                audioVisualisation()
+                audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
             }
         }
     }
@@ -191,15 +242,58 @@ document.addEventListener('keydown', function (event) {
         for (let i = 0; i < isPlaying.length; i++) {
             if (isPlaying[i]) {
                 stopAudio();
-                playAudio();
-                audioVisualisation()
+                audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
             }
         }
     }
 
-    console.log(isPlaying);
-
+    else if (event.keyCode == 81) {
+        const info = addNotification();
+        setTimeout(() => {
+            removeNotification(info);
+        }, 2500);
+    }
 });
+
+
+// -----------------------------------------------------------------------------
+
+const notificationContainer = document.getElementById('notification-container');
+
+function addNotification() {
+    // create the DIV and add the required classes
+    const newNotification = document.createElement('div');
+    newNotification.classList.add('notification');
+
+    const innerNotification = `
+        <img src="/images/EarplugIcon.png" id="earplug">
+	`;
+
+    // insert the inner elements
+    newNotification.innerHTML = innerNotification;
+
+    // add the newNotification to the container
+    notificationContainer.appendChild(newNotification);
+
+    return newNotification;
+}
+
+function removeNotification(notification) {
+    notification.classList.add('hide');
+
+    // remove notification from the DOM after 0.5 seconds
+    setTimeout(() => {
+        notificationContainer.removeChild(notification);
+    }, 500);
+}
+
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 90) {
+        window.location = "http://localhost:3000/standby-screen";
+    }
+});
+
+
 
 
 

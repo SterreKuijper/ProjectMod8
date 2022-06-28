@@ -22,7 +22,7 @@ var elapsedTimeInHours = 0;
 
 function calculateTime() {
     let maxFakeTime = 8 * 60 * 60;      // 8 hours
-    let maxRealTime = 60;              // 2 minutes
+    let maxRealTime = 180;              // 3 minutes
 
     let timeText = document.getElementById("time").innerHTML;
     let time = Math.round(parseFloat(timeText))/1000 * maxFakeTime / maxRealTime;
@@ -37,11 +37,17 @@ function secondsToHms(d) {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
-    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+z    var hDisplay = h > 0 ? h + (h == 1 ? (m > 0 ? " hour, ":" hour") : (m > 0 ? " hours, ":" hours")) : ""; 
+    var mDisplay = m > 0 ? m + (m == 1 ? (s > 0 ? " minute, ":" minute") : (s > 0 ? " minutes, ":" minutes")) : "";    
     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return hDisplay + mDisplay + sDisplay; 
 }
+
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 90) {
+        window.location = "http://localhost:3000/standby-screen";
+    }
+});
 
 
 
