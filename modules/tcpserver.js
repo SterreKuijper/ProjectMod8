@@ -69,3 +69,11 @@ server.on('connection', function(socket) {
 exports.getEar = () => {
     return ear;
 }
+
+exports.getXPos = () => {
+    return magX;
+}
+
+exports.getYPos = () => {
+    return magY;
+}
