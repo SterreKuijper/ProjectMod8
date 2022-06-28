@@ -112,17 +112,17 @@ function audioVisualisation() {
 
             // barHeight = -(-3 - dataArray[i]/2) *3.5;
 
-            // var b = barHeight + (25 * (i / bufferLength));
-            // var g = 250 * (i / bufferLength);
-            // var r = 50;
+            var r = barHeight + (25 * (i / bufferLength));
+            var g = 250 * (i / bufferLength);
+            var b = 50;
 
-            var b = barHeight / 2 + (25 * (i / bufferLength));
-            var g = barHeight / 3;
-            var r = barHeight / 4;
+            // var b = barHeight / 2 + (25 * (i / bufferLength));
+            // var g = barHeight / 3;
+            // var r = barHeight / 4;
 
-            if (b >= 256) { b = 0 }
-            if (g >= 256) { g = 0 }
-            if (r >= 256) { r = 0 }
+            // if (b >= 256) { b = 0 }
+            // if (g >= 256) { g = 0 }
+            // if (r >= 256) { r = 0 }
 
             ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
             ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
