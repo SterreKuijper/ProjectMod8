@@ -127,7 +127,7 @@ function audioVisualisation(song) {
     source.connect(analyser);
     analyser.connect(context.destination);
 
-    const amountOfBars = 128;
+    const amountOfBars = 64;
     analyser.fftSize = amountOfBars * 4;
 
     var bufferLength = analyser.frequencyBinCount;
