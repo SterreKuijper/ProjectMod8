@@ -18,6 +18,7 @@
         <%= title %>
     </title>
     <link href="/stylesheets/experience.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/images/sterfavicon.jpg">
 
 </head>
 
@@ -27,11 +28,15 @@
 
     <div id="content">
         <canvas id="canvas"></canvas>
-        <audio id="audio" src="/audio/dreams.mp3"></audio>
+        <audio id="audio">
+            <source src="/audio/CHOIR - Alleluia - University of Utah Singers.wav" typq="audio/wav">
+        </audio>
     </div>
 
     <div class="fixed-bottom text-center text-white my-3">
-        <div class="genre extra bg-danger">
+        <div class="song-container">
+            <div class="song text-dark">H</div>
+            <div class="extra bg-danger"></div>
         </div>
         <div id="card1" class="genre p-2">
             <h1 id="genre-1" class="m-0">Rock</h1>
@@ -51,7 +56,7 @@
         <div id="card6" class="genre p-2">
             <h1 id="genre-6" class="m-0">Classical Music</h1>
         </div>
-        
+
     </div>
 
     <div id="time-bar" class="m-4 py-2 px-5 fixed-top d-flex flex-row justify-content-between align-items-center">
@@ -65,6 +70,10 @@
         </div>
         <h1 class="time text-white flex-column">22:00</h1>
     </div>
+
+    <div class="notification-container" id="notification-container">
+    </div>
+
 
     <script src="/js/experience.js"></script>
     <script src="/js/socket.io.min.js"></script>

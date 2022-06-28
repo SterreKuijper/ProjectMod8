@@ -1,27 +1,3 @@
-.bg {
-    animation: colorFade 9s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-@keyframes colorFade {
-    0% {
-        background-color: #FF5471;
-    }
-
-    33% {
-        background-color: #7F56C0;
-    }
-
-    66% {
-        background-color: #64F8E9;
-    }
-
-    100% {
-        background-color: #C0FF33;
-    }
-}
-
 .content {
     position: fixed;
     width: 100vw;
@@ -29,13 +5,54 @@
 }
 
 .card {
-    background-color: #FFFFFF;
+    background-color: #FFFC98;
     border: none;
     display: none;
-    height: 600px;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.rainbow {
+    z-index: 0;
+    height: 600px;
+    width: 1200px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.rainbow ::before {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    left: -100%;
+    top: -100%;
+    width: 300%;
+    height: 300%;
+    background-color: #FFFC98;
+    background-repeat: no-repeat;
+    background-size: 50% 50%, 50% 50%;
+    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    background-image: linear-gradient(#FF23F4, #FF23F4), linear-gradient(#FFFC98, #FFFC98), linear-gradient(#00FFE6, #00FFE6), linear-gradient(#FFFC98, #FFFC98);
+    animation: rotate 4s linear infinite;
+}
+
+.rainbow ::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 10px;
+    top: 10px;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    background-color: #FFFC98;
+    border-radius: 5px;
 }
 
 @keyframes move-in {
