@@ -43,12 +43,27 @@ setTimeout(() => {
     });
 }, 50);
 
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 82) {
+        setAvatar(false);
+    }
+    if (event.keyCode == 69) {
+        setAvatar(true);
+    }
+});
+
 function setAvatar(avatarIsOn) {
     if(!avatarIsOn) {
         document.getElementById('avatar').classList.remove('pop-up');
         document.getElementById('avatar').classList.remove('hide');
         document.getElementById('avatar').classList.add('pop-up');
-    }else{
+
+        document.getElementById('content').classList.add('out');
+    }else{        
+        document.getElementById('content').classList.remove('in');
+        document.getElementById('content').classList.remove('out');
+        document.getElementById('content').classList.add('in');
+
         document.getElementById('avatar').classList.add('hide');
     }
 }

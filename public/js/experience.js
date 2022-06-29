@@ -500,8 +500,14 @@ function setAvatar(avatarIsOn) {
         document.getElementById('avatar').classList.remove('pop-up');
         document.getElementById('avatar').classList.remove('hide');
         document.getElementById('avatar').classList.add('pop-up');
+
+        document.getElementById('start-btn').classList.add('out');
     }else{
         document.getElementById('avatar').classList.add('hide');
+        
+        document.getElementById('start-btn').classList.remove('in');
+        document.getElementById('start-btn').classList.remove('out');
+        document.getElementById('start-btn').classList.add('in');
     }
 }
 
