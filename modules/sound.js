@@ -1,3 +1,4 @@
+//setup socket
 const socket = require("./socket");
 
 //setup speaker
@@ -6,7 +7,7 @@ var distToSpeaker = 4; //distance to speaker in meters
 var distToSpeaker1;
 var distToSpeaker2;
 var speakerVolMult = -8.656; //speaker multiplier
-var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m
+var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m DEBUGGING
 //var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
 var floatNumComp = 5390; //extra time to run the programm the correct amount of times in milliseconds
 
@@ -32,7 +33,7 @@ var safeSndDose = 100; //safe daily sound dose
 var hearingDamage = 0;  //Damage to the ear
 
 const tcpServer = require('./tcpserver');
-const wrapped = require('../public/js/wrapped');
+//const wrapped = require('../public/js/wrapped');
 
 function loop(){
     calcDistToSpeaker();
@@ -50,8 +51,8 @@ function loop(){
 }
 
 function calcDistToSpeaker(){
-    let relXPosToSpeaker1 = 20 - tcpServer.getXPos();
-    let relXPosToSpeaker2 = 40 - tcpServer.getXPos();
+    let relXPosToSpeaker1 = 22 - tcpServer.getXPos();
+    let relXPosToSpeaker2 = 41 - tcpServer.getXPos();
     let relYPosToSpeaker1 = 64 - tcpServer.getYPos();
     let relYPosToSpeaker2 = 64 - tcpServer.getYPos(); 
     distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 2) ** 2 + (relYPosToSpeaker1 * 4) ** 2); 
@@ -73,7 +74,7 @@ function calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2){
 
 function calcSndDose(){
     passedTime = calcPassedTime();
-    sndDose = (100/critSndDur)*passedTime*10**((totWeightedSndLvl-critSndLvl)/exchangeRate);
+    sndDose = ((100/critSndDur)*passedTime*10**((totWeightedSndLvl-critSndLvl)/exchangeRate))/100;
     //let timeInterval = 1/60; DEBUGGING
     //sndDose += (100/critSndDur)*timeInterval*10**((totweightedSndLvl-critSndLvl)/exchangeRate); DEBUGGING
     console.log("soundDose = " + sndDose);
@@ -88,10 +89,11 @@ function getSndDose(){
 }
 
 function calcPassedTime(){
+    passedTime = 8;
     //Time from client.
-    passedTime = socket.passedTime;
-    console.log(socket.passedTime);
-    passedTime = wrapped.getElapsedTime();
+    //passedTime = socket.passedTime;
+    //console.log(socket.passedTime);
+    //passedTime = wrapped.getElapsedTime();
     return passedTime;
 }
 

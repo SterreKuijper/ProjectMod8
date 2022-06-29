@@ -6,8 +6,8 @@ const port = 8080;
 
 // variables used for events
 let ear = Boolean(false);
-let magX = 0;
-let magY = 0;
+let magX = 22;
+let magY = 63;
 
 
 // Use net.createServer() in your code. This is just for illustration purpose.
