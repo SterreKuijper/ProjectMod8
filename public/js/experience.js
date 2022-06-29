@@ -152,9 +152,12 @@ function audioVisualisation(song) {
         ctx.fillStyle = "#000";
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-        for (var i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] * 3.5;
+        //let xFactor = 0.03; * Math.log(i * xFactor)  Math.sqrt(i * xFactor) 
+        let xFactor = 0.01;
 
+        for (var i = 0; i < bufferLength; i++) {
+            barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
+ 
             // barHeight = -(-3 - dataArray[i]/2) *3.5;
 
             var r = barHeight + (25 * (i / bufferLength));

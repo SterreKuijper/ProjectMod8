@@ -8,12 +8,13 @@
   "dependencies": {
     "animate.css": "^4.1.1",
     "bootstrap": "^3.4.1",
-    "cookie-parser": "^1.4.5",
+    "cookie-parser": "^1.4.6",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "^4.17.1",
     "http-errors": "~1.6.2",
     "morgan": "^1.10.0",
+    "net": "^1.0.2",
     "pg-promise": "^8.7.5"
   }
 }
