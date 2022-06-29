@@ -19,7 +19,6 @@ io.on('connection', (s) => {
   });
 
   s.on('new-song', id => {
-    console.log('hkdsahfdsah');
     eventEmitter.emit('new-song', id);
   });
   //Store this socket to be used in other functions.

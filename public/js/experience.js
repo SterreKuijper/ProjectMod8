@@ -256,7 +256,6 @@ function rightInput() {
             randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
             var idOmdoortesturen = audioInfo[i].id[randomSong];
             socket.emit('new-song', idOmdoortesturen);
-            console.log('zou dingen moeten doen');
             changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
