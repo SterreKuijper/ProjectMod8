@@ -28,10 +28,41 @@ function myFunctionHandle() {
         playVideo(key);
     }
 }
+// document.addEventListener('keydown', function (event) {
+
+//     window.location = "http://localhost:3000/experience?";
+
+// });
+
+var avatarIsOn = false;
+
 document.addEventListener('keydown', function (event) {
+    // right key
+    if (event.keyCode == 37) {
+        avatarIsOn = true;
+    }
+    // left key
+    if (event.keyCode == 39) {
+        avatarIsOn = false;
+    }
 
-    proceed();
+    if (avatarIsOn === false) {     
+        document.getElementById('avatar').classList.remove('pop-up');
+        document.getElementById('avatar').classList.remove('hide');     
+        document.getElementById('avatar').classList.add('pop-up');
+        
+        document.getElementById('content').classList.add('out');
+    }
 
+    console.log(avatarIsOn);
+    if (avatarIsOn === true) {
+        document.getElementById('avatar').classList.add('hide');  
+        
+        
+        document.getElementById('content').classList.remove('inf');
+        document.getElementById('content').classList.remove('out');     
+        document.getElementById('content').classList.add('in');
+    }
 });
 
 function proceed(){
