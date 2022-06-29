@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var tcpSocket = require('../modules/tcpserver');
 
 const app = express()
 const port = 3000
@@ -24,12 +25,12 @@ router.get('/', function(req, res, next) {
 
 /* GET standby-screen page. */
 router.get('/standby-screen', function(req, res, next) {
-      res.render('standby-screen', { title: 'Standby screen', data:[] });
+      res.render('standby-screen', { title: 'Standby screen', data:[], present: tcpSocket.getPresentStatus() });
    });
 
 /* GET experience page. */
 router.get('/experience', function(req, res, next) {
-      res.render('experience', { title: 'Experience', data:[] });
+      res.render('experience', { title: 'Experience', data:[], present: tcpSocket.getPresentStatus() });
    });
 
 /* GET wrapped page. */

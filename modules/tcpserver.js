@@ -55,7 +55,7 @@ server.on('connection', function(socket) {
             incoming = incoming.replace('m', '').split(',')
             magX = incoming[0]
             magY = incoming[1]
-            if(magX === -1 || magY === -1) {
+            if(magX.includes("-1") || magY.includes("-1")) {
                 if(present) {
                     socketModule.sendPresent(false);
                     present = false;
@@ -94,3 +94,5 @@ exports.getXPos = () => {
 exports.getYPos = () => {
     return magY;
 }
+
+exports.getPresentStatus = () => present;

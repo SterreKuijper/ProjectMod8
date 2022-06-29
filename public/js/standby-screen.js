@@ -34,36 +34,20 @@ function myFunctionHandle() {
 
 // });
 
-var avatarIsOn = false;
-
-document.addEventListener('keydown', function (event) {
-    // right key
-    if (event.keyCode == 82) {
-        avatarIsOn = true;
-    }
-    // left key
-    if (event.keyCode == 69) {
-        avatarIsOn = false;
-    }
-
-    if (avatarIsOn === false) {     
-        document.getElementById('avatar').classList.remove('pop-up');
-        document.getElementById('avatar').classList.remove('hide');     
-        document.getElementById('avatar').classList.add('pop-up');
-        
-        document.getElementById('content').classList.add('out');
-    }
-
-    console.log(avatarIsOn);
-    if (avatarIsOn === true) {
-        document.getElementById('avatar').classList.add('hide');  
-        
-        
-        document.getElementById('content').classList.remove('inf');
-        document.getElementById('content').classList.remove('out');     
-        document.getElementById('content').classList.add('in');
-    }
+var socket = io("http://localhost:3010");
+socket.on("present", present  => {
+    setAvatar(present); 
 });
+
+function setAvatar(avatarIsOn) {
+    if(!avatarIsOn) {
+        document.getElementById('avatar').classList.remove('pop-up');
+        document.getElementById('avatar').classList.remove('hide');
+        document.getElementById('avatar').classList.add('pop-up');
+    }else{
+        document.getElementById('avatar').classList.add('hide');
+    }
+}
 
 function proceed(){
     window.location = "http://localhost:3000/experience?";

@@ -449,7 +449,7 @@ function scratch(){
 
 //Inputs from controller
 
-// var socket = io("http://localhost:3010");
+var socket = io("http://localhost:3010");
 socket.on("input", (data) => {
     var split = data.split(",");
     var button = split[0];
@@ -480,31 +480,26 @@ socket.on("input", (data) => {
 
 });
 
+socket.on("ear", isIn  => {
+    const info = addNotification(`<img src="/images/${!isIn ? 'EarplugOutIcon' : 'EarplugIcon'}.png" id="earplug">`);
+    setTimeout(() => {
+        removeNotification(info);
+    }, 2500);   
+});
 
+socket.on("present", present  => {
+    setAvatar(present);  
+});
 
-var avatarIsOn = false;
-
-document.addEventListener('keydown', function (event) {
-    // right key
-    if (event.keyCode == 82) {
-        avatarIsOn = true;
-    }
-    // left key
-    if (event.keyCode == 69) {
-        avatarIsOn = false;
-    }
-
-    if (avatarIsOn === false) {
+function setAvatar(avatarIsOn) {
+    if(!avatarIsOn) {
         document.getElementById('avatar').classList.remove('pop-up');
         document.getElementById('avatar').classList.remove('hide');
         document.getElementById('avatar').classList.add('pop-up');
-    }
-
-    console.log(avatarIsOn);
-    if (avatarIsOn === true) {
+    }else{
         document.getElementById('avatar').classList.add('hide');
     }
-});
+}
 
 function changeSongDisplay(index, song) {
     var title = document.getElementById('title');
