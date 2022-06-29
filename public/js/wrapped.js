@@ -18,17 +18,19 @@ function moveInAndOut(idIn, idOut) {
     moveOut(idOut);
 }
 
-var elapsedTimeInHours = 0;
+var elapsedTimeInHours = 0; //to Jelle
 
 function calculateTime() {
     let maxFakeTime = 8 * 60 * 60;      // 8 hours
-    let maxRealTime = 60;              // 2 minutes
+    let maxRealTime = 180;              // 3 minutes
 
     let timeText = document.getElementById("time").innerHTML;
     let time = Math.round(parseFloat(timeText))/1000 * maxFakeTime / maxRealTime;
     elapsedTimeInHours = time/3600;
 
     document.getElementById('time-text').innerHTML = secondsToHms(time);
+
+    moveIn('card1');
 }
 
 function secondsToHms(d) {
@@ -37,10 +39,30 @@ function secondsToHms(d) {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
-    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-    var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? (m > 0 ? " hour, ":" hour") : (m > 0 ? " hours, ":" hours")) : ""; 
+    var mDisplay = m > 0 ? m + (m == 1 ? (s > 0 ? " minute, ":" minute") : (s > 0 ? " minutes, ":" minutes")) : "";    
     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return hDisplay + mDisplay + sDisplay; 
+}
+
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 90) {
+        window.location = "http://localhost:3000/standby-screen";
+    }
+});
+
+function startWrapped() {
+    calculateTime();
+
+    moveIn('card1');
+
+    setTimeout(function () {
+        moveInAndOut('card2', 'card1');
+    }, 10000);
+
+    setTimeout(function () {
+        moveOut('card2');
+    }, 20000);
 }
 
 
