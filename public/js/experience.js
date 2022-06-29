@@ -128,23 +128,25 @@ function randomiseAudio() {
             randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
         }
     }
-
 }
 
 function switchAudio() {
+    previousAudio = randomAudio;
+
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
-            stopAudio();
-            randomiseAudio();
-            if (randomAudio == previousAudio) {
+                stopAudio();
                 randomiseAudio();
-            } else {
-                audioVisualisation(`/audio/${randomAudio}`);
-                previousAudio = randomAudio;
+                if (previousAudio === randomAudio){
+                    randomiseAudio();
+                    audioVisualisation(`/audio/${randomAudio}`);
+                } else {
+                    audioVisualisation(`/audio/${randomAudio}`);
+                }
             }
         }
-    }
 }
+
 
 function audioVisualisation(song) {
     context = context || new AudioContext();
@@ -245,7 +247,8 @@ function rightInput() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
             stopAudio();
-            audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
+            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+            audioVisualisation(`/audio/${randomAudio}`);
         }
     }
 }
@@ -272,7 +275,8 @@ function leftInput() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
             stopAudio();
-            audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
+            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+            audioVisualisation(`/audio/${randomAudio}`);
         }
     }
 }
