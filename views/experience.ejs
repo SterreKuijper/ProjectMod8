@@ -33,9 +33,12 @@
         </audio>
     </div>
 
-    <div class="fixed-bottom text-center text-white my-3">
+    <div class="fixed-bottom text-center text-white" style="margin-bottom: 50px;">
         <div class="song-container">
-            <div class="song text-dark">H</div>
+            <div class="song text-dark m-3 p-3">
+                <h3 id="title">Title</h3>
+                <h6 id="artist">Artist</h6>
+            </div>
             <div class="extra bg-danger"></div>
         </div>
         <div id="card1" class="genre p-2">
@@ -59,16 +62,22 @@
 
     </div>
 
-    <div id="time-bar" class="m-4 py-2 px-5 fixed-top d-flex flex-row justify-content-between align-items-center">
+    <div id="time-bar" class="py-2 px-5 fixed-top d-flex flex-row justify-content-between align-items-center">
         <h1 class="time text-white flex-column">14:00</h1>
         <div class="d-block w-100 mx-5">
-            <div class="progress" id="progress-bar" style="height: 32px">
+            <div class="progress" id="progress-bar" style="height: 48px;">
                 <div id="progressbar" class="progress-bar progress-bar-striped progress-bar-animated bg-warning"
                     role="progressbar" aria-valuenow="75" aria-valueSmin="0" aria-valuemax="100"
-                    style="width: 0; height: 32px;"></div>
+                    style="width: 0; height: 48px;"></div>
             </div>
         </div>
         <h1 class="time text-white flex-column">22:00</h1>
+    </div>
+
+    <div class="avatar-container">
+        <div class="avatar pop-up" id="avatar">
+            <img width="300px" src="/images/AvatarPlacementIcon.png" class="imag">
+        </div>
     </div>
 
     <div class="notification-container" id="notification-container">

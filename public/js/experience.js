@@ -208,9 +208,9 @@ function audioVisualisation(song) {
         let xFactor = 0.40;
 
         for (var i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
+            // barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
 
-            // barHeight = -(-3 - dataArray[i]/2) *3.5;
+            barHeight = dataArray[i] *3.5;
 
             var r = barHeight + (25 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
@@ -239,6 +239,7 @@ let left = true;
 var index = [1, 2, 3, 4, 5, 6];
 var isPlaying = [false, false, true, false, false, false];
 
+var randomSong;
 
 function rightInput() {
     for (let i = 0; i < index.length; i++) {
@@ -265,6 +266,8 @@ function rightInput() {
             stopAudio();
             randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
             audioVisualisation(`/audio/${randomAudio}`);
+            changeSongDisplay(i, randomAudio);
+            audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
     }
 }
@@ -293,6 +296,8 @@ function leftInput() {
             stopAudio();
             randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
             audioVisualisation(`/audio/${randomAudio}`);
+            changeSongDisplay(i, randomAudio);
+            audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
     }
 }
@@ -303,12 +308,6 @@ document.addEventListener('keydown', function (event) {
     }
     if (event.keyCode == 39) {
         leftInput();
-    }
-    else if (event.keyCode == 81) {
-        const info = addNotification();
-        setTimeout(() => {
-            removeNotification(info);
-        }, 2500);
     }
     else if (event.keyCode == 81) {
         const info = addNotification(`<img src="/images/EarplugIcon.png" id="earplug">`);
@@ -439,6 +438,40 @@ socket.on("input", (data) => {
     }
 
 });
+
+var avatarIsOn = false;
+
+document.addEventListener('keydown', function (event) {
+    // right key
+    if (event.keyCode == 82) {
+        avatarIsOn = true;
+    }
+    // left key
+    if (event.keyCode == 69) {
+        avatarIsOn = false;
+    }
+
+    if (avatarIsOn === false) {     
+        document.getElementById('avatar').classList.remove('pop-up');
+        document.getElementById('avatar').classList.remove('hide');     
+        document.getElementById('avatar').classList.add('pop-up');
+    }
+
+    console.log(avatarIsOn);
+    if (avatarIsOn === true) {
+        document.getElementById('avatar').classList.add('hide');
+    }
+});
+
+function changeSongDisplay(index, song){
+    var title = document.getElementById('title');
+    var artist = document.getElementById('artist');
+
+    console.log(song);
+    
+    title.innerHTML = audioInfo[index].song[song];
+    artist.innerHTML = audioInfo[index].artist[song];
+}
 
 
 
