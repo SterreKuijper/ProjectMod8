@@ -111,18 +111,36 @@ var audio = document.getElementById("audio");
 var context;
 var source;
 
-function playAudio(song) {
-    audio.setAttribute("src", song);
-    audio.load();
-    audio.play();
+var newSound = null;
+
+function playAudio(song){
+    // Audio for playback
+    console.log(song);
+    newSound = new Howl({
+        src: [song],
+        html5: false,
+      });
+      newSound.play();
+    
+    // Audio for visualizer
+    function load(){
+        audio.setAttribute("src", song);
+        audio.load();
+        document.getElementById("audio").volume = 0.01;
+        audio.play();
+        console.log("Start Visualizer");
+    }
+    setTimeout(load, 950);
 }
 
-function stopAudio() {
+function stopAudio(){
+    // Stop playback audio
+    Howler.stop();
+
+    //Stop visualiser audio
     audio.pause();
     audio.currentTime = 0;
 }
-
-// Not working properly yet
 
 var previousAudio;
 var randomAudio;
@@ -130,25 +148,34 @@ var randomAudio;
 function randomiseAudio() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
-            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+            //randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+            randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
         }
     }
-
 }
 
 function switchAudio() {
+    previousAudio = randomAudio;
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
+                // stopAudio();
+                // randomiseAudio();
+                // if (previousAudio === randomAudio){
+                //     randomiseAudio();
+                //     audioVisualisation(`/audio/${randomAudio}`);
+                // } else {
+                //     audioVisualisation(`/audio/${randomAudio}`);
+                // }
             stopAudio();
-            randomiseAudio();
-            if (randomAudio == previousAudio) {
+            if (previousAudio === randomAudio){
                 randomiseAudio();
+                audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
             } else {
-                audioVisualisation(`/audio/${randomAudio}`);
-                previousAudio = randomAudio;
+                audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
+            }
+            changeSongDisplay(i, randomSong);
             }
         }
-    }
 }
 
 function audioVisualisation(song) {
@@ -160,7 +187,7 @@ function audioVisualisation(song) {
     playAudio(song);
 
     var canvas = document.getElementById("canvas");
-    canvas.width = window.innerWidth;
+    canvas.width = window.innerWidth + 35;
     canvas.height = window.innerHeight;
     var ctx = canvas.getContext("2d");
 
@@ -181,7 +208,6 @@ function audioVisualisation(song) {
     var barHeight;
     var x = 0;
 
-
     function renderFrame() {
         requestAnimationFrame(renderFrame);
 
@@ -193,7 +219,7 @@ function audioVisualisation(song) {
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         //let xFactor = 0.03; * Math.log(i * xFactor)  Math.sqrt(i * xFactor) 
-        let xFactor = 0.01;
+        let xFactor = 0.40;
 
         for (var i = 0; i < bufferLength; i++) {
             // barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
@@ -202,7 +228,7 @@ function audioVisualisation(song) {
 
             var r = barHeight + (25 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
-            var b = 50;
+            var b = 100;
 
             // var b = barHeight / 2 + (25 * (i / bufferLength));
             // var g = barHeight / 3;
@@ -316,7 +342,6 @@ function leftInput() {
     }
 }
 
-
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 37) {
         rightInput();
@@ -373,6 +398,54 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+
+var sfx1 = new Audio('sfx/scratch1.mp3');
+var sfx2 = new Audio('sfx/scratch2.mp3');
+var sfx3 = new Audio('sfx/scratch3.mp3');
+var sfx4 = new Audio('sfx/scratch4.mp3');
+var sfx5 = new Audio('sfx/scratch5.mp3');
+var sfx6 = new Audio('sfx/scratch6.mp3');
+var trigger = 0;
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+function scratchReset(){
+    trigger = 0;
+}
+
+function scratch(){
+    trigger++;
+    var sound = getRandomInt(1,7);
+    console.log(sound, trigger);
+    if (trigger == 1){
+        switch(sound) {
+            case 1:
+                sfx1.play();
+                break;
+            case 2:
+                sfx2.play();
+                break;
+            case 3:
+                sfx3.play();
+                break;
+            case 4:
+                sfx4.play();
+                break;
+            case 5:
+                sfx5.play();
+                break;
+            case 6:
+                sfx6.play();
+            break;
+          }
+          setTimeout(scratchReset, 800);
+    }    
+}
+
 //Inputs from controller
 
 var socket = io("http://localhost:3010");
@@ -398,6 +471,10 @@ socket.on("input", (data) => {
     if (button == "crossfader" && (value == "0" || value == "127")) {
         console.log("CROSSFADE");
         switchAudio();
+    }
+
+    if((button == "jogwheelL" || button == "jogwheelR" )){
+        scratch();
     }
 
 });
