@@ -116,7 +116,6 @@ function playAudio(song){
         html5: false,
       });
       newSound.play();
-      console.log(newSound);
     
     // Audio for visualizer
     function load(){
@@ -144,7 +143,8 @@ var randomAudio;
 function randomiseAudio() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
-            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+            //randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+            randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
         }
     }
 }
@@ -153,14 +153,22 @@ function switchAudio() {
     previousAudio = randomAudio;
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
-                stopAudio();
+                // stopAudio();
+                // randomiseAudio();
+                // if (previousAudio === randomAudio){
+                //     randomiseAudio();
+                //     audioVisualisation(`/audio/${randomAudio}`);
+                // } else {
+                //     audioVisualisation(`/audio/${randomAudio}`);
+                // }
+            stopAudio();
+            if (previousAudio === randomAudio){
                 randomiseAudio();
-                if (previousAudio === randomAudio){
-                    randomiseAudio();
-                    audioVisualisation(`/audio/${randomAudio}`);
-                } else {
-                    audioVisualisation(`/audio/${randomAudio}`);
-                }
+                audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
+            } else {
+                audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
+            }
+            changeSongDisplay(i, randomSong);
             }
         }
 }
@@ -264,9 +272,8 @@ function rightInput() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
             stopAudio();
-            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
-            audioVisualisation(`/audio/${randomAudio}`);
-            changeSongDisplay(i, randomAudio);
+            randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
+            changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
     }
@@ -294,9 +301,8 @@ function leftInput() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
             stopAudio();
-            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
-            audioVisualisation(`/audio/${randomAudio}`);
-            changeSongDisplay(i, randomAudio);
+            randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
+            changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
     }
