@@ -106,18 +106,37 @@ var audio = document.getElementById("audio");
 var context;
 var source;
 
-function playAudio(song) {
-    audio.setAttribute("src", song);
-    audio.load();
-    audio.play();
+var newSound = null;
+
+function playAudio(song){
+    // Audio for playback
+    console.log(song);
+    newSound = new Howl({
+        src: [song],
+        html5: false,
+      });
+      newSound.play();
+      console.log(newSound);
+    
+    // Audio for visualizer
+    function load(){
+        audio.setAttribute("src", song);
+        audio.load();
+        document.getElementById("audio").volume = 0.01;
+        audio.play();
+        console.log("Start Visualizer");
+    }
+    setTimeout(load, 950);
 }
 
-function stopAudio() {
+function stopAudio(){
+    // Stop playback audio
+    Howler.stop();
+
+    //Stop visualiser audio
     audio.pause();
     audio.currentTime = 0;
 }
-
-// Not working properly yet
 
 var previousAudio;
 var randomAudio;
@@ -132,7 +151,6 @@ function randomiseAudio() {
 
 function switchAudio() {
     previousAudio = randomAudio;
-
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
                 stopAudio();
@@ -155,7 +173,7 @@ function audioVisualisation(song) {
     playAudio(song);
 
     var canvas = document.getElementById("canvas");
-    canvas.width = window.innerWidth;
+    canvas.width = window.innerWidth + 35;
     canvas.height = window.innerHeight;
     var ctx = canvas.getContext("2d");
 
@@ -176,7 +194,6 @@ function audioVisualisation(song) {
     var barHeight;
     var x = 0;
 
-
     function renderFrame() {
         requestAnimationFrame(renderFrame);
 
@@ -188,7 +205,7 @@ function audioVisualisation(song) {
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         //let xFactor = 0.03; * Math.log(i * xFactor)  Math.sqrt(i * xFactor) 
-        let xFactor = 0.01;
+        let xFactor = 0.40;
 
         for (var i = 0; i < bufferLength; i++) {
             barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
@@ -197,7 +214,7 @@ function audioVisualisation(song) {
 
             var r = barHeight + (25 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
-            var b = 50;
+            var b = 100;
 
             // var b = barHeight / 2 + (25 * (i / bufferLength));
             // var g = barHeight / 3;
@@ -279,7 +296,6 @@ function leftInput() {
         }
     }
 }
-
 
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 37) {
