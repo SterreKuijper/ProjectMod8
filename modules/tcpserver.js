@@ -1,5 +1,6 @@
 // Include Nodejs' net module.
 const Net = require('net');
+const EventEmitter = require('node:events')
 // The port on which the server is listening.
 const port = 8080;
 
@@ -12,6 +13,7 @@ let magY = 0;
 // Use net.createServer() in your code. This is just for illustration purpose.
 // Create a new TCP server.
 const server = new Net.Server();
+const emitter = new EventEmitter();
 // The server listens to a socket for a client to make a connection request.
 // Think of a socket as an end point.
 server.listen(port, function() {
@@ -35,10 +37,16 @@ server.on('connection', function(socket) {
         //ear boolean is set
         if (incoming.includes('e')){
             if (incoming.includes('0')){
-                ear = false;
+                if (ear = true){
+                    ear = false;
+                    emitter.emit('EarToFalse')
+                }
             }
             if (incoming.includes('1')){
-                ear = true;
+                if (ear = false){
+                    ear = true;
+                    emitter.emit('EarToTrue')
+                }
             }
         }
         //magnet input is set

@@ -70,6 +70,11 @@ function startWrapped() {
     }, 25000);
 }
 
+exports.getElapsedTime = () => {
+    elapsedTimeInHours = 8;
+    return elapsedTimeInHours;
+}
+
 
 
 
