@@ -22,6 +22,15 @@
     transform: translate(-50%, -50%);
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 5%;
+}
+
 #ty-card {
     color: #C0FF33;
     display: flex;
