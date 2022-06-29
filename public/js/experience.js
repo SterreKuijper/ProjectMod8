@@ -62,43 +62,50 @@ var audioInfo = [{
     genre: "ROCK",
     files: ["ROCK - AC_DC - Highway to Hell.wav", "ROCK - Joan Jett - I Love Rock 'n' Roll.wav", "ROCK - Nirvana - Smells Like Teen Spirit.wav"],
     artist: ["AC/DC", "Joan Jett", "Nirvana"],
-    song: ["Highway to Hell", "I love Rock 'n' Roll", "Smells Like Teen Spirit"]
+    song: ["Highway to Hell", "I love Rock 'n' Roll", "Smells Like Teen Spirit"],
+    id: [5, 6, 4]
 },
 {
     genre: "CHOIR",
     files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.wav", "CHOIR - Thomas Tallis - Spem in Alium.wav", "CHOIR - Alleluia - University of Utah Singers.wav"],
     artist: ["Carl Orff", "Thomas Tallis.wav", "University of Utah Singers"],
-    song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"]
+    song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"],
+    id: [2, 3, 1]
 },
 {
     genre: "POP",
     files: ["POP - Abba - Dancing Queen.wav", "POP - The Weeknd - Blinding Lights.wav", "POP - Ed Sheeran - Shape of You.wav"],
     artist: ["Abba", "The Weeknd", "Ed Sheeran"],
-    song: ["Dancing Queen", "Blinding Lights", "Shape of You"]
+    song: ["Dancing Queen", "Blinding Lights", "Shape of You"],
+    id: [16, 18, 17]
 },
 {
     genre: "EDM",
     files: ["EDM - ACRAZE - Do It To It.wav", "EDM - DJ Fresh - Gold Dust (Fox Stevenson Remix).wav", "EDM - Shouse - Love Tonight.wav"],
     artist: ["ACRAZE", "DJ Fresh (Fox Stevenson Remix)", "Shouse"],
-    song: ["Do It To IT", "Gold Dust (Fox Stevenson Remix)", "Love Tonight"]
+    song: ["Do It To IT", "Gold Dust (Fox Stevenson Remix)", "Love Tonight"],
+    id: [10, 11, 12]
 },
 {
     genre: "HIPHOP",
     files: ["HIPHOP -  Eminem - 'Till I Collapse.wav", "HIPHOP - Dr Dre Ft. Snoop Dogg - Still D.R.E.wav", "HIPHOP - 2Pac - Hit Em Up.wav"],
     artist: ["Eminem", "Dr Dre Ft. Snoop Dogg", "2Pac"],
-    song: ["'Till I collapse", "Still D.R.E.", "Hit Em Up"]
+    song: ["'Till I collapse", "Still D.R.E.", "Hit Em Up"],
+    id: [13, 15, 14]
 },
 {
     genre: "CLASSIC",
     files: ["CLASSIC - Beethoven - Fur Elise.wav", "CLASSIC - Mozart - Eine Kleine Nachtmusik.wav", "CLASSIC - Beethoven - Moonlight Sonata.wav"],
     artist: ["Beethoven", "Mozart", "Beethoven"],
-    song: ["Fur Elise", "Eine kleine Nachtmusik", "Moonlight Sonata"]
+    song: ["Fur Elise", "Eine kleine Nachtmusik", "Moonlight Sonata"],
+    id: [7, 9, 8]
 },
 {
     genre: "HARDSTYLE",
     files: ["HARDSTYLE - Wildstylez Feat. Niels Geusebroek - Year Of Summer.wav", "HARDSTYLE - Jebroer - Kind van de Duivel.wav", "HARDSTYLE - Ran-D - Zombie.wav"],
     artist: ["Wildstylez Feat. Niels Geusebroek", "Jebroer", "Ran-D"],
-    song: ["Year Of Summer", "Kind van de Duivel", "Zombie"]
+    song: ["Year Of Summer", "Kind van de Duivel", "Zombie"],
+    id: [21, 19, 20]
 }];
 
 var audio = document.getElementById("audio");
@@ -247,6 +254,9 @@ function rightInput() {
         if (isPlaying[i]) {
             stopAudio();
             randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
+            var idOmdoortesturen = audioInfo[i].id[randomSong];
+            socket.emit('new-song', idOmdoortesturen);
+            console.log('zou dingen moeten doen');
             changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
