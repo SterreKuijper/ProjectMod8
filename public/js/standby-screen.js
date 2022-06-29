@@ -38,11 +38,11 @@ var avatarIsOn = false;
 
 document.addEventListener('keydown', function (event) {
     // right key
-    if (event.keyCode == 37) {
+    if (event.keyCode == 82) {
         avatarIsOn = true;
     }
     // left key
-    if (event.keyCode == 39) {
+    if (event.keyCode == 69) {
         avatarIsOn = false;
     }
 
