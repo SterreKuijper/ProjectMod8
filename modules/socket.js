@@ -9,13 +9,21 @@ const io = new Server(server, {
 });
 
 let socket;
+var passedTime;
 
 // Open a socket to keep a connection open.
 io.on('connection', (s) => {
   console.log('a user connected');
+  
   s.on('disconnect', () => {
     console.log('user disconnected');
   });
+ 
+  // Listen for messages from client
+  s.on('wrapped', (read) => {
+    passedTime = read;
+  });
+
   //Store this socket to be used in other functions.
   socket = s;
 });
@@ -26,14 +34,8 @@ function send(input){
   socket.emit("input", input);
 }
 
-function read(){
-  socket.on("wrapped", (data) => {
-    console.log(data)
-});
-}
-
 server.listen(3010, () => {
   console.log('listening on *:3010');
 });
 
-module.exports = { send, read };
+module.exports = { send };

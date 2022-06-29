@@ -1,5 +1,3 @@
-const socket = require("./socket");
-
 function moveIn(id) {
     var element = document.getElementById(id);
     element.style.display = 'block';
@@ -33,6 +31,7 @@ function calculateTime() {
     document.getElementById('time-text').innerHTML = secondsToHms(time);
 
     moveIn('card1');
+    send(elapsedTimeInHours);
 }
 
 function secondsToHms(d) {
@@ -73,18 +72,10 @@ function startWrapped() {
 }
 
 var socket = io("http://localhost:3010");
-// socket.on("wrapped", (data) => {
-//     console.log(data);
-    
+function send(input){
+    socket.emit('wrapped', input);
+}
 
-// });
-
-socket.emit('wrapped', "WERKT SWOAFLEKA");
-
-// exports.getElapsedTime = () => {
-//     elapsedTimeInHours = 8;
-//     return elapsedTimeInHours;
-// }
 
 
 

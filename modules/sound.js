@@ -88,8 +88,9 @@ function getSndDose(){
 }
 
 function calcPassedTime(){
-    socket.read();
-    //let passedTime = 8;
+    //Time from client.
+    passedTime = socket.passedTime;
+    console.log(socket.passedTime);
     passedTime = wrapped.getElapsedTime();
     return passedTime;
 }
