@@ -24,10 +24,20 @@
 
 </head>
 
-<body class="bg-dark" onload="calculateTime()">
+<body class="bg-dark" onload="startWrapped()">
 
     <div class="content">
-        <div class="card text-center rainbow" id="card1" style="display: block; top: 50%;" onclick="calculateTime()">
+        <div class="card text-center rainbow rainbow1" id="card1" style="display: block; top: 150%;">
+            <div class="card-body">
+                <h1>MOOSE WRAPPED</h1>
+                <h3>You have been listening to loud music for <span id="time-text"></span>.</h3>
+                <h5 id="time" style="display: none;">
+                    <%= time %>
+                </h5>
+            </div>
+        </div>
+
+        <div class="card text-center rainbow rainbow2" id="card2" style="display: none; top: 150%;">
             <div class="card-body">
                 <h1>MOOSE WRAPPED</h1>
                 <h3>You have been listening to loud music for <span id="time-text"></span>.</h3>

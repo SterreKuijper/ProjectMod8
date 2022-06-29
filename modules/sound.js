@@ -1,9 +1,11 @@
 //setup speaker
 var speakerVol = 120; //volume in decibel (dB)
-var distToSpeaker = 16; //distance to speaker in meters
+var distToSpeaker = 4; //distance to speaker in meters
+var distToSpeaker1;
+var distToSpeaker2;
 var speakerVolMult = -8.656; //speaker multiplier
-//var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m
-var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
+var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m
+//var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
 var floatNumComp = 5390; //extra time to run the programm the correct amount of times in milliseconds
 
 //setup  run program
@@ -15,20 +17,24 @@ var critSndDur = 8; //time in hours
 var critSndLvl = 80; //volume in decibel (dB)
 var exchangeRate = 10 //Exchange rate paremeter which is the result of 
 
-//calculated values
-var weightedSndLvl;
+//calculated & received values
+var weightedSndLvl1;
+var weightedSndLvl2;
+var totweightedSndLvl;
 var sndDose = 0; //begins at zero
+var earplugsIn = false;
 
 //set sound dose thresholds
 var maxSndDose = 1000000; //maximum sound dose you could receive
 var safeSndDose = 100; //safe daily sound dose
 var hearingDamage = 0;  //Damage to the ear
 
-
+const tcpServer = require('./tcpserver');
+const wrapped = require('./wrapped')
 
 function loop(){
-
-    calcWeightedSndLvl(speakerVol, distToSpeaker);
+    calcDistToSpeaker();
+    calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2);
     calcSndDose();
 
     if (sndDose <= 100) console.log(sndDose);
@@ -41,16 +47,33 @@ function loop(){
 
 }
 
-function calcWeightedSndLvl(speakerVol, distToSpeaker){
-    weightedSndLvl = speakerVolMult * Math.log(distToSpeaker) + speakerVol + speakerVolComp;
-    console.log("weightedSndLvl = " + weightedSndLvl);
+function calcDistToSpeaker(){
+    let relXPosToSpeaker1 = 20 - tcpServer.getXPos();
+    let relXPosToSpeaker2 = 40 - tcpServer.getXPos();
+    let relYPosToSpeaker1 = 64 - tcpServer.getYPos();
+    let relYPosToSpeaker2 = 64 - tcpServer.getYPos(); 
+    distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 2) ** 2 + (relYPosToSpeaker1 * 4) ** 2); 
+    distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 2) ** 2 + (relYPosToSpeaker2 * 4) ** 2);
+    console.log(tcpServer.getXPos(), tcpServer.getYPos());
+    console.log(relXPosToSpeaker1, relXPosToSpeaker2, relYPosToSpeaker1, relYPosToSpeaker2);
+    console.log(distToSpeaker1,distToSpeaker2);
+}
+
+function calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2){
+    weightedSndLvl1 = speakerVolMult * Math.log(distToSpeaker1) + speakerVol + speakerVolComp;
+    weightedSndLvl2 = speakerVolMult * Math.log(distToSpeaker2) + speakerVol + speakerVolComp;
+    //weightedSndLvl1 = 100; DEBUGGING
+    //weightedSndLvl2 = 100; DEBUGGING
+    totWeightedSndLvl = Math.log(10 ** (weightedSndLvl1/10) + 10 ** (weightedSndLvl2/10))/Math.log(10) * 10;
+    if(tcpServer.getEar() == true) totWeightedSndLvl -= 20; 
+    console.log("totweightedSndLvl = " + totWeightedSndLvl);
 } 
 
 function calcSndDose(){
-    //passedTime = calcPassedTime();
-    //sndDose = (100/critSndDur)*passedTime*10**((weightedSndLvl-critSndLvl)/exchangeRate);
-    let timeInterval = 1/60;
-    sndDose += (100/critSndDur)*timeInterval*10**((weightedSndLvl-critSndLvl)/exchangeRate);
+    passedTime = calcPassedTime();
+    sndDose = (100/critSndDur)*passedTime*10**((totWeightedSndLvl-critSndLvl)/exchangeRate);
+    //let timeInterval = 1/60; DEBUGGING
+    //sndDose += (100/critSndDur)*timeInterval*10**((totweightedSndLvl-critSndLvl)/exchangeRate); DEBUGGING
     console.log("soundDose = " + sndDose);
 } 
 
@@ -62,10 +85,11 @@ function getSndDose(){
     return sndDose;
 }
 
-// function calcPassedTime(){
-//     let passedTime = 8;
-//     return passedTime;
-// }
+function calcPassedTime(){
+    let passedTime = 8;
+    passedTime = wrapped.getElapsedTime();
+    return passedTime;
+}
 
 var runProgrammeInterval = setInterval(loop, runIntervalTime);
 

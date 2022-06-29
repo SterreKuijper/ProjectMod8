@@ -25,7 +25,6 @@ server.on('connection', function(socket) {
 
     // TCP connection established, the server can send data to
     // the client by writing to its socket.
-     
     socket.write('Hello, client.');
 
     // The server receives data from the client by reading from its socket.
@@ -66,6 +65,14 @@ server.on('connection', function(socket) {
     });
 });
 
-exports.getData = () => {
+exports.getEar = () => {
     return ear;
+}
+
+exports.getXPos = () => {
+    return magX;
+}
+
+exports.getYPos = () => {
+    return magY;
 }

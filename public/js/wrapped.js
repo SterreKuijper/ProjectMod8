@@ -18,7 +18,7 @@ function moveInAndOut(idIn, idOut) {
     moveOut(idOut);
 }
 
-var elapsedTimeInHours = 0;
+var elapsedTimeInHours = 0; //to Jelle
 
 function calculateTime() {
     let maxFakeTime = 8 * 60 * 60;      // 8 hours
@@ -29,6 +29,8 @@ function calculateTime() {
     elapsedTimeInHours = time/3600;
 
     document.getElementById('time-text').innerHTML = secondsToHms(time);
+
+    moveIn('card1');
 }
 
 function secondsToHms(d) {
@@ -37,7 +39,7 @@ function secondsToHms(d) {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
-z    var hDisplay = h > 0 ? h + (h == 1 ? (m > 0 ? " hour, ":" hour") : (m > 0 ? " hours, ":" hours")) : ""; 
+    var hDisplay = h > 0 ? h + (h == 1 ? (m > 0 ? " hour, ":" hour") : (m > 0 ? " hours, ":" hours")) : ""; 
     var mDisplay = m > 0 ? m + (m == 1 ? (s > 0 ? " minute, ":" minute") : (s > 0 ? " minutes, ":" minutes")) : "";    
     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return hDisplay + mDisplay + sDisplay; 
@@ -48,6 +50,20 @@ document.addEventListener('keydown', function (event) {
         window.location = "http://localhost:3000/standby-screen";
     }
 });
+
+function startWrapped() {
+    calculateTime();
+
+    moveIn('card1');
+
+    setTimeout(function () {
+        moveInAndOut('card2', 'card1');
+    }, 10000);
+
+    setTimeout(function () {
+        moveOut('card2');
+    }, 20000);
+}
 
 
 
