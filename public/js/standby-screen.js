@@ -30,7 +30,23 @@ function myFunctionHandle() {
 }
 document.addEventListener('keydown', function (event) {
 
-    window.location = "http://localhost:3000/experience?";
+    proceed();
 
+});
+
+function proceed(){
+    window.location = "http://localhost:3000/experience?";
+}
+
+// Input from controller
+
+var socket = io("http://localhost:3010");
+socket.on("input", (data) => {
+var split = data.split(",");
+var button = split[0];
+var direction = split[1];
+var value = split[2];
+console.log(button, direction, value);
+proceed();
 });
 

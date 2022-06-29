@@ -2,6 +2,7 @@ var easymidi = require('easymidi');
 var inputs = easymidi.getInputs();
 
 const socket = require("./socket");
+const audio = require("./audio");
 
 var buttonID, buttonValue;
 
@@ -169,15 +170,31 @@ function Press(id, value){
   var direction;
   var obj = mapping.find(x => {return x.id === id});
   if(!obj) return;
+
+  // If a button is directional check it's direction.
   if(obj.directional == true){
     if(value == 1){
       direction = "right";
     } else {
       direction = "left";
-    }
-  } else {
-    console.log("Button");
+    } 
   }
-  console.log(obj.button + direction);
-  socket.send(obj.button);
+  
+  // If a input is not diractional it's a button
+  if (obj.directional == false){
+    direction = "down";
+  }
+
+  // Use value of rotary button to control volume
+  if(obj.button == "masterVolume"){
+    audio.control(value);
+  }
+
+  //DJ scratches
+  if(obj.button == "jogwheelL" || obj.button == "jogwheelR"){
+    audio.dj();
+  }
+
+  console.log(obj.button + "," + direction  + "," + value);
+  socket.send(obj.button + "," + direction  + "," + value);
 }

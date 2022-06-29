@@ -43,11 +43,15 @@ function progressBar(id) {
 
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 65) {
-        var end = window.performance.now();
-        var time = end - start;
-        window.location = "http://localhost:3000/wrapped?time=" + time;
+        end();
     }
 });
+
+function end(){
+    var end = window.performance.now();
+    var time = end - start;
+    window.location = "http://localhost:3000/wrapped?time=" + time;
+}
 
 // --------------------------------------------- audio
 
@@ -292,6 +296,30 @@ document.addEventListener('keydown', function (event) {
     if (event.keyCode == 90) {
         window.location = "http://localhost:3000/standby-screen";
     }
+});
+
+//Inputs from controller
+
+var socket = io("http://localhost:3010");
+socket.on("input", (data) => {
+var split = data.split(",");
+var button = split[0];
+var direction = split[1];
+var value = split[2];
+console.log(button, direction, value);
+// Browse button scroll left
+if(button == "browse" && direction == "left"){
+    rightInput();
+}
+// Browse button scroll right
+if(button == "browse" && direction == "right"){
+    leftInput();
+}
+// End experience
+if(button == "reset" && direction == "down"){
+    end();
+}
+
 });
 
 
