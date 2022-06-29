@@ -248,7 +248,14 @@ document.addEventListener('keydown', function (event) {
     }
 
     else if (event.keyCode == 81) {
-        const info = addNotification();
+        const info = addNotification(`<img src="/images/EarplugIcon.png" id="earplug">`);
+        setTimeout(() => {
+            removeNotification(info);
+        }, 2500);
+    }
+
+    else if (event.keyCode == 87) {
+        const info = addNotification(`<img src="/images/EarplugOutIcon.png" id="earplug">`);
         setTimeout(() => {
             removeNotification(info);
         }, 2500);
@@ -260,14 +267,12 @@ document.addEventListener('keydown', function (event) {
 
 const notificationContainer = document.getElementById('notification-container');
 
-function addNotification() {
+function addNotification(message) {
     // create the DIV and add the required classes
     const newNotification = document.createElement('div');
     newNotification.classList.add('notification');
 
-    const innerNotification = `
-        <img src="/images/EarplugIcon.png" id="earplug">
-	`;
+    const innerNotification = message;
 
     // insert the inner elements
     newNotification.innerHTML = innerNotification;

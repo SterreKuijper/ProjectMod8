@@ -25,12 +25,18 @@
 
     <video autoplay muted id="videos"></video>
 
-    <div class="content">
+    <div class="content" id="content">
         <form method="get" action="/experience">
-            <button type="submit" class="btn btn-outline-danger">
-                <h1 class="text-white m-4">Press any button to start</h1>
+            <button type="submit" class="btn" id="start-btn">
+                <h1 class="text-dark m-4">Press any button to start</h1>
             </button>
         </form>
+    </div>
+
+    <div class="avatar-container">
+        <div class="avatar pop-up" id="avatar">
+            <img width="400px" src="/images/AvatarPlacementIcon.png" class="imag">
+        </div>
     </div>
 
     <script src="/js/standby-screen.js"></script>
