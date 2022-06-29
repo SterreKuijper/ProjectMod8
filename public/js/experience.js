@@ -117,6 +117,35 @@ function stopAudio() {
     audio.currentTime = 0;
 }
 
+// Not working properly yet
+
+var previousAudio;
+var randomAudio;
+
+function randomiseAudio(){
+    for (let i = 0; i < isPlaying.length; i++) {
+        if (isPlaying[i]) {
+            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+        }
+    }
+    
+}
+
+function switchAudio(){
+    for (let i = 0; i < isPlaying.length; i++) {
+        if (isPlaying[i]) {
+            stopAudio();
+            randomiseAudio();
+            if (randomAudio == previousAudio){
+                randomiseAudio();
+            } else {
+                audioVisualisation(`/audio/${randomAudio}`);
+                previousAudio = randomAudio;
+            }
+        }
+    }
+}
+
 function audioVisualisation(song) {
     context = context || new AudioContext();
     source = source || context.createMediaElementSource(audio);
@@ -318,6 +347,11 @@ if(button == "browse" && direction == "right"){
 // End experience
 if(button == "reset" && direction == "down"){
     end();
+}
+
+if(button == "crossfader" && value == "0" || value == "127"){
+    console.log("CROSSFADE");
+    switchAudio();
 }
 
 });

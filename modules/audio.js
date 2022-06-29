@@ -18,7 +18,7 @@ function control(controller){
 //Not working yet
 function dj(){
     console.log("DJ");
-    sound.play('scratch.wav');
+    //sound.play('scratch.wav');
 }
 
 module.exports = { control, dj };

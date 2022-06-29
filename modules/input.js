@@ -154,13 +154,16 @@ const mapping = [
 easymidi.getInputs().forEach((inputName) => {
     const input = new easymidi.Input(inputName);
     input.on('message', (msg) => {
+
       // Catch all MIDI input
       const vals = Object.keys(msg).map((key) => `${key}: ${msg[key]}`);
       read = (`${inputName}: ${vals.join(', ')}`);
+
       // Split values on types needed
       var split = read.split(" ");
       buttonID = parseInt(split[6].slice(0, split[6].length - 1));
       buttonValue = parseInt(split[8].slice(0, split[8].length - 1));
+
       console.log(buttonID, buttonValue);
       Press(buttonID, buttonValue);
     });
@@ -168,6 +171,8 @@ easymidi.getInputs().forEach((inputName) => {
 
 function Press(id, value){
   var direction;
+
+  //Look for correct button and corresponding data of input
   var obj = mapping.find(x => {return x.id === id});
   if(!obj) return;
 
@@ -180,7 +185,7 @@ function Press(id, value){
     } 
   }
   
-  // If a input is not diractional it's a button
+  // If a input is not directional it's a button
   if (obj.directional == false){
     direction = "down";
   }
@@ -190,11 +195,12 @@ function Press(id, value){
     audio.control(value);
   }
 
-  //DJ scratches
+  //DJ scratches when jogwheels are moved
   if(obj.button == "jogwheelL" || obj.button == "jogwheelR"){
     audio.dj();
   }
 
+  // Send input to socket
   console.log(obj.button + "," + direction  + "," + value);
   socket.send(obj.button + "," + direction  + "," + value);
 }
