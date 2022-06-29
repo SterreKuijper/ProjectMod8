@@ -1,3 +1,5 @@
+const socket = require("./socket");
+
 function moveIn(id) {
     var element = document.getElementById(id);
     element.style.display = 'block';
@@ -70,10 +72,19 @@ function startWrapped() {
     }, 25000);
 }
 
-exports.getElapsedTime = () => {
-    elapsedTimeInHours = 8;
-    return elapsedTimeInHours;
-}
+var socket = io("http://localhost:3010");
+// socket.on("wrapped", (data) => {
+//     console.log(data);
+    
+
+// });
+
+socket.emit('wrapped', "WERKT SWOAFLEKA");
+
+// exports.getElapsedTime = () => {
+//     elapsedTimeInHours = 8;
+//     return elapsedTimeInHours;
+// }
 
 
 

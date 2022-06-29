@@ -1,3 +1,5 @@
+const socket = require("./socket");
+
 //setup speaker
 var speakerVol = 120; //volume in decibel (dB)
 var distToSpeaker = 4; //distance to speaker in meters
@@ -86,6 +88,7 @@ function getSndDose(){
 }
 
 function calcPassedTime(){
+    socket.read();
     //let passedTime = 8;
     passedTime = wrapped.getElapsedTime();
     return passedTime;
