@@ -47,7 +47,7 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-function end(){
+function end() {
     var end = window.performance.now();
     var time = end - start;
     window.location = "http://localhost:3000/wrapped?time=" + time;
@@ -122,21 +122,21 @@ function stopAudio() {
 var previousAudio;
 var randomAudio;
 
-function randomiseAudio(){
+function randomiseAudio() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
             randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
         }
     }
-    
+
 }
 
-function switchAudio(){
+function switchAudio() {
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
             stopAudio();
             randomiseAudio();
-            if (randomAudio == previousAudio){
+            if (randomAudio == previousAudio) {
                 randomiseAudio();
             } else {
                 audioVisualisation(`/audio/${randomAudio}`);
@@ -191,7 +191,7 @@ function audioVisualisation(song) {
 
         for (var i = 0; i < bufferLength; i++) {
             barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
- 
+
             // barHeight = -(-3 - dataArray[i]/2) *3.5;
 
             var r = barHeight + (25 * (i / bufferLength));
@@ -221,90 +221,88 @@ let left = true;
 var index = [1, 2, 3, 4, 5, 6];
 var isPlaying = [false, false, true, false, false, false];
 
-    
-    function rightInput() {
-        for (let i = 0; i < index.length; i++) {
-            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
-            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
-        }
 
-        for (let i = 0; i < index.length; i++) if (!left) index[i]++;
-
-        left = false;
-
-        for (let i = 0; i < index.length; i++) if (index[i] <= 0) index[i] = 6;
-        for (let i = 0; i < index.length; i++) if (index[i] >= 7) index[i] = 1;
-
-        for (let i = 0; i < index.length; i++) {
-            document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-right`);
-        }
-
-        for (let i = 0; i < index.length; i++) if (index[i] == 2) isPlaying[i] = true;
-        else isPlaying[i] = false;
-
-        for (let i = 0; i < isPlaying.length; i++) {
-            if (isPlaying[i]) {
-                stopAudio();
-                audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
-            }
-        }
+function rightInput() {
+    for (let i = 0; i < index.length; i++) {
+        document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
+        document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
     }
 
-    //left key
-    function leftInput() {
-        for (let i = 0; i < index.length; i++) {
-            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
-            document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
-        }
+    for (let i = 0; i < index.length; i++) if (!left) index[i]++;
 
-        for (let i = 0; i < index.length; i++) if (left) index[i]--;
+    left = false;
 
-        left = true;
+    for (let i = 0; i < index.length; i++) if (index[i] <= 0) index[i] = 6;
+    for (let i = 0; i < index.length; i++) if (index[i] >= 7) index[i] = 1;
 
-        for (let i = 0; i < index.length; i++) if (index[i] <= 0) index[i] = 6;
-        for (let i = 0; i < index.length; i++) if (index[i] >= 7) index[i] = 1;
-
-        for (let i = 0; i < index.length; i++) document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-left`);
-
-        for (let i = 0; i < index.length; i++) if (index[i] == 3) isPlaying[i] = true;
-        else isPlaying[i] = false;
-
-        for (let i = 0; i < isPlaying.length; i++) {
-            if (isPlaying[i]) {
-                stopAudio();
-                audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
-            }
-        }
+    for (let i = 0; i < index.length; i++) {
+        document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-right`);
     }
 
+    for (let i = 0; i < index.length; i++) if (index[i] == 2) isPlaying[i] = true;
+    else isPlaying[i] = false;
 
-    document.addEventListener('keydown', function (event) {
-        if (event.keyCode == 37){
-            rightInput();
+    for (let i = 0; i < isPlaying.length; i++) {
+        if (isPlaying[i]) {
+            stopAudio();
+            audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
         }
-        if (event.keyCode == 39){
-            leftInput();
+    }
+}
+
+//left key
+function leftInput() {
+    for (let i = 0; i < index.length; i++) {
+        document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
+        document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
+    }
+
+    for (let i = 0; i < index.length; i++) if (left) index[i]--;
+
+    left = true;
+
+    for (let i = 0; i < index.length; i++) if (index[i] <= 0) index[i] = 6;
+    for (let i = 0; i < index.length; i++) if (index[i] >= 7) index[i] = 1;
+
+    for (let i = 0; i < index.length; i++) document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-left`);
+
+    for (let i = 0; i < index.length; i++) if (index[i] == 3) isPlaying[i] = true;
+    else isPlaying[i] = false;
+
+    for (let i = 0; i < isPlaying.length; i++) {
+        if (isPlaying[i]) {
+            stopAudio();
+            audioVisualisation(`/audio/${audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)]}`);
         }
-        else if (event.keyCode == 81) {
-            const info = addNotification();
-            setTimeout(() => {
-                removeNotification(info);
-            }, 2500);
-        }
-        else if (event.keyCode == 81) {
-          const info = addNotification(`<img src="/images/EarplugIcon.png" id="earplug">`);
-          setTimeout(() => {
-              removeNotification(info);
-          }, 2500);
-        }
-        else if (event.keyCode == 87) {
-            const info = addNotification(`<img src="/images/EarplugOutIcon.png" id="earplug">`);
-            setTimeout(() => {
-                removeNotification(info);
-            }, 2500);
-        }
-    });
-    
+    }
+}
+
+
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 37) {
+        rightInput();
+    }
+    if (event.keyCode == 39) {
+        leftInput();
+    }
+    else if (event.keyCode == 81) {
+        const info = addNotification();
+        setTimeout(() => {
+            removeNotification(info);
+        }, 2500);
+    }
+    else if (event.keyCode == 81) {
+        const info = addNotification(`<img src="/images/EarplugIcon.png" id="earplug">`);
+        setTimeout(() => {
+            removeNotification(info);
+        }, 2500);
+    }
+    else if (event.keyCode == 87) {
+        const info = addNotification(`<img src="/images/EarplugOutIcon.png" id="earplug">`);
+        setTimeout(() => {
+            removeNotification(info);
+        }, 2500);
+    }
 });
 
 // -----------------------------------------------------------------------------
@@ -346,28 +344,28 @@ document.addEventListener('keydown', function (event) {
 
 var socket = io("http://localhost:3010");
 socket.on("input", (data) => {
-var split = data.split(",");
-var button = split[0];
-var direction = split[1];
-var value = split[2];
-console.log(button, direction, value);
-// Browse button scroll left
-if(button == "browse" && direction == "left"){
-    rightInput();
-}
-// Browse button scroll right
-if(button == "browse" && direction == "right"){
-    leftInput();
-}
-// End experience
-if(button == "reset" && direction == "down"){
-    end();
-}
+    var split = data.split(",");
+    var button = split[0];
+    var direction = split[1];
+    var value = split[2];
+    console.log(button, direction, value);
+    // Browse button scroll left
+    if (button == "browse" && direction == "left") {
+        rightInput();
+    }
+    // Browse button scroll right
+    if (button == "browse" && direction == "right") {
+        leftInput();
+    }
+    // End experience
+    if (button == "reset" && direction == "down") {
+        end();
+    }
 
-if(button == "crossfader" && ( value == "0" || value == "127")){
-    console.log("CROSSFADE");
-    switchAudio();
-}
+    if (button == "crossfader" && (value == "0" || value == "127")) {
+        console.log("CROSSFADE");
+        switchAudio();
+    }
 
 });
 
