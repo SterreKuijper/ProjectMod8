@@ -54,6 +54,9 @@ document.addEventListener('keydown', function (event) {
 function startWrapped() {
     calculateTime();
 
+
+    // moveIn('card3');
+
     moveIn('card1');
 
     setTimeout(function () {
@@ -61,7 +64,7 @@ function startWrapped() {
     }, 10000);
 
     setTimeout(function () {
-        moveOut('card2');
+        moveInAndOut('card3', 'card2');
     }, 20000);
 
     // // end wrapped
@@ -70,10 +73,10 @@ function startWrapped() {
     // }, 25000);
 }
 
-exports.getElapsedTime = () => {
-    elapsedTimeInHours = 8;
-    return elapsedTimeInHours;
-}
+// exports.getElapsedTime = () => {
+//     elapsedTimeInHours = 8;
+//     return elapsedTimeInHours;
+// }
 
 
 
