@@ -196,9 +196,12 @@ function Press(id, value){
   }
 
   //DJ scratches when jogwheels are moved
-  if(obj.button == "jogwheelL" || obj.button == "jogwheelR"){
-    audio.dj();
-  }
+  // if(obj.button == "jogwheelL" || obj.button == "jogwheelR"){
+  //   audio.dj();
+  // }
+  // if(obj.button == "playL"){
+  //   audio.dj();
+  // }
 
   // Send input to socket
   console.log(obj.button + "," + direction  + "," + value);

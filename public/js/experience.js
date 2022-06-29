@@ -147,7 +147,6 @@ function switchAudio() {
         }
 }
 
-
 function audioVisualisation(song) {
     context = context || new AudioContext();
     source = source || context.createMediaElementSource(audio);
@@ -344,6 +343,54 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
+
+var sfx1 = new Audio('sfx/scratch1.mp3');
+var sfx2 = new Audio('sfx/scratch2.mp3');
+var sfx3 = new Audio('sfx/scratch3.mp3');
+var sfx4 = new Audio('sfx/scratch4.mp3');
+var sfx5 = new Audio('sfx/scratch5.mp3');
+var sfx6 = new Audio('sfx/scratch6.mp3');
+var trigger = 0;
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
+function scratchReset(){
+    trigger = 0;
+}
+
+function scratch(){
+    trigger++;
+    var sound = getRandomInt(1,7);
+    console.log(sound, trigger);
+    if (trigger == 1){
+        switch(sound) {
+            case 1:
+                sfx1.play();
+                break;
+            case 2:
+                sfx2.play();
+                break;
+            case 3:
+                sfx3.play();
+                break;
+            case 4:
+                sfx4.play();
+                break;
+            case 5:
+                sfx5.play();
+                break;
+            case 6:
+                sfx6.play();
+            break;
+          }
+          setTimeout(scratchReset, 800);
+    }    
+}
+
 //Inputs from controller
 
 var socket = io("http://localhost:3010");
@@ -369,6 +416,10 @@ socket.on("input", (data) => {
     if (button == "crossfader" && (value == "0" || value == "127")) {
         console.log("CROSSFADE");
         switchAudio();
+    }
+
+    if((button == "jogwheelL" || button == "jogwheelR" )){
+        scratch();
     }
 
 });
