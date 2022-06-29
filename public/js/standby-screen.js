@@ -35,9 +35,13 @@ function myFunctionHandle() {
 // });
 
 var socket = io("http://localhost:3010");
-socket.on("present", present  => {
-    setAvatar(present); 
-});
+
+setTimeout(() => {
+    //fuck socket.io
+    socket.on("present", present  => {
+        setAvatar(present); 
+    });
+}, 50);
 
 function setAvatar(avatarIsOn) {
     if(!avatarIsOn) {
