@@ -1,3 +1,5 @@
+const socket = require('./socket');
+
 //setup speaker
 var speakerVol = 120; //volume in decibel (dB)
 var distToSpeaker = 4; //distance to speaker in meters
@@ -31,6 +33,7 @@ var hearingDamage = 0;  //Damage to the ear
 
 const tcpServer = require('./tcpserver');
 const wrapped = require('../public/js/wrapped');
+const { request } = require('express');
 
 function loop(){
     calcDistToSpeaker();
@@ -44,7 +47,6 @@ function loop(){
     }
 
     if (sndDose > maxSndDose) console.log("ERROR: Sound Dose went over Maximum");
-
 }
 
 function calcDistToSpeaker(){
@@ -81,15 +83,19 @@ function calcHearingDamage(){
     hearingDamage = (sndDose-safeSndDose)/(maxSndDose-safeSndDose)*100;
 }
 
+//Dit moet terug naar el client
 function getSndDose(){
     return sndDose;
 }
+socket.sendSound(getSndDose());
 
 function calcPassedTime(){
-    //let passedTime = 8;
+    passedTime =  input.passedTime;
     passedTime = wrapped.getElapsedTime();
     return passedTime;
 }
+
+console.log("Dit bestand doet ook echt wel");
 
 var runProgrammeInterval = setInterval(loop, runIntervalTime);
 

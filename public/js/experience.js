@@ -219,12 +219,12 @@ function audioVisualisation(song) {
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         //let xFactor = 0.03; * Math.log(i * xFactor)  Math.sqrt(i * xFactor) 
-        let xFactor = 0.40;
+        let xFactor = 0.9;
 
         for (var i = 0; i < bufferLength; i++) {
             // barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
 
-            barHeight = dataArray[i] * 3.5;
+            barHeight = dataArray[i] * 6;
 
             var r = barHeight + (25 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
@@ -398,7 +398,6 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-
 var sfx1 = new Audio('sfx/scratch1.mp3');
 var sfx2 = new Audio('sfx/scratch2.mp3');
 var sfx3 = new Audio('sfx/scratch3.mp3');
@@ -478,6 +477,8 @@ socket.on("input", (data) => {
     }
 
 });
+
+
 
 var avatarIsOn = false;
 
