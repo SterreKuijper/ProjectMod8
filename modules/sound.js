@@ -34,13 +34,11 @@ var safeSndDose = 100; //safe daily sound dose
 var hearingDamage = 0;  //Damage to the ear
 
 const tcpServer = require('./tcpserver');
-//const wrapped = require('../public/js/wrapped');
 
 function loop(){
     calcDistToSpeaker();
     setSpeakerVol(activeGenre);
     calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2);
-    //console.log(totWeightedSndLvl);
     calcSndDose();
 
     if (sndDose <= 100) console.log(sndDose);
@@ -68,9 +66,9 @@ function calcDistToSpeaker(){
 function setSpeakerVol(activeGenre){
     if(activeGenre[0]) speakerVol = 120; //Rock music
     else if(activeGenre[1]) speakerVol = 80; //Choir music
-    else if(activeGenre[2]) speakerVol = 100; //pop music
+    else if(activeGenre[2]) speakerVol = 100; //Pop music
     else if(activeGenre[3]) speakerVol = 110; //EDM music
-    else if(activeGenre[4]) speakerVol = 105; //hiphop music
+    else if(activeGenre[4]) speakerVol = 105; //Hiphop music
     else if(activeGenre[5]) speakerVol = 90; //Classic music
     console.log(speakerVol);
 }

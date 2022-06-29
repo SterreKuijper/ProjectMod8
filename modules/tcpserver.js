@@ -63,7 +63,7 @@ server.on('connection', function(socket) {
     // When the client requests to end the TCP connection with the server, the server
     // ends the connection.
     
-    socket.on('end', function() {
+    socket.on('end', function()6 {
         console.log('Closing connection with the client');
     });
 
