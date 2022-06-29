@@ -41,6 +41,7 @@ function sendEar(earStatus) {
 function sendPresent(present) {
   if(!socket) return;
   socket.emit('present', present);
+}
 
 function sendSound(input){
   if(!socket) return;
