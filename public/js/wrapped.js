@@ -65,6 +65,11 @@ function startWrapped() {
     }, 20000);
 }
 
+exports.getElapsedTime = () => {
+    elapsedTimeInHours = 8;
+    return elapsedTimeInHours;
+}
+
 
 
 
