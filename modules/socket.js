@@ -16,6 +16,13 @@ io.on('connection', (s) => {
   s.on('disconnect', () => {
     console.log('user disconnected');
   });
+
+  // Listen for messages from client
+  s.on('wrapped', (read) => {
+    var passedTime = read;
+    console.log(passedTime);
+  });
+
   //Store this socket to be used in other functions.
   socket = s;
 });
@@ -34,6 +41,10 @@ function sendEar(earStatus) {
 function sendPresent(present) {
   if(!socket) return;
   socket.emit('present', present);
+
+function sendSound(input){
+  if(!socket) return;
+  socket.emit("calulation", input);
 }
 
 server.listen(3010, () => {

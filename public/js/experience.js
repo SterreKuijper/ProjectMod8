@@ -55,7 +55,8 @@ document.addEventListener('keydown', function (event) {
 function end() {
     var end = window.performance.now();
     var time = end - start;
-    window.location = "http://localhost:3000/wrapped?time=" + time;
+    mostPopGenre = calcMostPopGenre();
+    window.location = "http://localhost:3000/wrapped?time=" + time + `&genre=${mostPopGenre}`;
 }
 
 // --------------------------------------------- audio
@@ -219,12 +220,12 @@ function audioVisualisation(song) {
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         //let xFactor = 0.03; * Math.log(i * xFactor)  Math.sqrt(i * xFactor) 
-        let xFactor = 0.40;
+        let xFactor = 0.9;
 
         for (var i = 0; i < bufferLength; i++) {
             // barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
 
-            barHeight = dataArray[i] * 3.5;
+            barHeight = dataArray[i] * 6;
 
             var r = barHeight + (25 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
@@ -251,11 +252,11 @@ function audioVisualisation(song) {
 
 let left = true;
 var index = [1, 2, 3, 4, 5, 6];
-var isPlaying = [false, false, true, false, false, false];
+var isPlaying = [false, false, true, false, false, false, false];
 
 var randomSong;
 
-var timeOfGenre = [{ genre: "ROCK", time: [] }, { genre: "CHOIR", time: [] }, { genre: "POP", time: [] }, { genre: "EDM", time: [] }, { genre: "HIPHOP", time: [] }, { genre: "CLASSIC", time: [] }, { genre: "HARDSTYLE", time: [] }];
+var timeOfGenre = [{ genre: "rock", time: 0 }, { genre: "church choir", time: 0 }, { genre: "pop", time: 0 }, { genre: "edm", time: 0 }, { genre: "hip hop", time: 0 }, { genre: "classical music", time: 0 }, { genre: "hardstyle", time: 0 }];
 
 var startTime = null;
 var previousGenre = 2;
@@ -398,7 +399,6 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-
 var sfx1 = new Audio('sfx/scratch1.mp3');
 var sfx2 = new Audio('sfx/scratch2.mp3');
 var sfx3 = new Audio('sfx/scratch3.mp3');
@@ -448,7 +448,7 @@ function scratch(){
 
 //Inputs from controller
 
-var socket = io("http://localhost:3010");
+// var socket = io("http://localhost:3010");
 socket.on("input", (data) => {
     var split = data.split(",");
     var button = split[0];
@@ -478,6 +478,8 @@ socket.on("input", (data) => {
     }
 
 });
+
+
 
 var avatarIsOn = false;
 
@@ -513,7 +515,18 @@ function changeSongDisplay(index, song) {
     artist.innerHTML = audioInfo[index].artist[song];
 }
 
-
+function calcMostPopGenre() {
+    let highestValue = 0;
+    let mostPopGenre = 0;
+    for (let i = 0; i < timeOfGenre.length; i++) {
+        var value = timeOfGenre[i].time;
+        if (value > highestValue) {
+            highestValue = value;
+            mostPopGenre = i;
+        }
+    }
+    return timeOfGenre[mostPopGenre].genre;
+}
 
 
 

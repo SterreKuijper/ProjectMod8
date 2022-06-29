@@ -31,6 +31,7 @@ function calculateTime() {
     document.getElementById('time-text').innerHTML = secondsToHms(time);
 
     moveIn('card1');
+    send(elapsedTimeInHours);
 }
 
 function secondsToHms(d) {
@@ -45,11 +46,11 @@ function secondsToHms(d) {
     return hDisplay + mDisplay + sDisplay;
 }
 
-document.addEventListener('keydown', function (event) {
-    if (event.keyCode == 90) {
-        window.location = "http://localhost:3000/standby-screen";
-    }
-});
+// document.addEventListener('keydown', function (event) {
+//     if (event.keyCode == 90) {
+//         window.location = "http://localhost:3000/standby-screen";
+//     }
+// });
 
 function startWrapped() {
     calculateTime();
@@ -72,6 +73,14 @@ function startWrapped() {
     //     window.location = "http://localhost:3000/standby-screen";
     // }, 25000);
 }
+
+var socket = io("http://localhost:3010");
+function send(input){
+    socket.emit('wrapped', "100");
+}
+socket.on("calculation", (data) => {
+    console.log(data);
+});
 
 
 
