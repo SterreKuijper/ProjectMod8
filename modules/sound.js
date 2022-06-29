@@ -30,6 +30,7 @@ var safeSndDose = 100; //safe daily sound dose
 var hearingDamage = 0;  //Damage to the ear
 
 const tcpServer = require('./tcpserver');
+const wrapped = require('./wrapped')
 
 function loop(){
     calcDistToSpeaker();
@@ -86,6 +87,7 @@ function getSndDose(){
 
 function calcPassedTime(){
     let passedTime = 8;
+    passedTime = wrapped.getElapsedTime();
     return passedTime;
 }
 
