@@ -449,63 +449,61 @@ function scratch(){
 }
 
 //Inputs from controller
-    
 var socket = io("http://localhost:3010");
-socket.on("input", (data) => {
-    var split = data.split(",");
-    var button = split[0];
-    var direction = split[1];
-    var value = split[2];
-    console.log(button, direction, value);
-    // Browse button scroll left
-    if (button == "browse" && direction == "left") {
-        rightInput();
-    }
-    // Browse button scroll right
-    if (button == "browse" && direction == "right") {
-        leftInput();
-    }
-    // End experience
-    if (button == "reset" && direction == "down") {
-        end();
-    }
 
-    if (button == "crossfader" && (value == "0" || value == "127")) {
-        console.log("CROSSFADE");
-        switchAudio();
-    }
+setTimeout(() => {
+    //fuck socket.io
+    socket.on("input", (data) => {
+        var split = data.split(",");
+        var button = split[0];
+        var direction = split[1];
+        var value = split[2];
+        console.log(button, direction, value);
+        // Browse button scroll left
+        if (button == "browse" && direction == "left") {
+            rightInput();
+        }
+        // Browse button scroll right
+        if (button == "browse" && direction == "right") {
+            leftInput();
+        }
+        // End experience
+        if (button == "reset" && direction == "down") {
+            end();
+        }
+    
+        if (button == "crossfader" && (value == "0" || value == "127")) {
+            console.log("CROSSFADE");
+            switchAudio();
+        }
+    
+        if((button == "jogwheelL" || button == "jogwheelR" )){
+            scratch();
+        }
+    
+    });
+    
+    socket.on("ear", isIn  => {
+        const info = addNotification(`<img src="/images/${!isIn ? 'EarplugOutIcon' : 'EarplugIcon'}.png" id="earplug">`);
+        setTimeout(() => {
+            removeNotification(info);
+        }, 2500);   
+    });
+    
+    socket.on("present", present  => {
+        setAvatar(present);  
+    });
+}, 50);
 
-    if((button == "jogwheelL" || button == "jogwheelR" )){
-        scratch();
-    }
-
-});
-
-
-
-var avatarIsOn = false;
-
-document.addEventListener('keydown', function (event) {
-    // right key
-    if (event.keyCode == 82) {
-        avatarIsOn = true;
-    }
-    // left key
-    if (event.keyCode == 69) {
-        avatarIsOn = false;
-    }
-
-    if (avatarIsOn === false) {
+function setAvatar(avatarIsOn) {
+    if(!avatarIsOn) {
         document.getElementById('avatar').classList.remove('pop-up');
         document.getElementById('avatar').classList.remove('hide');
         document.getElementById('avatar').classList.add('pop-up');
-    }
-
-    console.log(avatarIsOn);
-    if (avatarIsOn === true) {
+    }else{
         document.getElementById('avatar').classList.add('hide');
     }
-});
+}
 
 function changeSongDisplay(index, song) {
     var title = document.getElementById('title');

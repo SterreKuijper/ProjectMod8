@@ -34,36 +34,24 @@ function myFunctionHandle() {
 
 // });
 
-var avatarIsOn = false;
+var socket = io("http://localhost:3010");
 
-document.addEventListener('keydown', function (event) {
-    // right key
-    if (event.keyCode == 82) {
-        avatarIsOn = true;
-    }
-    // left key
-    if (event.keyCode == 69) {
-        avatarIsOn = false;
-    }
+setTimeout(() => {
+    //fuck socket.io
+    socket.on("present", present  => {
+        setAvatar(present); 
+    });
+}, 50);
 
-    if (avatarIsOn === false) {     
+function setAvatar(avatarIsOn) {
+    if(!avatarIsOn) {
         document.getElementById('avatar').classList.remove('pop-up');
-        document.getElementById('avatar').classList.remove('hide');     
+        document.getElementById('avatar').classList.remove('hide');
         document.getElementById('avatar').classList.add('pop-up');
-        
-        document.getElementById('content').classList.add('out');
+    }else{
+        document.getElementById('avatar').classList.add('hide');
     }
-
-    console.log(avatarIsOn);
-    if (avatarIsOn === true) {
-        document.getElementById('avatar').classList.add('hide');  
-        
-        
-        document.getElementById('content').classList.remove('inf');
-        document.getElementById('content').classList.remove('out');     
-        document.getElementById('content').classList.add('in');
-    }
-});
+}
 
 function proceed(){
     window.location = "http://localhost:3000/experience?";
