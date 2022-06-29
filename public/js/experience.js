@@ -352,7 +352,7 @@ if(button == "reset" && direction == "down"){
     end();
 }
 
-if(button == "crossfader" && value == "0" || value == "127"){
+if(button == "crossfader" && ( value == "0" || value == "127")){
     console.log("CROSSFADE");
     switchAudio();
 }
