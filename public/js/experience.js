@@ -1,38 +1,43 @@
 
-var videoSource = new Array();
-videoSource[0] = './videos/visual1.mp4';
-let key = 0; // global
-const videoCount = videoSource.length;
-const videoElement = document.getElementById("videos");
+// var videoSource = new Array();
+// videoSource[0] = './videos/visual1.mp4';
+// let key = 0; // global
+// const videoCount = videoSource.length;
+// const videoElement = document.getElementById("videos");
 
 // element.setAttribute("src", videoSource[0]);
-``
-function playVideo(videoNum) {
-    videoElement.setAttribute("src", videoSource[videoNum]);
-    videoElement.load();
-    videoElement.play();
-}
+// ``
+// function playVideo(videoNum) {
+//     videoElement.setAttribute("src", videoSource[videoNum]);
+//     videoElement.load();
+//     videoElement.play();
+// }
 
-videoElement.addEventListener('ended', myFunctionHandle, false);
+// videoElement.addEventListener('ended', myFunctionHandle, false);
 
-function myFunctionHandle() {
-    key++;
-    if (key == videoCount) {
-        key = 0;
-        playVideo(key);
-    } else {
-        playVideo(key);
-    }
-}
+// function myFunctionHandle() {
+//     key++;
+//     if (key == videoCount) {
+//         key = 0;
+//         playVideo(key);
+//     } else {
+//         playVideo(key);
+//     }
+// }
 
 // -----------------------------------
 
 var start = 0;
 
+function startExperience() {
+    start = window.performance.now();
+    progressBar('progressbar');
+    startTime = start;
+}
+
 function progressBar(id) {
     var element = document.getElementById(id);
     element.classList.add("fill-progress-bar");
-    start = window.performance.now();
 
     setTimeout(function () {
         var end = window.performance.now();
@@ -147,6 +152,7 @@ function switchAudio() {
 }
 
 function audioVisualisation(song) {
+
     context = context || new AudioContext();
     source = source || context.createMediaElementSource(audio);
     var analyser = context.createAnalyser();
@@ -192,7 +198,7 @@ function audioVisualisation(song) {
         for (var i = 0; i < bufferLength; i++) {
             // barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
 
-            barHeight = dataArray[i] *3.5;
+            barHeight = dataArray[i] * 3.5;
 
             var r = barHeight + (25 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
@@ -223,7 +229,14 @@ var isPlaying = [false, false, true, false, false, false];
 
 var randomSong;
 
-function rightInput() {
+var timeOfGenre = [{ genre: "ROCK", time: [] }, { genre: "CHOIR", time: [] }, { genre: "POP", time: [] }, { genre: "EDM", time: [] }, { genre: "HIPHOP", time: [] }, { genre: "CLASSIC", time: [] }, { genre: "HARDSTYLE", time: [] }];
+
+var startTime = null;
+var previousGenre = 2;
+
+function rightInput() {    
+    startTime = window.performance.now();
+
     for (let i = 0; i < index.length; i++) {
         document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
         document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
@@ -240,8 +253,17 @@ function rightInput() {
         document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-right`);
     }
 
-    for (let i = 0; i < index.length; i++) if (index[i] == 2) isPlaying[i] = true;
+    for (let i = 0; i < index.length; i++) if (index[i] == 2) {
+        isPlaying[i] = true;
+        var endTime = window.performance.now();
+        console.log(endTime);
+        if (startTime != null) timeOfGenre[previousGenre].time += endTime - startTime;
+        previousGenre = i; 
+        startTime = endTime;
+    }
     else isPlaying[i] = false;
+
+    console.log(timeOfGenre);
 
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
@@ -255,6 +277,7 @@ function rightInput() {
 
 //left key
 function leftInput() {
+
     for (let i = 0; i < index.length; i++) {
         document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
         document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
@@ -269,8 +292,19 @@ function leftInput() {
 
     for (let i = 0; i < index.length; i++) document.getElementById(`card${i + 1}`).classList.add(`card${index[i]}-left`);
 
-    for (let i = 0; i < index.length; i++) if (index[i] == 3) isPlaying[i] = true;
+    for (let i = 0; i < index.length; i++) if (index[i] == 3) {
+        isPlaying[i] = true;
+        var endTime = window.performance.now();
+        console.log(startTime);
+        console.log(endTime);
+        console.log(endTime - startTime);
+        if (startTime != null) timeOfGenre[previousGenre].time += endTime - startTime;
+        previousGenre = i; 
+        startTime = endTime;
+    }
     else isPlaying[i] = false;
+
+    console.log(timeOfGenre);
 
     for (let i = 0; i < isPlaying.length; i++) {
         if (isPlaying[i]) {
@@ -380,9 +414,9 @@ document.addEventListener('keydown', function (event) {
         avatarIsOn = false;
     }
 
-    if (avatarIsOn === false) {     
+    if (avatarIsOn === false) {
         document.getElementById('avatar').classList.remove('pop-up');
-        document.getElementById('avatar').classList.remove('hide');     
+        document.getElementById('avatar').classList.remove('hide');
         document.getElementById('avatar').classList.add('pop-up');
     }
 
@@ -392,12 +426,12 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-function changeSongDisplay(index, song){
+function changeSongDisplay(index, song) {
     var title = document.getElementById('title');
     var artist = document.getElementById('artist');
 
     console.log(song);
-    
+
     title.innerHTML = audioInfo[index].song[song];
     artist.innerHTML = audioInfo[index].artist[song];
 }
