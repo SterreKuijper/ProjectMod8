@@ -57,6 +57,11 @@ router.get('/animation', function(req, res, next) {
       res.render('animation', {title: 'Animation', data:[]});
 })
 
+/* GET animation page */
+router.get('/input', function(req, res, next) {
+      res.render('input', {title: 'Input', data:[]});
+})
+
 // router.get('/getgrades/', function(req, res, next) {
 //   // show what information is passed from the browser
 //   console.log(req.query);

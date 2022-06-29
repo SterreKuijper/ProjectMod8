@@ -41,7 +41,6 @@ document.addEventListener('keydown', function (event) {
     if (event.keyCode == 37) {
         avatarIsOn = true;
     }
-
     // left key
     if (event.keyCode == 39) {
         avatarIsOn = false;
@@ -64,5 +63,21 @@ document.addEventListener('keydown', function (event) {
         document.getElementById('content').classList.remove('out');     
         document.getElementById('content').classList.add('in');
     }
+});
+
+function proceed(){
+    window.location = "http://localhost:3000/experience?";
+}
+
+// Input from controller
+
+var socket = io("http://localhost:3010");
+socket.on("input", (data) => {
+var split = data.split(",");
+var button = split[0];
+var direction = split[1];
+var value = split[2];
+console.log(button, direction, value);
+proceed();
 });
 

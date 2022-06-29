@@ -1,5 +1,6 @@
+
 var videoSource = new Array();
-videoSource[0] = '/videos/visual1.mp4';
+videoSource[0] = './videos/visual1.mp4';
 let key = 0; // global
 const videoCount = videoSource.length;
 const videoElement = document.getElementById("videos");
@@ -42,11 +43,15 @@ function progressBar(id) {
 
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 65) {
-        var end = window.performance.now();
-        var time = end - start;
-        window.location = "http://localhost:3000/wrapped?time=" + time;
+        end();
     }
 });
+
+function end(){
+    var end = window.performance.now();
+    var time = end - start;
+    window.location = "http://localhost:3000/wrapped?time=" + time;
+}
 
 // --------------------------------------------- audio
 
@@ -110,6 +115,35 @@ function playAudio(song) {
 function stopAudio() {
     audio.pause();
     audio.currentTime = 0;
+}
+
+// Not working properly yet
+
+var previousAudio;
+var randomAudio;
+
+function randomiseAudio(){
+    for (let i = 0; i < isPlaying.length; i++) {
+        if (isPlaying[i]) {
+            randomAudio = audioInfo[i].files[Math.floor(Math.random() * audioInfo[i].files.length)];
+        }
+    }
+    
+}
+
+function switchAudio(){
+    for (let i = 0; i < isPlaying.length; i++) {
+        if (isPlaying[i]) {
+            stopAudio();
+            randomiseAudio();
+            if (randomAudio == previousAudio){
+                randomiseAudio();
+            } else {
+                audioVisualisation(`/audio/${randomAudio}`);
+                previousAudio = randomAudio;
+            }
+        }
+    }
 }
 
 function audioVisualisation(song) {
@@ -187,16 +221,8 @@ let left = true;
 var index = [1, 2, 3, 4, 5, 6];
 var isPlaying = [false, false, true, false, false, false];
 
-// 1: Rock
-// 2: Church Choir
-// 3: Pop
-// 4: EDM
-// 5: Hip Hop
-// 6: Classical Music
-
-document.addEventListener('keydown', function (event) {
-    //right key
-    if (event.keyCode == 37) {
+    
+    function rightInput() {
         for (let i = 0; i < index.length; i++) {
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
@@ -223,8 +249,9 @@ document.addEventListener('keydown', function (event) {
             }
         }
     }
+
     //left key
-    else if (event.keyCode == 39) {
+    function leftInput() {
         for (let i = 0; i < index.length; i++) {
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-right`);
             document.getElementById(`card${i + 1}`).classList.remove(`card${index[i]}-left`);
@@ -250,21 +277,35 @@ document.addEventListener('keydown', function (event) {
         }
     }
 
-    else if (event.keyCode == 81) {
-        const info = addNotification(`<img src="/images/EarplugIcon.png" id="earplug">`);
-        setTimeout(() => {
-            removeNotification(info);
-        }, 2500);
-    }
 
-    else if (event.keyCode == 87) {
-        const info = addNotification(`<img src="/images/EarplugOutIcon.png" id="earplug">`);
-        setTimeout(() => {
-            removeNotification(info);
-        }, 2500);
-    }
+    document.addEventListener('keydown', function (event) {
+        if (event.keyCode == 37){
+            rightInput();
+        }
+        if (event.keyCode == 39){
+            leftInput();
+        }
+        else if (event.keyCode == 81) {
+            const info = addNotification();
+            setTimeout(() => {
+                removeNotification(info);
+            }, 2500);
+        }
+        else if (event.keyCode == 81) {
+          const info = addNotification(`<img src="/images/EarplugIcon.png" id="earplug">`);
+          setTimeout(() => {
+              removeNotification(info);
+          }, 2500);
+        }
+        else if (event.keyCode == 87) {
+            const info = addNotification(`<img src="/images/EarplugOutIcon.png" id="earplug">`);
+            setTimeout(() => {
+                removeNotification(info);
+            }, 2500);
+        }
+    });
+    
 });
-
 
 // -----------------------------------------------------------------------------
 
@@ -299,6 +340,35 @@ document.addEventListener('keydown', function (event) {
     if (event.keyCode == 90) {
         window.location = "http://localhost:3000/standby-screen";
     }
+});
+
+//Inputs from controller
+
+var socket = io("http://localhost:3010");
+socket.on("input", (data) => {
+var split = data.split(",");
+var button = split[0];
+var direction = split[1];
+var value = split[2];
+console.log(button, direction, value);
+// Browse button scroll left
+if(button == "browse" && direction == "left"){
+    rightInput();
+}
+// Browse button scroll right
+if(button == "browse" && direction == "right"){
+    leftInput();
+}
+// End experience
+if(button == "reset" && direction == "down"){
+    end();
+}
+
+if(button == "crossfader" && ( value == "0" || value == "127")){
+    console.log("CROSSFADE");
+    switchAudio();
+}
+
 });
 
 
