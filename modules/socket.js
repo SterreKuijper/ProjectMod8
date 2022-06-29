@@ -26,8 +26,18 @@ function send(input){
   socket.emit("input", input);
 }
 
+function sendEar(earStatus) {
+  if(!socket) return;
+  socket.emit('ear', earStatus);
+}
+
+function sendPresent(present) {
+  if(!socket) return;
+  socket.emit('present', present);
+}
+
 server.listen(3010, () => {
   console.log('listening on *:3010');
 });
 
-module.exports = { send };
+module.exports = { send, sendEar, sendPresent };

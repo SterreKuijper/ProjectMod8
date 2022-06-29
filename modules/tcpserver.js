@@ -1,3 +1,5 @@
+const socketModule = require('./socket');
+
 // Include Nodejs' net module.
 const Net = require('net');
 const EventEmitter = require('node:events')
@@ -8,7 +10,7 @@ const port = 8080;
 let ear = Boolean(false);
 let magX = 0;
 let magY = 0;
-
+let present = false;
 
 // Use net.createServer() in your code. This is just for illustration purpose.
 // Create a new TCP server.
@@ -37,15 +39,14 @@ server.on('connection', function(socket) {
         //ear boolean is set
         if (incoming.includes('e')){
             if (incoming.includes('0')){
-                if (ear = true){
+                if (ear === true){
                     ear = false;
-                    emitter.emit('EarToFalse')
+                    socketModule.sendEar(false);
                 }
-            }
-            if (incoming.includes('1')){
-                if (ear = false){
+            }else{
+                if (ear === false) {
                     ear = true;
-                    emitter.emit('EarToTrue')
+                    socketModule.sendEar(true);
                 }
             }
         }
@@ -54,6 +55,15 @@ server.on('connection', function(socket) {
             incoming = incoming.replace('m', '').split(',')
             magX = incoming[0]
             magY = incoming[1]
+            if(magX === -1 || magY === -1) {
+                if(present) {
+                    socketModule.sendPresent(false);
+                    present = false;
+                }
+            }else{
+                socketModule.sendPresent(true);
+                present = true;
+            }
         }
         console.log('------------------')
         console.log('Ear touched: ' + ear)
