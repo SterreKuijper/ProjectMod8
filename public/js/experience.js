@@ -127,7 +127,7 @@ function playAudio(song){
     function load(){
         audio.setAttribute("src", song);
         audio.load();
-        document.getElementById("audio").volume = 0.01;
+        document.getElementById("audio").volume = 0.001;
         audio.play();
         console.log("Start Visualizer");
     }
@@ -220,14 +220,14 @@ function audioVisualisation(song) {
         ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
         //let xFactor = 0.03; * Math.log(i * xFactor)  Math.sqrt(i * xFactor) 
-        let xFactor = 0.9;
+        let xFactor = 3;
 
         for (var i = 0; i < bufferLength; i++) {
-            // barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
+            barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
 
-            barHeight = dataArray[i] * 6;
+            //barHeight = dataArray[i] * 6;
 
-            var r = barHeight + (25 * (i / bufferLength));
+            var r = barHeight + (10 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
             var b = 100;
 
@@ -247,6 +247,7 @@ function audioVisualisation(song) {
     }
 
     audio.play();
+    audio.volume = 0.001;
     renderFrame();
 };
 
@@ -447,8 +448,8 @@ function scratch(){
 }
 
 //Inputs from controller
-
-// var socket = io("http://localhost:3010");
+    
+var socket = io("http://localhost:3010");
 socket.on("input", (data) => {
     var split = data.split(",");
     var button = split[0];
