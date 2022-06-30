@@ -138,7 +138,7 @@ function playAudio(song){
     function load(){
         audio.setAttribute("src", song);
         audio.load();
-        document.getElementById("audio").volume = 0.001;
+        document.getElementById("audio").volume = 0.004;
         audio.play();
         console.log("Start Visualizer");
     }
@@ -234,7 +234,7 @@ function audioVisualisation(song) {
         let xFactor = 3;
 
         for (var i = 0; i < bufferLength; i++) {
-            barHeight = dataArray[i] * 3.5 * Math.sqrt(i * xFactor);
+            barHeight = dataArray[i] * 6.5 * Math.sqrt(i * xFactor);
 
             //barHeight = dataArray[i] * 6;
 
@@ -258,7 +258,6 @@ function audioVisualisation(song) {
     }
 
     audio.play();
-    audio.volume = 0.001;
     renderFrame();
 };
 

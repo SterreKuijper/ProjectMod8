@@ -89,11 +89,11 @@ server.on('connection', function(socket) {
     });
 });
 
-this.emitter.on('new-song', id => {
+exports.setSong = id => {
     for(let i = 0; i < sockets.length; i++) {
         sockets[i].write(`S${id}\r\n`);
     }
-});
+};
 
 exports.getEar = () => {
     return ear;

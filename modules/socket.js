@@ -7,7 +7,7 @@ const io = new Server(server, {
   //Allow cross origin communication as it would otherwise be blocked by the browser.
   cors: "*",
 });
-const eventEmitter = require('./tcpserver').emitter;
+const tcpSocket = require('./tcpserver');
 
 let socket;
 var passedTime;
@@ -27,7 +27,7 @@ io.on('connection', (s) => {
   });
 
   s.on('new-song', id => {
-    eventEmitter.emit('new-song', id);
+    tcpSocket.setSong(id);
   });
   
   //Store this socket to be used in other functions.
