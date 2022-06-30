@@ -17,6 +17,7 @@
     "morgan": "^1.10.0",
     "net": "^1.0.2",
     "node-gyp": "^9.0.0",
+    "object-inspect": "^1.12.2",
     "pg-promise": "^8.7.5",
     "socket.io": "^4.5.1",
     "sound-play": "^1.1.0",
