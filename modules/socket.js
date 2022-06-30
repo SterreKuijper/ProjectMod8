@@ -30,6 +30,10 @@ io.on('connection', (s) => {
   s.on('new-song', id => {
     tcpSocket.setSong(id);
   });
+
+  s.on('new-genre', isPlaying => {
+    tcpSocket.emitter.emit('volume', isPlaying);
+  });
   
   //Store this socket to be used in other functions.
   socket = s;
@@ -60,7 +64,7 @@ function sendSound(input){
 function sendSoundDose(dose, command) {
   if(!socket) return;
   socket.emit("dose", dose);
-  tcpSocket.setColor(command);
+  tcpSocket.setSoundDose(command);
 }
 
 server.listen(3010, () => {

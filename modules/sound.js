@@ -1,7 +1,7 @@
 
 //setup socket
 const socket = require("./socket");
-
+const tcpSocket = require('./tcpserver');
 
 //setup speaker
 var speakerVol; //volume in decibel (dB)
@@ -39,6 +39,10 @@ const tcpServer = require('./tcpserver');
 
 const { request } = require('express');
 
+tcpSocket.emitter.on('volume', isPlaying => {
+    activeGenre = isPlaying;
+});
+
 
 function loop(){
     calcDistToSpeaker();
@@ -68,6 +72,7 @@ function calcDistToSpeaker(){
 }
 
 function setSpeakerVol(activeGenre){
+
     if(activeGenre[0]) speakerVol = 120; //Rock music
     else if(activeGenre[1]) speakerVol = 80; //Choir music
     else if(activeGenre[2]) speakerVol = 100; //Pop music
@@ -117,7 +122,7 @@ function calcHearingDamage(){
 function getSndDose(){
     return sndDose;
 }
-socket.sendSound(getSndDose());
+socket.sendSound(sndDose);
 
 function calcPassedTime(){
 
@@ -182,3 +187,5 @@ setTimeout(stopProgramme, runTime + floatNumComp);
     artist: ["Wildstylez Feat. Niels Geusebroek", "Jebroer", "Ran-D"],
     song: ["Year Of Summer", "Kind van de Duivel", "Zombie"]
 }]
+
+module.exports = {setSpeakerVol};

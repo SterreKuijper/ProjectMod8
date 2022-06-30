@@ -309,6 +309,7 @@ function rightInput() {
             randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
             var idOmdoortesturen = audioInfo[i].id[randomSong];
             socket.emit('new-song', idOmdoortesturen);
+            socket.emit('new-genre', isPlaying);
             changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
@@ -352,6 +353,7 @@ function leftInput() {
             randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
             var idOmdoortesturen = audioInfo[i].id[randomSong];
             socket.emit('new-song', idOmdoortesturen);
+            socket.emit('new-genre', isPlaying);
             changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
