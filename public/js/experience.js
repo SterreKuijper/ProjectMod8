@@ -350,6 +350,8 @@ function leftInput() {
         if (isPlaying[i]) {
             stopAudio();
             randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
+            var idOmdoortesturen = audioInfo[i].id[randomSong];
+            socket.emit('new-song', idOmdoortesturen);
             changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
@@ -505,7 +507,9 @@ setTimeout(() => {
     socket.on("present", present  => {
         setAvatar(present);  
     });
-}, 50);
+
+    socket.emit('new-song', 17);
+}, 200);
 
 function setAvatar(avatarIsOn) {
     if(!avatarIsOn) {
