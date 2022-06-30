@@ -14,8 +14,8 @@ var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start 
 var floatNumComp = 4090; //extra time to run the programm the correct amount of times in milliseconds
 
 //setup  run program
-var runTime = 120000; // the time that the program should run in milli seconds
-var runIntervalTime = 250; //time before the next time the loop function should run in milliseconds
+var runTime = 180000; // the time that the program should run in milli seconds
+var runIntervalTime = 375; //time before the next time the loop function should run in milliseconds
 
 //set safety criterium: we say that 8 hours of 80dB is safe given that the exchange rate is 3dB
 var critSndDur = 8; //time in hours
@@ -50,7 +50,7 @@ function loop(){
     if (sndDose <= 100) console.log(sndDose);
     else {
         calcHearingDamage(sndDose);
-        console.log("Your hearing damage is:" + hearingDamage +"%" ); //DEBUGGING
+        //console.log("Your hearing damage is:" + hearingDamage +"%" ); //DEBUGGING
     }
 
     if (sndDose > maxSndDose) console.log("ERROR: Sound Dose went over Maximum");

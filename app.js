@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var tcpServer = require('./modules/tcpserver');
 var socket = require('./modules/socket'); 
 var input = require('./modules/input');
+var sound = require('./modules/sound');
 
 var app = express();
 
