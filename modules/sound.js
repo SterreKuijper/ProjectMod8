@@ -111,8 +111,13 @@ function calcSndDose(){
     else if(sndDose>100000){
         var commandOmdoortesturen = 0;
     }
+<<<<<<< Updated upstream
     console.log("command =" + commandOmdoortesturen);
     socket.sendSoundDose(sndDose, commandOmdoortesturen);
+=======
+    console.log(commandOmdoortesturen);
+    socket.updateSoundDose(sndDose, commandOmdoortesturen);
+>>>>>>> Stashed changes
 } 
 
 function calcHearingDamage(){
@@ -135,7 +140,6 @@ function calcPassedTime(){
     return passedTime;
 }
 
-console.log("Dit bestand doet ook echt wel");
 
 var runProgrammeInterval = setInterval(loop, runIntervalTime);
 
