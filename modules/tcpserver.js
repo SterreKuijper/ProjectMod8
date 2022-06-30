@@ -1,6 +1,7 @@
 // Include Nodejs' net module.
 const Net = require('net');
 const EventEmitter = require('node:events')
+
 // The port on which the server is listening.
 const port = 8080;
 
@@ -63,7 +64,7 @@ server.on('connection', function(socket) {
     // When the client requests to end the TCP connection with the server, the server
     // ends the connection.
     
-    socket.on('end', function()6 {
+    socket.on('end', function() {
         console.log('Closing connection with the client');
     });
 
