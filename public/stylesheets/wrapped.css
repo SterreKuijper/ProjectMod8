@@ -148,3 +148,15 @@
 .card-move-out {
     animation: move-out 2s forwards;
 }
+
+.favorite-genres{
+    text-align: left;
+    padding: 5%;
+    margin-right: 60%;
+}
+
+.time{
+    text-align: Right;
+    padding: 5%;
+    margin-left: 30%;
+}

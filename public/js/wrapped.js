@@ -59,13 +59,13 @@ function startWrapped() {
 
     moveIn('card1');
 
-    setTimeout(function () {
-        moveInAndOut('card2', 'card1');
-    }, 10000);
+    // setTimeout(function () {
+    //     moveInAndOut('card2', 'card1');
+    // }, 10000);
 
-    setTimeout(function () {
-        moveInAndOut('card3', 'card2');
-    }, 20000);
+    // setTimeout(function () {
+    //     moveInAndOut('card3', 'card2');
+    // }, 20000);
 
     // // end wrapped
     // setTimeout(() => {
