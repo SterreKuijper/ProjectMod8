@@ -37,7 +37,6 @@ var hearingDamage = 0;  //Damage to the ear
 
 const tcpServer = require('./tcpserver');
 
-const wrapped = require('../public/js/wrapped');
 const { request } = require('express');
 
 
@@ -107,7 +106,7 @@ function calcSndDose(){
     else if(sndDose>=100000){
         var commandOmdoortesturen = 0;
     }
-    socket.updateSoundDose(sndDose, commandOmdoortesturen);
+    socket.sendSoundDose(sndDose, commandOmdoortesturen);
 } 
 
 function calcHearingDamage(){

@@ -67,4 +67,4 @@ server.listen(3010, () => {
   console.log('listening on *:3010');
 });
 
-module.exports = { send, sendEar, sendPresent, sendSound };
+module.exports = { send, sendEar, sendPresent, sendSound, sendSoundDose };
