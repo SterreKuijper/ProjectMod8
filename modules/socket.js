@@ -24,6 +24,7 @@ io.on('connection', (s) => {
   s.on('wrapped', (read) => {
     var passedTime = read;
     console.log(passedTime);
+  });
 
   s.on('new-song', id => {
     eventEmitter.emit('new-song', id);
