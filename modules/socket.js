@@ -9,10 +9,12 @@ const io = new Server(server, {
 });
 
 let socket;
+var passedTime;
 
 // Open a socket to keep a connection open.
 io.on('connection', (s) => {
   console.log('a user connected');
+  
   s.on('disconnect', () => {
     console.log('user disconnected');
   });
@@ -21,7 +23,6 @@ io.on('connection', (s) => {
   s.on('wrapped', (read) => {
     var passedTime = read;
     console.log(passedTime);
-  });
 
   //Store this socket to be used in other functions.
   socket = s;

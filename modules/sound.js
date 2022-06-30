@@ -1,14 +1,17 @@
-const socket = require('./socket');
+
+//setup socket
+const socket = require("./socket");
+
 
 //setup speaker
-var speakerVol = 120; //volume in decibel (dB)
+var speakerVol; //volume in decibel (dB)
 var distToSpeaker = 4; //distance to speaker in meters
 var distToSpeaker1;
 var distToSpeaker2;
 var speakerVolMult = -8.656; //speaker multiplier
-var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m
+var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m DEBUGGING
 //var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
-var floatNumComp = 5390; //extra time to run the programm the correct amount of times in milliseconds
+var floatNumComp = 4090; //extra time to run the programm the correct amount of times in milliseconds
 
 //setup  run program
 var runTime = 120000; // the time that the program should run in milli seconds
@@ -22,9 +25,10 @@ var exchangeRate = 10 //Exchange rate paremeter which is the result of
 //calculated & received values
 var weightedSndLvl1;
 var weightedSndLvl2;
-var totweightedSndLvl;
+var totWeightedSndLvl;
 var sndDose = 0; //begins at zero
 var earplugsIn = false;
+var activeGenre = [false, true, false, false, false, false];
 
 //set sound dose thresholds
 var maxSndDose = 1000000; //maximum sound dose you could receive
@@ -32,33 +36,46 @@ var safeSndDose = 100; //safe daily sound dose
 var hearingDamage = 0;  //Damage to the ear
 
 const tcpServer = require('./tcpserver');
+
 const wrapped = require('../public/js/wrapped');
 const { request } = require('express');
 
+
 function loop(){
     calcDistToSpeaker();
+    setSpeakerVol(activeGenre);
     calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2);
     calcSndDose();
 
     if (sndDose <= 100) console.log(sndDose);
     else {
         calcHearingDamage(sndDose);
-        console.log("Your hearing damage is:" + hearingDamage +"%" );
+        console.log("Your hearing damage is:" + hearingDamage +"%" ); //DEBUGGING
     }
 
     if (sndDose > maxSndDose) console.log("ERROR: Sound Dose went over Maximum");
 }
 
 function calcDistToSpeaker(){
-    let relXPosToSpeaker1 = 20 - tcpServer.getXPos();
-    let relXPosToSpeaker2 = 40 - tcpServer.getXPos();
+    let relXPosToSpeaker1 = 22 - tcpServer.getXPos();
+    let relXPosToSpeaker2 = 41 - tcpServer.getXPos();
     let relYPosToSpeaker1 = 64 - tcpServer.getYPos();
     let relYPosToSpeaker2 = 64 - tcpServer.getYPos(); 
     distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 2) ** 2 + (relYPosToSpeaker1 * 4) ** 2); 
     distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 2) ** 2 + (relYPosToSpeaker2 * 4) ** 2);
-    console.log(tcpServer.getXPos(), tcpServer.getYPos());
-    console.log(relXPosToSpeaker1, relXPosToSpeaker2, relYPosToSpeaker1, relYPosToSpeaker2);
-    console.log(distToSpeaker1,distToSpeaker2);
+    //console.log(tcpServer.getXPos(), tcpServer.getYPos());
+    //console.log(relXPosToSpeaker1, relXPosToSpeaker2, relYPosToSpeaker1, relYPosToSpeaker2);
+    //onsole.log(distToSpeaker1,distToSpeaker2);
+}
+
+function setSpeakerVol(activeGenre){
+    if(activeGenre[0]) speakerVol = 120; //Rock music
+    else if(activeGenre[1]) speakerVol = 80; //Choir music
+    else if(activeGenre[2]) speakerVol = 100; //Pop music
+    else if(activeGenre[3]) speakerVol = 110; //EDM music
+    else if(activeGenre[4]) speakerVol = 105; //Hiphop music
+    else if(activeGenre[5]) speakerVol = 90; //Classic music
+    console.log(speakerVol);
 }
 
 function calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2){
@@ -68,14 +85,14 @@ function calcTotWeightedSndLvl(speakerVol, distToSpeaker1, distToSpeaker2){
     //weightedSndLvl2 = 100; DEBUGGING
     totWeightedSndLvl = Math.log(10 ** (weightedSndLvl1/10) + 10 ** (weightedSndLvl2/10))/Math.log(10) * 10;
     if(tcpServer.getEar() == true) totWeightedSndLvl -= 20; 
-    console.log("totweightedSndLvl = " + totWeightedSndLvl);
+    console.log("totWeightedSndLvl = " + totWeightedSndLvl);
 } 
 
 function calcSndDose(){
-    passedTime = calcPassedTime();
-    sndDose = (100/critSndDur)*passedTime*10**((totWeightedSndLvl-critSndLvl)/exchangeRate);
-    //let timeInterval = 1/60; DEBUGGING
-    //sndDose += (100/critSndDur)*timeInterval*10**((totweightedSndLvl-critSndLvl)/exchangeRate); DEBUGGING
+    //passedTime = calcPassedTime();
+    //sndDose = ((100/critSndDur)*passedTime*10**((totWeightedSndLvl-critSndLvl)/exchangeRate))/100;
+    let timeInterval = 1/60;
+    sndDose += (100/critSndDur)*timeInterval*10**((totWeightedSndLvl-critSndLvl)/exchangeRate);
     console.log("soundDose = " + sndDose);
 } 
 
@@ -90,8 +107,12 @@ function getSndDose(){
 socket.sendSound(getSndDose());
 
 function calcPassedTime(){
-    passedTime =  input.passedTime;
-    passedTime = wrapped.getElapsedTime();
+
+    passedTime = 8;
+    //Time from client.
+    //passedTime = socket.passedTime;
+    //console.log(socket.passedTime);
+    //passedTime = wrapped.getElapsedTime();
     return passedTime;
 }
 

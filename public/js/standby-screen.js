@@ -28,11 +28,11 @@ function myFunctionHandle() {
         playVideo(key);
     }
 }
-// document.addEventListener('keydown', function (event) {
+document.addEventListener('keydown', function (event) {
 
-//     window.location = "http://localhost:3000/experience?";
+    window.location = "http://localhost:3000/experience?";
 
-// });
+});
 
 var socket = io("http://localhost:3010");
 

@@ -76,11 +76,16 @@ function startWrapped() {
 
 var socket = io("http://localhost:3010");
 function send(input){
-    socket.emit('wrapped', "100");
+
+    //socket.emit('wrapped', "100");
+
+    socket.emit('wrapped', input);
+
 }
 socket.on("calculation", (data) => {
     console.log(data);
 });
+
 
 
 
