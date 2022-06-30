@@ -38,21 +38,20 @@ server.on('connection', function(socket) {
     // The server receives data from the client by reading from its socket.
     socket.on('data', function(chunk) {
         let incoming = chunk.toString().toLowerCase();
-        console.log(`Data received from client: ${incoming}`);
+        // console.log(`Data received from client: ${incoming}`);
 
         //ear boolean is set
         if (incoming.includes('e')){
             if (incoming.includes('0')){
                 if (ear === true){
                     ear = false;
+                    console.log('teringzooi')
                     socketModule.sendEar(false);
-                    this.emitter.emit('EarToFalse')
                 }
             }else{
                 if (ear === false) {
                     ear = true;
                     socketModule.sendEar(true);
-                    this.emitter.emit('EarToTrue')
                 }
             }
         }
@@ -71,16 +70,16 @@ server.on('connection', function(socket) {
                 present = true;
             }
         }
-        console.log('------------------')
-        console.log('Ear touched: ' + ear)
-        console.log('Mag X: ' + magX + '  Mag Y: ' + magY)
+        // console.log('------------------')
+        // console.log('Ear touched: ' + ear)
+        // console.log('Mag X: ' + magX + '  Mag Y: ' + magY)
     });
 
     // When the client requests to end the TCP connection with the server, the server
     // ends the connection.
     
     socket.on('end', function() {
-        console.log('Closing connection with the client');
+        // console.log('Closing connection with the client');
         sockets.splice(sockets.indexOf(socket), 1);
     });
 

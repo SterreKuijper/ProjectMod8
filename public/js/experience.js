@@ -497,6 +497,7 @@ setTimeout(() => {
     
     socket.on("ear", isIn  => {
         const info = addNotification(`<img src="/images/${!isIn ? 'EarplugOutIcon' : 'EarplugIcon'}.png" id="earplug">`);
+        console.log('werkt echt niet');
         setTimeout(() => {
             removeNotification(info);
         }, 2500);   
