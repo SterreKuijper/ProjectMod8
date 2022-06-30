@@ -57,12 +57,12 @@ function loop(){
 }
 
 function calcDistToSpeaker(){
-    let relXPosToSpeaker1 = 22 - tcpServer.getXPos();
-    let relXPosToSpeaker2 = 41 - tcpServer.getXPos();
-    let relYPosToSpeaker1 = 64 - tcpServer.getYPos();
-    let relYPosToSpeaker2 = 64 - tcpServer.getYPos(); 
-    distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 2) ** 2 + (relYPosToSpeaker1 * 4) ** 2); 
-    distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 2) ** 2 + (relYPosToSpeaker2 * 4) ** 2);
+    let relXPosToSpeaker1 = 10 - tcpServer.getXPos();
+    let relXPosToSpeaker2 = 21 - tcpServer.getXPos();
+    let relYPosToSpeaker1 = 32 - tcpServer.getYPos();
+    let relYPosToSpeaker2 = 32 - tcpServer.getYPos(); 
+    distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 4) ** 2 + (relYPosToSpeaker1 * 8) ** 2); 
+    distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 4) ** 2 + (relYPosToSpeaker2 * 8) ** 2);
     //console.log(tcpServer.getXPos(), tcpServer.getYPos());
     //console.log(relXPosToSpeaker1, relXPosToSpeaker2, relYPosToSpeaker1, relYPosToSpeaker2);
     //onsole.log(distToSpeaker1,distToSpeaker2);
