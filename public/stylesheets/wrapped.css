@@ -1,10 +1,10 @@
 @font-face {
-    font-family: font;
-    src: url(/font/BRLNSDB.ttf);
+    font-family: berlin-sans;
+    src: url(../fonts/berlin-sans.ttf);
 }
 
-* {
-    font: font;
+.html {
+    font: berlin-sans;
 }
 
 .content {
