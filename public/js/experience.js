@@ -236,7 +236,7 @@ function audioVisualisation(song) {
         for (var i = 0; i < bufferLength; i++) {
             barHeight = dataArray[i] * 6.5 * Math.sqrt(i * xFactor);
 
-            //barHeight = dataArray[i] * 6;
+            // barHeight = dataArray[i] * 6;
 
             var r = barHeight + (10 * (i / bufferLength));
             var g = 250 * (i / bufferLength);
