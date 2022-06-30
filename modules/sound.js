@@ -59,8 +59,8 @@ function loop(){
 function calcDistToSpeaker(){
     let relXPosToSpeaker1 = 10 - tcpServer.getXPos();
     let relXPosToSpeaker2 = 21 - tcpServer.getXPos();
-    let relYPosToSpeaker1 = 32 - tcpServer.getYPos();
-    let relYPosToSpeaker2 = 32 - tcpServer.getYPos(); 
+    let relYPosToSpeaker1 = tcpServer.getYPos();
+    let relYPosToSpeaker2 = tcpServer.getYPos(); 
     distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 4) ** 2 + (relYPosToSpeaker1 * 8) ** 2); 
     distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 4) ** 2 + (relYPosToSpeaker2 * 8) ** 2);
     //console.log(tcpServer.getXPos(), tcpServer.getYPos());
