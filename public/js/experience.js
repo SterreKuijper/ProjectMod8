@@ -71,43 +71,51 @@ var audioInfo = [{
     genre: "ROCK",
     files: ["ROCK - AC_DC - Highway to Hell.mp3", "ROCK - Joan Jett - I Love Rock 'n' Roll.mp3", "ROCK - Nirvana - Smells Like Teen Spirit.mp3"],
     artist: ["AC/DC", "Joan Jett", "Nirvana"],
-    song: ["Highway to Hell", "I love Rock 'n' Roll", "Smells Like Teen Spirit"]
+    song: ["Highway to Hell", "I love Rock 'n' Roll", "Smells Like Teen Spirit"],
+    id: [5, 6, 4]
 },
 {
     genre: "CHOIR",
-    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.mp3", "CHOIR - Thomas Tallis - Spem in Alium.mp3", "CHOIR - Alleluia - University of Utah Singers.mp3"],
-    artist: ["Carl Orff", "Thomas Tallis.mp3", "University of Utah Singers"],
-    song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"]
+    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.wav", "CHOIR - Thomas Tallis - Spem in Alium.wav", "CHOIR - Alleluia - University of Utah Singers.wav"],
+    artist: ["Carl Orff", "Thomas Tallis.wav", "University of Utah Singers"],
+    song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"],
+    id: [2, 3, 1]
+
 },
 {
     genre: "POP",
     files: ["POP - Abba - Dancing Queen.mp3", "POP - The Weeknd - Blinding Lights.mp3", "POP - Ed Sheeran - Shape of You.mp3"],
     artist: ["Abba", "The Weeknd", "Ed Sheeran"],
-    song: ["Dancing Queen", "Blinding Lights", "Shape of You"]
+    song: ["Dancing Queen", "Blinding Lights", "Shape of You"],
+    id: [16, 18, 17]
 },
 {
     genre: "EDM",
     files: ["EDM - ACRAZE - Do It To It.mp3", "EDM - DJ Fresh - Gold Dust (Fox Stevenson Remix).mp3", "EDM - Shouse - Love Tonight.mp3"],
     artist: ["ACRAZE", "DJ Fresh (Fox Stevenson Remix)", "Shouse"],
-    song: ["Do It To IT", "Gold Dust (Fox Stevenson Remix)", "Love Tonight"]
+    song: ["Do It To IT", "Gold Dust (Fox Stevenson Remix)", "Love Tonight"],
+    id: [10, 11, 12]
 },
 {
     genre: "HIPHOP",
     files: ["HIPHOP -  Eminem - 'Till I Collapse.mp3", "HIPHOP - Dr Dre Ft. Snoop Dogg - Still D.R.E.mp3", "HIPHOP - 2Pac - Hit Em Up.mp3"],
     artist: ["Eminem", "Dr Dre Ft. Snoop Dogg", "2Pac"],
-    song: ["'Till I collapse", "Still D.R.E.", "Hit Em Up"]
+    song: ["'Till I collapse", "Still D.R.E.", "Hit Em Up"],
+    id: [13, 15, 14]
 },
 {
     genre: "CLASSIC",
     files: ["CLASSIC - Beethoven - Fur Elise.mp3", "CLASSIC - Mozart - Eine Kleine Nachtmusik.mp3", "CLASSIC - Beethoven - Moonlight Sonata.mp3"],
     artist: ["Beethoven", "Mozart", "Beethoven"],
-    song: ["Fur Elise", "Eine kleine Nachtmusik", "Moonlight Sonata"]
+    song: ["Fur Elise", "Eine kleine Nachtmusik", "Moonlight Sonata"],
+    id: [7, 9, 8]
 },
 {
     genre: "HARDSTYLE",
     files: ["HARDSTYLE - Wildstylez Feat. Niels Geusebroek - Year Of Summer.mp3", "HARDSTYLE - Jebroer - Kind van de Duivel.mp3", "HARDSTYLE - Ran-D - Zombie.mp3"],
     artist: ["Wildstylez Feat. Niels Geusebroek", "Jebroer", "Ran-D"],
-    song: ["Year Of Summer", "Kind van de Duivel", "Zombie"]
+    song: ["Year Of Summer", "Kind van de Duivel", "Zombie"],
+    id: [21, 19, 20]
 }];
 
 var audio = document.getElementById("audio");
@@ -300,6 +308,8 @@ function rightInput() {
         if (isPlaying[i]) {
             stopAudio();
             randomSong = Math.floor(Math.random() * audioInfo[i].files.length);
+            var idOmdoortesturen = audioInfo[i].id[randomSong];
+            socket.emit('new-song', idOmdoortesturen);
             changeSongDisplay(i, randomSong);
             audioVisualisation(`/audio/${audioInfo[i].files[randomSong]}`);
         }
