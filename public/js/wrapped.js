@@ -40,30 +40,33 @@ function secondsToHms(d) {
     var m = Math.floor(d % 3600 / 60);
     var s = Math.floor(d % 3600 % 60);
 
-    var hDisplay = h > 0 ? h + (h == 1 ? (m > 0 ? " hour, " : " hour") : (m > 0 ? " hours, " : " hours")) : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? (m > 0 || (!(m > 0) && s > 0) ? " hour, " : " hour") : (m > 0 || (!(m > 0) && s > 0) ? " hours, " : " hours")) : "";
     var mDisplay = m > 0 ? m + (m == 1 ? (s > 0 ? " minute, " : " minute") : (s > 0 ? " minutes, " : " minutes")) : "";
     var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return hDisplay + mDisplay + sDisplay;
 }
 
-document.addEventListener('keydown', function (event) {
-    if (event.keyCode == 90) {
-        window.location = "http://localhost:3000/standby-screen";
-    }
-});
+// document.addEventListener('keydown', function (event) {
+//     if (event.keyCode == 90) {
+//         window.location = "http://localhost:3000/standby-screen";
+//     }
+// });
 
 function startWrapped() {
     calculateTime();
 
+
+    // moveIn('card3');
+
     moveIn('card1');
 
-    setTimeout(function () {
-        moveInAndOut('card2', 'card1');
-    }, 10000);
+    // setTimeout(function () {
+    //     moveInAndOut('card2', 'card1');
+    // }, 10000);
 
-    setTimeout(function () {
-        moveOut('card2');
-    }, 20000);
+    // setTimeout(function () {
+    //     moveInAndOut('card3', 'card2');
+    // }, 20000);
 
     // end wrapped
     setTimeout(() => {
@@ -73,8 +76,15 @@ function startWrapped() {
 
 var socket = io("http://localhost:3010");
 function send(input){
+
+    //socket.emit('wrapped', "100");
+
     socket.emit('wrapped', input);
+
 }
+socket.on("calculation", (data) => {
+    console.log(data);
+});
 
 
 
