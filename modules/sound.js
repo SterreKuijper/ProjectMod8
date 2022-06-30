@@ -1,4 +1,3 @@
-
 //setup socket
 const socket = require("./socket");
 
@@ -11,11 +10,11 @@ var distToSpeaker2;
 var speakerVolMult = -8.656; //speaker multiplier
 var speakerVolComp = 11.9997639898537755 //Compensation value in dB given start dist is 4m DEBUGGING
 //var speakerVolComp = 23.99952797970755; //9898537755 //Compensation value in dB given start dist is 16m
-var floatNumComp = 4090; //extra time to run the programm the correct amount of times in milliseconds
+var floatNumComp = 0; //4090; //extra time to run the programm the correct amount of times in milliseconds
 
 //setup  run program
-var runTime = 120000; // the time that the program should run in milli seconds
-var runIntervalTime = 250; //time before the next time the loop function should run in milliseconds
+var runTime = 180000; // the time that the program should run in milli seconds
+var runIntervalTime = 371; //time before the next time the loop function should run in milliseconds
 
 //set safety criterium: we say that 8 hours of 80dB is safe given that the exchange rate is 3dB
 var critSndDur = 8; //time in hours
@@ -57,12 +56,12 @@ function loop(){
 }
 
 function calcDistToSpeaker(){
-    let relXPosToSpeaker1 = 22 - tcpServer.getXPos();
-    let relXPosToSpeaker2 = 41 - tcpServer.getXPos();
-    let relYPosToSpeaker1 = 64 - tcpServer.getYPos();
-    let relYPosToSpeaker2 = 64 - tcpServer.getYPos(); 
-    distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 2) ** 2 + (relYPosToSpeaker1 * 4) ** 2); 
-    distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 2) ** 2 + (relYPosToSpeaker2 * 4) ** 2);
+    let relXPosToSpeaker1 = 10 - tcpServer.getXPos();
+    let relXPosToSpeaker2 = 21 - tcpServer.getXPos();
+    let relYPosToSpeaker1 = 32 - tcpServer.getYPos();
+    let relYPosToSpeaker2 = 32 - tcpServer.getYPos(); 
+    distToSpeaker1 = Math.sqrt((relXPosToSpeaker1 * 4) ** 2 + (relYPosToSpeaker1 * 8) ** 2); 
+    distToSpeaker2 = Math.sqrt((relXPosToSpeaker2 * 4) ** 2 + (relYPosToSpeaker2 * 8) ** 2);
     //console.log(tcpServer.getXPos(), tcpServer.getYPos());
     //console.log(relXPosToSpeaker1, relXPosToSpeaker2, relYPosToSpeaker1, relYPosToSpeaker2);
     //onsole.log(distToSpeaker1,distToSpeaker2);
