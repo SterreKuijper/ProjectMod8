@@ -41,7 +41,9 @@ setTimeout(() => {
     socket.on("present", present  => {
         setAvatar(present); 
     });
-}, 50);
+
+    socket.emit('new-song', 0);
+}, 200);
 
 document.addEventListener('keydown', function (event) {
     if (event.keyCode == 82) {
