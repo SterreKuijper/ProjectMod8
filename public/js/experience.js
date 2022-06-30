@@ -33,7 +33,9 @@ function startExperience() {
     start = window.performance.now();
     progressBar('progressbar');
     startTime = start;
-    audioVisualisation(`/audio/${audioInfo[2].files[Math.floor(Math.random()*3)]}`);
+    let randomSong = Math.floor(Math.random()*3);
+    audioVisualisation(`/audio/${audioInfo[2].files[randomSong]}`);
+    changeSongDisplay(2, randomSong);
 }
 
 function progressBar(id) {
