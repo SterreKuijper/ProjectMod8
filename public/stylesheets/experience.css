@@ -66,7 +66,7 @@
 .song {
     width: 150%;  
     border-radius: 6px;    
-    background: rgba(255, 252, 152, 0.5);
+    background: rgba(152, 44, 255, 0.5);
     display: flex;
     align-items: center;
     justify-content: end;
@@ -331,11 +331,11 @@
 }
 
 .avatar {
-    height: 300px;
-    width: 500px;
-    background: rgba(255, 252, 152, 0.5);
+    height: 400px;
+    width: 600px;
+    background: rgba(0, 255, 230, 0.5);
     color: #f1f1f1;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .imag {
