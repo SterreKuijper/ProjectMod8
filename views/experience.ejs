@@ -22,12 +22,12 @@
 
 </head>
 
-<body class="bg-dark" onload="progressBar('progressbar')">
+<body class="bg-dark" onload="startExperience()">
 
     <video autoplay muted id="videos"></video>
 
     <div id="content">
-        <canvas id="canvas"></canvas>
+        <canvas id="canvas" style="margin-left: -35px;"></canvas>
         <audio id="audio">
             <source src="/audio/CHOIR - Alleluia - University of Utah Singers.wav" typq="audio/wav">
         </audio>
@@ -39,7 +39,7 @@
                 <h3 id="title">Title</h3>
                 <h6 id="artist">Artist</h6>
             </div>
-            <div class="extra bg-danger"></div>
+            <div class="extra"></div>
         </div>
         <div id="card1" class="genre p-2">
             <h1 id="genre-1" class="m-0">Rock</h1>
@@ -75,7 +75,7 @@
     </div>
 
     <div class="avatar-container">
-        <div class="avatar pop-up" id="avatar">
+        <div class="avatar <%= present ? 'hide' : 'pop-up' %>" id="avatar">
             <img width="300px" src="/images/AvatarPlacementIcon.png" class="imag">
         </div>
     </div>
@@ -84,11 +84,11 @@
     </div>
 
     <script src="/js/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.3/dist/howler.min.js"></script>
     <script src="/js/experience.js"></script>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
         crossorigin="anonymous"></script>
 </body>
-
 </html>
