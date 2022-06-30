@@ -96,6 +96,12 @@ exports.setSong = id => {
     }
 };
 
+exports.setSoundDose = command => {
+    for(let i = 0; i < sockets.length; i++) {
+        sockets[i].write(`C${command}\r\n`);
+    }
+};
+
 exports.getEar = () => {
     return ear;
 }

@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const http = require('http');
+const { kill } = require('process');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
@@ -54,6 +55,12 @@ function sendPresent(present) {
 function sendSound(input){
   if(!socket) return;
   socket.emit("calulation", input);
+}
+
+function sendSoundDose(dose, command) {
+  if(!socket) return;
+  socket.emit("dose", dose);
+  tcpSocket.setColor(command);
 }
 
 server.listen(3010, () => {
