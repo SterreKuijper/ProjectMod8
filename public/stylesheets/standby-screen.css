@@ -27,10 +27,10 @@
 
 .avatar {
     height: 400px;
-    width: 800px;
-    background: rgba(0, 0, 0, 0.5);
+    width: 600px;
+    background: rgba(0, 255, 230, 0.5);
     color: #f1f1f1;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 .imag {
