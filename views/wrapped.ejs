@@ -27,10 +27,14 @@
 <body class="bg-dark" onload="startWrapped()">
 
     <div class="content">
-        <div class="card text-center rainbow rainbow1" id="card1" style="display: block; top: 150%;">
+        <div class="card text-center rainbow rainbow1" id="card1" style="display: block;">
             <div class="card-body">
                 <h1>Thank you for coming to this event!</h1>
                 <h3>You have been listening to loud music for <strong style="color: #982CFF;"><span id="time-text"></span></strong>.<br>Your most popular genre is <strong style="color: #FF23F4;"><%= genre %></strong>.</h3>
+                <h1>MOOSE WRAPPED</h1>
+                <h3>We were delighted to have you at Moke Some Noise!</h3> 
+                <h3 class="favorite-genres" style="border:rgb(102, 255, 255);  border-width:5px; border-style:solid; border-radius: 20px; padding-bottom: 300px;">Here are your favorite Genres: </h3> `
+                <h3 class="time" style="margin-top: -410px;">YOU LISTENED TO (insert favourite genre) FOR: <br><span id="time-text"></span>.</h3>
                 <h5 id="time" style="display: none;">
                     <%= time %>
                 </h5>
