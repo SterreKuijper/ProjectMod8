@@ -99,18 +99,19 @@ function calcSndDose(){
     sndDose += (100/critSndDur)*timeInterval*10**((totWeightedSndLvl-critSndLvl)/exchangeRate);
     console.log("soundDose = " + sndDose);
 
-    if(sndDose>0 && sndDose<100){
+    if(sndDose<100){
         var commandOmdoortesturen = 3;
     }
-    else if(sndDose>=100 && sndDose<1000){
+    else if(sndDose>100 && sndDose<1000){
         var commandOmdoortesturen = 2;
     }
-    else if(sndDose>=1000 && sndDose<10000){
+    else if(sndDose>1000 && sndDose<10000){
         var commandOmdoortesturen = 1;
     }
-    else if(sndDose>=100000){
+    else if(sndDose>100000){
         var commandOmdoortesturen = 0;
     }
+    console.log("command =" + commandOmdoortesturen);
     socket.sendSoundDose(sndDose, commandOmdoortesturen);
 } 
 
