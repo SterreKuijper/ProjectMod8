@@ -69,43 +69,43 @@ function end() {
 
 var audioInfo = [{
     genre: "ROCK",
-    files: ["ROCK - AC_DC - Highway to Hell.wav", "ROCK - Joan Jett - I Love Rock 'n' Roll.wav", "ROCK - Nirvana - Smells Like Teen Spirit.wav"],
+    files: ["ROCK - AC_DC - Highway to Hell.mp3", "ROCK - Joan Jett - I Love Rock 'n' Roll.mp3", "ROCK - Nirvana - Smells Like Teen Spirit.mp3"],
     artist: ["AC/DC", "Joan Jett", "Nirvana"],
     song: ["Highway to Hell", "I love Rock 'n' Roll", "Smells Like Teen Spirit"]
 },
 {
     genre: "CHOIR",
-    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.wav", "CHOIR - Thomas Tallis - Spem in Alium.wav", "CHOIR - Alleluia - University of Utah Singers.wav"],
-    artist: ["Carl Orff", "Thomas Tallis.wav", "University of Utah Singers"],
+    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.mp3", "CHOIR - Thomas Tallis - Spem in Alium.mp3", "CHOIR - Alleluia - University of Utah Singers.mp3"],
+    artist: ["Carl Orff", "Thomas Tallis.mp3", "University of Utah Singers"],
     song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"]
 },
 {
     genre: "POP",
-    files: ["POP - Abba - Dancing Queen.wav", "POP - The Weeknd - Blinding Lights.wav", "POP - Ed Sheeran - Shape of You.wav"],
+    files: ["POP - Abba - Dancing Queen.mp3", "POP - The Weeknd - Blinding Lights.mp3", "POP - Ed Sheeran - Shape of You.mp3"],
     artist: ["Abba", "The Weeknd", "Ed Sheeran"],
     song: ["Dancing Queen", "Blinding Lights", "Shape of You"]
 },
 {
     genre: "EDM",
-    files: ["EDM - ACRAZE - Do It To It.wav", "EDM - DJ Fresh - Gold Dust (Fox Stevenson Remix).wav", "EDM - Shouse - Love Tonight.wav"],
+    files: ["EDM - ACRAZE - Do It To It.mp3", "EDM - DJ Fresh - Gold Dust (Fox Stevenson Remix).mp3", "EDM - Shouse - Love Tonight.mp3"],
     artist: ["ACRAZE", "DJ Fresh (Fox Stevenson Remix)", "Shouse"],
     song: ["Do It To IT", "Gold Dust (Fox Stevenson Remix)", "Love Tonight"]
 },
 {
     genre: "HIPHOP",
-    files: ["HIPHOP -  Eminem - 'Till I Collapse.wav", "HIPHOP - Dr Dre Ft. Snoop Dogg - Still D.R.E.wav", "HIPHOP - 2Pac - Hit Em Up.wav"],
+    files: ["HIPHOP -  Eminem - 'Till I Collapse.mp3", "HIPHOP - Dr Dre Ft. Snoop Dogg - Still D.R.E.mp3", "HIPHOP - 2Pac - Hit Em Up.mp3"],
     artist: ["Eminem", "Dr Dre Ft. Snoop Dogg", "2Pac"],
     song: ["'Till I collapse", "Still D.R.E.", "Hit Em Up"]
 },
 {
     genre: "CLASSIC",
-    files: ["CLASSIC - Beethoven - Fur Elise.wav", "CLASSIC - Mozart - Eine Kleine Nachtmusik.wav", "CLASSIC - Beethoven - Moonlight Sonata.wav"],
+    files: ["CLASSIC - Beethoven - Fur Elise.mp3", "CLASSIC - Mozart - Eine Kleine Nachtmusik.mp3", "CLASSIC - Beethoven - Moonlight Sonata.mp3"],
     artist: ["Beethoven", "Mozart", "Beethoven"],
     song: ["Fur Elise", "Eine kleine Nachtmusik", "Moonlight Sonata"]
 },
 {
     genre: "HARDSTYLE",
-    files: ["HARDSTYLE - Wildstylez Feat. Niels Geusebroek - Year Of Summer.wav", "HARDSTYLE - Jebroer - Kind van de Duivel.wav", "HARDSTYLE - Ran-D - Zombie.wav"],
+    files: ["HARDSTYLE - Wildstylez Feat. Niels Geusebroek - Year Of Summer.mp3", "HARDSTYLE - Jebroer - Kind van de Duivel.mp3", "HARDSTYLE - Ran-D - Zombie.mp3"],
     artist: ["Wildstylez Feat. Niels Geusebroek", "Jebroer", "Ran-D"],
     song: ["Year Of Summer", "Kind van de Duivel", "Zombie"]
 }];
