@@ -2,8 +2,8 @@ const win = require('win-audio');
 const speaker = win.speaker;
 
 //Set minimum and maximum volume the user can control between.
-const max = 30;
-const min = 10;
+const max = 70;
+const min = 20;
 
 function map(value, low1, high1, low2, high2) {
     return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
