@@ -9,10 +9,97 @@
 
 .content {
     position: fixed;
-    top: 50%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
+    background: rgba(63, 63, 63, 0.8);
+    border-radius: 6px;
+    opacity: 0;
+    background-color: #C0FF33;
+}
+
+.avatar-container {
+    position: fixed;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.avatar {
+    height: 400px;
+    width: 800px;
     background: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
     border-radius: 6px;
+}
+
+.imag {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    margin-top: 100px;
+}
+
+.pop-up {
+    animation: grow 0.5s ease-in forwards;
+}
+
+@keyframes grow {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.hide {
+    animation: shrink 0.3s ease-out forwards;
+}
+
+@keyframes shrink {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+}
+
+.in {    
+    animation: in 0.5s ease-in forwards;
+}
+
+@keyframes in {
+    from {
+        opacity: 0;
+        top: 85%;
+    }
+    to {
+        opacity: 1;
+        top: 75%;
+    }
+}
+
+.out {    
+    animation: out 0.5s ease-in forwards;
+}
+
+@keyframes out {
+    from {
+        opacity: 1;
+        top: 75%;
+    }
+    to {
+        opacity: 0;
+        top: 85%;
+    }
 }

@@ -34,3 +34,53 @@ document.addEventListener('keydown', function (event) {
 
 });
 
+var socket = io("http://localhost:3010");
+
+setTimeout(() => {
+    //fuck socket.io
+    socket.on("present", present  => {
+        setAvatar(present); 
+    });
+}, 50);
+
+document.addEventListener('keydown', function (event) {
+    if (event.keyCode == 82) {
+        setAvatar(false);
+    }
+    if (event.keyCode == 69) {
+        setAvatar(true);
+    }
+});
+
+function setAvatar(avatarIsOn) {
+    if(!avatarIsOn) {
+        document.getElementById('avatar').classList.remove('pop-up');
+        document.getElementById('avatar').classList.remove('hide');
+        document.getElementById('avatar').classList.add('pop-up');
+
+        document.getElementById('content').classList.add('out');
+    }else{        
+        document.getElementById('content').classList.remove('in');
+        document.getElementById('content').classList.remove('out');
+        document.getElementById('content').classList.add('in');
+
+        document.getElementById('avatar').classList.add('hide');
+    }
+}
+
+function proceed(){
+    window.location = "http://localhost:3000/experience?";
+}
+
+// Input from controller
+
+var socket = io("http://localhost:3010");
+socket.on("input", (data) => {
+var split = data.split(",");
+var button = split[0];
+var direction = split[1];
+var value = split[2];
+console.log(button, direction, value);
+proceed();
+});
+
