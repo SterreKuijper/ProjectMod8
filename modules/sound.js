@@ -79,7 +79,7 @@ function setSpeakerVol(activeGenre){
     else if(activeGenre[3]) speakerVol = 110; //EDM music
     else if(activeGenre[4]) speakerVol = 105; //Hiphop music
     else if(activeGenre[5]) speakerVol = 90; //Classic music
-    else speakerVol = 0;
+    else speakerVol = -120;
     console.log(speakerVol);
 }
 
