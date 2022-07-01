@@ -55,6 +55,7 @@ function secondsToHms(d) {
 function startWrapped() {
     calculateTime();
 
+    setDose(300);
 
     // moveIn('card3');
 
@@ -75,22 +76,25 @@ function startWrapped() {
 }
 
 var socket = io("http://localhost:3010");
-function send(input){
+function send(input) {
 
     //socket.emit('wrapped', "100");
 
     socket.emit('wrapped', input);
 
 }
-socket.on("calculation", (data) => {
-    console.log(data);
-});
-
-socket.on("dose", soundDose => {
-    console.log(`dose: ${soundDose}`);
-});
 
 
-setTimeout
+setTimeout(() => {
+    socket.on("calculation", (data) => {
+        console.log(data);
+    });
+    
+    socket.on("dose", soundDose => {
+        console.log(`dose: ${soundDose}`);
+    });}, 200);
 
 
+function setDose(dose) {
+    document.getElementById('dose').innerHTML = dose + "%";
+}
