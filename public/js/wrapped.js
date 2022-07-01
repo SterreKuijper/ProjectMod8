@@ -58,7 +58,7 @@ function startWrapped() {
 
     // moveIn('card3');
 
-    moveIn('card3');
+    moveIn('card2');
 
     // setTimeout(function () {
     //     moveInAndOut('card2', 'card1');
@@ -86,7 +86,11 @@ socket.on("calculation", (data) => {
     console.log(data);
 });
 
+socket.on("dose", soundDose => {
+    console.log(`dose: ${soundDose}`);
+});
 
 
+setTimeout
 
 

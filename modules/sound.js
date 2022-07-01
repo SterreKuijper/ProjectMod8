@@ -28,7 +28,7 @@ var weightedSndLvl2;
 var totWeightedSndLvl;
 var sndDose = 0; //begins at zero
 var earplugsIn = false;
-var activeGenre = [false, true, false, false, false, false];
+var activeGenre = [false, false, false, false, false, false];
 
 //set sound dose thresholds
 var maxSndDose = 1000000; //maximum sound dose you could receive
@@ -79,6 +79,7 @@ function setSpeakerVol(activeGenre){
     else if(activeGenre[3]) speakerVol = 110; //EDM music
     else if(activeGenre[4]) speakerVol = 105; //Hiphop music
     else if(activeGenre[5]) speakerVol = 90; //Classic music
+    else speakerVol = 0;
     console.log(speakerVol);
 }
 
@@ -111,13 +112,11 @@ function calcSndDose(){
     else if(sndDose>100000){
         var commandOmdoortesturen = 0;
     }
-<<<<<<< Updated upstream
+
     console.log("command =" + commandOmdoortesturen);
     socket.sendSoundDose(sndDose, commandOmdoortesturen);
-=======
     console.log(commandOmdoortesturen);
-    socket.updateSoundDose(sndDose, commandOmdoortesturen);
->>>>>>> Stashed changes
+    // socket.updateSoundDose(sndDose, commandOmdoortesturen);
 } 
 
 function calcHearingDamage(){
