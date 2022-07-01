@@ -28,7 +28,7 @@ var weightedSndLvl2;
 var totWeightedSndLvl;
 var sndDose = 0; //begins at zero
 var earplugsIn = false;
-var activeGenre = [false, true, false, false, false, false];
+var activeGenre = [false, false, false, false, false, false];
 
 //set sound dose thresholds
 var maxSndDose = 1000000; //maximum sound dose you could receive
@@ -79,6 +79,7 @@ function setSpeakerVol(activeGenre){
     else if(activeGenre[3]) speakerVol = 110; //EDM music
     else if(activeGenre[4]) speakerVol = 105; //Hiphop music
     else if(activeGenre[5]) speakerVol = 90; //Classic music
+    else speakerVol = 0;
     console.log(speakerVol);
 }
 
@@ -99,19 +100,23 @@ function calcSndDose(){
     sndDose += (100/critSndDur)*timeInterval*10**((totWeightedSndLvl-critSndLvl)/exchangeRate);
     console.log("soundDose = " + sndDose);
 
-    if(sndDose>0 && sndDose<100){
+    if(sndDose<100){
         var commandOmdoortesturen = 3;
     }
-    else if(sndDose>=100 && sndDose<1000){
+    else if(sndDose>100 && sndDose<1000){
         var commandOmdoortesturen = 2;
     }
-    else if(sndDose>=1000 && sndDose<10000){
+    else if(sndDose>1000 && sndDose<10000){
         var commandOmdoortesturen = 1;
     }
-    else if(sndDose>=100000){
+    else if(sndDose>100000){
         var commandOmdoortesturen = 0;
     }
+
+    console.log("command =" + commandOmdoortesturen);
     socket.sendSoundDose(sndDose, commandOmdoortesturen);
+    console.log(commandOmdoortesturen);
+    // socket.updateSoundDose(sndDose, commandOmdoortesturen);
 } 
 
 function calcHearingDamage(){
@@ -134,7 +139,6 @@ function calcPassedTime(){
     return passedTime;
 }
 
-console.log("Dit bestand doet ook echt wel");
 
 var runProgrammeInterval = setInterval(loop, runIntervalTime);
 
