@@ -56,10 +56,7 @@ var socket = io("http://localhost:3010");
 
 function startWrapped() {
     calculateTime();
-    setTimeout(() => {
-        socket.emit('stop');
-    }, 200);
-    // setProgressBar(20);
+    socket.emit('stop');
 
     // moveIn('card3');
 
@@ -83,7 +80,7 @@ function send(input) {
 
     //socket.emit('wrapped', "100");
 
-    if(socket.emit) {
+    if (socket.emit) {
         socket.emit('wrapped', input);
     }
 
@@ -94,10 +91,10 @@ setTimeout(() => {
     socket.on("calculation", (data) => {
         console.log(data);
     });
-    
+
     socket.on("dose", soundDose => {
         console.log(`dose: ${soundDose}`);
-        setDose(Math.round(soundDose));
+        setDose(Math.round(soundDose)); 
     });
 }, 200);
 
@@ -109,3 +106,23 @@ function setDose(dose) {
 function setProgressBar(dose) {
     document.getElementById('progress-bar').style.width = '20%';
 }
+
+function setfact(sndDose) {
+    console.log('werkt');
+    var planecalc = sndDose/125000;    
+    var horncalc = sndDose/12500;
+    var alarmcalc = sndDose/626;    
+
+    var plane = `This is the same as standing next to an jet plane for <strong style="color:#982CFF">${planecalc} hours</strong>.`
+    var horn = `This is the same as standing next to an car horn for <strong style="color:#982CFF">${horncalc} hours</strong>.`
+    var alarm = `This is the same as listening to an fire alarm for <strong style="color:#982CFF">${alarmcalc} hours</strong>.`
+
+    var facts = [plane, horn, alarm];
+
+    randomfact = Math.floor(Math.random() * 3);
+    randomfact2 = randomfact + 1;
+    if (randomfact2 == 3) randomfact2 = 0;
+    document.getElementById('fact1').innerHTML = facts[randomfact];
+    document.getElementById('fact2').innerHTML = facts[randomfact2];
+}
+
