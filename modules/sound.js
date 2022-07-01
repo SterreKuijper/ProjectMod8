@@ -43,6 +43,13 @@ tcpSocket.emitter.on('volume', isPlaying => {
     activeGenre = isPlaying;
 });
 
+tcpSocket.emitter.on('stop-program', () => {
+    stopProgramme();
+});
+
+tcpSocket.emitter.on('start-program', () => {
+    startProgramme();
+});
 
 function loop(){
     calcDistToSpeaker();
@@ -140,14 +147,18 @@ function calcPassedTime(){
 }
 
 
-var runProgrammeInterval = setInterval(loop, runIntervalTime);
+var runProgrammeInterval;
 
 function stopProgramme(){
-    clearInterval(runProgrammeInterval);
-    console.log("The Fesitval is Over!")
+    setTimeout(() => {
+        clearInterval(runProgrammeInterval);
+    }, 300);
 }
 
-setTimeout(stopProgramme, runTime + floatNumComp);
+function startProgramme() {
+    runProgrammeInterval = setInterval(loop, runIntervalTime);   
+    sndDose = 0;
+}
 
 [{
     genre: "CHOIR",
@@ -192,4 +203,4 @@ setTimeout(stopProgramme, runTime + floatNumComp);
     song: ["Year Of Summer", "Kind van de Duivel", "Zombie"]
 }]
 
-module.exports = {setSpeakerVol};
+module.exports = {setSpeakerVol, stopProgramme, startProgramme};

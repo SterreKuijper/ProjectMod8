@@ -52,10 +52,11 @@ function secondsToHms(d) {
 //     }
 // });
 
+var socket = io("http://localhost:3010");
+
 function startWrapped() {
     calculateTime();
-
-    setDose(300);
+    socket.emit('stop');
 
     // moveIn('card3');
 
@@ -73,14 +74,18 @@ function startWrapped() {
     // setTimeout(() => {
     //     window.location = "http://localhost:3000/standby-screen";
     // }, 25000);
+
+
+
 }
 
-var socket = io("http://localhost:3010");
 function send(input) {
 
     //socket.emit('wrapped', "100");
 
-    socket.emit('wrapped', input);
+    if(socket.emit) {
+        socket.emit('wrapped', input);
+    }
 
 }
 
@@ -92,7 +97,9 @@ setTimeout(() => {
     
     socket.on("dose", soundDose => {
         console.log(`dose: ${soundDose}`);
-    });}, 200);
+        setDose(Math.round(soundDose));
+    });
+}, 200);
 
 
 function setDose(dose) {

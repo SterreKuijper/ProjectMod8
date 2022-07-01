@@ -27,6 +27,8 @@
 
 // -----------------------------------
 
+var socket = io("http://localhost:3010");
+
 var start = 0;
 
 function startExperience() {
@@ -36,6 +38,8 @@ function startExperience() {
     let randomSong = Math.floor(Math.random()*3);
     audioVisualisation(`/audio/${audioInfo[2].files[randomSong]}`);
     changeSongDisplay(2, randomSong);
+    socket.emit('start');
+
 }
 
 function progressBar(id) {
@@ -462,9 +466,6 @@ function scratch(){
           setTimeout(scratchReset, 800);
     }    
 }
-
-//Inputs from controller
-var socket = io("http://localhost:3010");
 
 setTimeout(() => {
     //fuck socket.io
