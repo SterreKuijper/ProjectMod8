@@ -57,26 +57,25 @@ var socket = io("http://localhost:3010");
 function startWrapped() {
     calculateTime();
     socket.emit('stop');
+    setDose(300);
+    // setProgressBar(20);
 
     // moveIn('card3');
 
-    moveIn('card2');
+    moveIn('card1');
 
-    // setTimeout(function () {
-    //     moveInAndOut('card2', 'card1');
-    // }, 10000);
+    setTimeout(function () {
+        moveInAndOut('card2', 'card1');
+    }, 10000);
 
-    // setTimeout(function () {
-    //     moveInAndOut('card3', 'card2');
-    // }, 20000);
+    setTimeout(function () {
+        moveInAndOut('card3', 'card2');
+    }, 20000);
 
-    // // end wrapped
-    // setTimeout(() => {
-    //     window.location = "http://localhost:3000/standby-screen";
-    // }, 25000);
-
-
-
+    // end wrapped
+    setTimeout(() => {
+        window.location = "http://localhost:3000/standby-screen";
+    }, 25000);
 }
 
 function send(input) {
@@ -104,4 +103,8 @@ setTimeout(() => {
 
 function setDose(dose) {
     document.getElementById('dose').innerHTML = dose + "%";
+}
+
+function setProgressBar(dose) {
+    document.getElementById('progress-bar').style.width = '20%';
 }

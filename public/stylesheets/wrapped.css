@@ -165,33 +165,12 @@
     width: 400px;
 }
 
-.bar-chart {
-    width: 800px;
-    height: 80px;
-    background-color: rgba(127, 127, 127, 0.5);
-}
-.bar-chart ::before {
-    content: '';
-    position: absolute;
-    z-index: -2;
-    left: -100%;
-    top: -100%;
-    width: 300%;
-    height: 300%;
+.progress {
+    width: 75%;
+    height: 50px;
     background-color: #212529;
-    background-repeat: no-repeat;
-    background-size: 50% 50%, 50% 50%;
-    background-position: 0 0, 100% 0, 100% 100%, 0 100%;
 }
 
-.bar-chart ::after {    
-    content: '';
-    position: absolute;
-    z-index: -1;
-    left: 10px;
-    top: 10px;
-    width: calc(100% - 20px);
-    height: calc(100% - 20px);
-    background-color: #212529;
-    border-radius: 5px;
+.progress-bar {
+    background-color: #00FFE6;
 }
