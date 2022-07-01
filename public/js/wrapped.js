@@ -52,9 +52,11 @@ function secondsToHms(d) {
 //     }
 // });
 
+var socket = io("http://localhost:3010");
+
 function startWrapped() {
     calculateTime();
-
+    socket.emit('stop');
     setDose(300);
     // setProgressBar(20);
 
@@ -76,12 +78,13 @@ function startWrapped() {
     // }, 25000);
 }
 
-var socket = io("http://localhost:3010");
 function send(input) {
 
     //socket.emit('wrapped', "100");
 
-    socket.emit('wrapped', input);
+    if(socket.emit) {
+        socket.emit('wrapped', input);
+    }
 
 }
 
@@ -93,7 +96,9 @@ setTimeout(() => {
     
     socket.on("dose", soundDose => {
         console.log(`dose: ${soundDose}`);
-    });}, 200);
+        setDose(Math.round(soundDose));
+    });
+}, 200);
 
 
 function setDose(dose) {

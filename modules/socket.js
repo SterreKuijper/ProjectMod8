@@ -34,6 +34,14 @@ io.on('connection', (s) => {
   s.on('new-genre', isPlaying => {
     tcpSocket.emitter.emit('volume', isPlaying);
   });
+
+  s.on('stop', () => {
+    tcpSocket.emitter.emit('stop-program');
+  });
+
+  s.on('start', () => {
+    tcpSocket.emitter.emit('start-program');
+  });
   
   //Store this socket to be used in other functions.
   socket = s;
