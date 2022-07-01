@@ -56,8 +56,9 @@ var socket = io("http://localhost:3010");
 
 function startWrapped() {
     calculateTime();
-    socket.emit('stop');
-    setDose(300);
+    setTimeout(() => {
+        socket.emit('stop');
+    }, 200);
     // setProgressBar(20);
 
     // moveIn('card3');
