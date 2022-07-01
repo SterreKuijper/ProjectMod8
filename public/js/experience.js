@@ -76,7 +76,7 @@ var audioInfo = [{
 },
 {
     genre: "CHOIR",
-    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.wav", "CHOIR - Thomas Tallis - Spem in Alium.wav", "CHOIR - Alleluia - University of Utah Singers.wav"],
+    files: ["CHOIR - Carl Orff - Carmina Burana O Fortune.mp3", "CHOIR - Thomas Tallis - Spem in Alium.mp3", "CHOIR - Alleluia - University of Utah Singers.mp3"],
     artist: ["Carl Orff", "Thomas Tallis.wav", "University of Utah Singers"],
     song: ["Carmina Burana O Fortune", "Spem in Alium", "Alleluia"],
     id: [2, 3, 1]
